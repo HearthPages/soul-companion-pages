@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · Seen Over Hidden · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .questions-section > p {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">Seen Over Hidden</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through Seen Over Hidden.
+
+Philosophy: You are not trying to build a better version of yourself. You are trying to find the real one. There are no right answers. Only honest ones.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Realising': [
+        {title: 'The Rules You Live By', prompt: `I'm working on "The Rules You Live By." The question is: "What are the unspoken rules you live by? Not the ones written in books — the ones written in your body, your choices, your silence. What would be dangerous to do? Selfish? Wrong?"\n\nI've written what I believe to be my unspoken rules. Ask me 3-5 questions to help me explore: where did each one come from? What happened in my history that made these rules feel necessary?`},
+        {title: 'Freedom or Performance', prompt: `I'm working on "Freedom or Performance." The question is: "Some of your values are genuinely yours. Others you perform because you believe you should. Can you feel the difference? Which values light you up? Which ones make you feel small?"\n\nI can feel the difference between a value that's real and one that's performed. Ask me 3-5 questions to help me explore: which of my values are actually mine? Which ones do I live from obligation?`}
+      ],
+      'Understanding': [
+        {title: 'The Teachers', prompt: `I'm working on "The Teachers." The question is: "Who taught you these rules? Parents, teachers, church, culture, social media. What did they believe you needed to become? What were they afraid would happen if you didn't?"\n\nI can name the people who taught me these rules. Ask me 3-5 questions to help me trace this back: what did they believe I needed to become? What were they afraid would happen if I didn't?`},
+        {title: 'What You Were Rewarded For', prompt: `I'm working on "What You Were Rewarded For." The question is: "What did you become good at? What earned you praise, approval, or safety? What had to be small or quiet or hidden for you to fit that image?"\n\nI can see what I became good at. Ask me 3-5 questions to help me understand: what did I have to stop letting myself be or want in order to fit that image? What went underground?`},
+        {title: 'What Was Criticised, Mocked, or Silenced', prompt: `I'm working on "What Was Criticised, Mocked, or Silenced." The question is: "What quality in you was discouraged? Passion? Ambition? Softness? Anger? Sexual desire? Grief? What happened when you tried to be that version of yourself?"\n\nI think I can identify a quality that was discouraged. Ask me 3-5 questions to help me go deeper: what happened when I tried to be that version? What did I learn about myself from that?`}
+      ],
+      'Releasing': [
+        {title: 'The Mirror Exercise', prompt: `I'm working on "The Mirror Exercise." The question is: "There is probably a quality in others that bothers you. That you judge. That you're quick to criticise. What is it? The thing that triggers you tells you something about yourself."\n\nI can see the quality that bothers me in others. Ask me 3-5 questions to help me explore: what does this tell me about myself? What part of me am I actually judging?`},
+        {title: 'The Inherited Rules', prompt: `I'm working on "The Inherited Rules." The question is: "You've written them all out. The shoulds that aren't yours. Which one feels heaviest? Which one, if you released it, would change things most?"\n\nI've written them all out. Ask me 3-5 questions to help me understand: which one feels heaviest? Which one, if I released it, would change things most?`},
+        {title: 'What Went Underground', prompt: `I'm working on "What Went Underground." The question is: "There was a quality in you that was called wrong. That you learned to hide. Not because it was bad — but because it didn't fit the picture. What would it mean to welcome that part back?"\n\nI can identify a quality that was called wrong. Ask me 3-5 questions to help me explore this more gently: what value was hiding inside it? What would it mean to welcome that part of myself back?`}
+      ],
+      'Returning': [
+        {title: 'Peak Moments', prompt: `I'm working on "Peak Moments." The question is: "Think of three moments when you felt most alive. Most yourself. Most authentic. What values were present in all three? What does that tell you about what you're actually made of?"\n\nI've identified three moments when I felt most alive. Ask me 3-5 questions to help me understand the pattern: what values were alive in all three? What does that tell me about what I'm really made of?`},
+        {title: 'The Anger Compass', prompt: `I'm working on "The Anger Compass." The question is: "What makes you genuinely angry? Real, hot anger — not the small irritations, but the things that make something in you rise up. What values are being violated?"\n\nI've named what makes me genuinely angry. Ask me 3-5 questions to help me explore: what values are being violated when I feel this anger? What matters to me that much?`},
+        {title: 'The Admiration Mirror', prompt: `I'm working on "The Admiration Mirror." The question is: "Who do you deeply admire? What qualities in them do you most want to claim in yourself? What's stopping you?"\n\nI've named people I deeply admire. Ask me 3-5 questions to help me understand: which of their qualities do I most want to claim in myself? What's stopping me?`}
+      ],
+      'Rooting': [
+        {title: 'When Values Conflict', prompt: `I'm working on "When Values Conflict." The question is: "Sometimes two values pull against each other. Honesty versus loyalty. Rest versus responsibility. Authenticity versus safety. Where do you feel this conflict most?"\n\nI can feel two values pulling against each other. Ask me 3-5 questions to help me navigate this: in this conflict, what does my gut actually want? What would it mean to choose that?`},
+        {title: 'Values and Your Relationships', prompt: `I'm working on "Values and Your Relationships." The question is: "How do your core values show up in your relationships? In which relationships do you honour them? In which ones do you compromise them? What does that tell you?"\n\nI've looked at how my values show up in relationships. Ask me 3-5 questions to help me go deeper: in the relationship that drains me, what value is being neglected? What boundary might I need?`},
+        {title: 'Living Your Values Daily', prompt: `I'm working on "Living Your Values Daily." The question is: "What is one small daily action that honours each of your core values? How would you actually do this? What would it look like tomorrow?"\n\nI've identified my core values. Ask me 3-5 questions to help me make this concrete: for each value, what's one small daily action that honors it? How would I actually do this?`}
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · Awareness Over Autopilot · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .questions-section > p {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">Awareness Over Autopilot</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through Awareness Over Autopilot.
+
+Philosophy: There is no perfect journalling. There is only showing up. Your mood does not have to be good to write — that is rather the point. One word is always enough. So is a blank page.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Realising': [
+        {title: 'Understanding Your Autopilot', prompt: `I'm working on "Understanding Your Autopilot." The question is: "Where do you go when you disappear into autopilot? What are you protecting yourself from by staying numb? What would you have to feel if you woke up?"\n\nI can see my autopilot patterns. Ask me 3-5 questions to help me go deeper: what am I protecting myself from by staying numb? What would I have to feel if I woke up?`},
+        {title: 'Your Mood Patterns', prompt: `I'm working on "Your Mood Patterns." The question is: "You know what a low mood feels like. You probably know what shifts it. Is it something external, or something you're creating inside? What's the actual trigger?"\n\nI know what a low mood feels like and what shifts it. Ask me 3-5 questions to help me explore: what's the actual trigger? Is it something external, or something happening inside me?`},
+        {title: 'Where You\'re Stuck', prompt: `I'm working on "Where You're Stuck." The question is: "Where are you most on autopilot? In relationships? Work? Your own care? What would change if you brought awareness there? What are you afraid you'd see?"\n\nI think I can identify where I'm on autopilot most. Ask me 3-5 questions to help me look at this more carefully: what would change if I brought awareness there? What am I afraid I'd see?`}
+      ],
+      'Understanding': [
+        {title: 'What Triggers Your Mood', prompt: `I'm working on "What Triggers Your Mood." The question is: "What consistently affects your mood? People? Situations? Time of day? Your own internal state? What do your triggers have in common? Are they external events, or something you're creating inside?"\n\nI believe I have identified my mood triggers. Ask me 3-5 questions to help me go deeper: what do they have in common? Are they external events, or something I'm creating inside?`},
+        {title: 'What Genuine Gratitude Feels Like', prompt: `I'm working on "What Genuine Gratitude Feels Like." The question is: "There was a moment when you felt genuinely grateful — not performed, not forced. What was that moment? What was different about it? How could you create more moments like it?"\n\nI remember a moment of genuine gratitude. Ask me 3-5 questions to help me explore this more deeply: what was different about that moment? How could I create more moments like it?`},
+        {title: 'The Habits That Keep You Stuck', prompt: `I'm working on "The Habits That Keep You Stuck." The question is: "What habits keep you on autopilot? Scrolling? Distracting? Numbing? What need is each one meeting? What would happen if you stopped?"\n\nI can name habits that keep me on autopilot. Ask me 3-5 questions to help me look at this more honestly: what need is each habit meeting? What would happen if I stopped?`}
+      ],
+      'Releasing': [
+        {title: 'What You\'re Ready to Stop', prompt: `I'm working on "What You're Ready to Stop." The question is: "There is probably an autopilot behavior you're ready to release. Not in some distant future — now. What would be possible if you stopped? What are you curious about?"\n\nI've identified an autopilot behavior I'm ready to release. Ask me 3-5 questions to help me explore this more deeply: what would be possible if I stopped? What am I curious about?`},
+        {title: 'Habits That Don\'t Serve You', prompt: `I'm working on "Habits That Don't Serve You." The question is: "There is probably a new habit you want to start. Small. Doable. What stops you? What's the smallest possible version you could try? What would it look like?"\n\nI've named a habit I want to start. Ask me 3-5 questions to help me go deeper: what stops me? What's the smallest possible version I could try?`}
+      ],
+      'Returning': [
+        {title: 'What Restores You', prompt: `I'm working on "What Restores You." The question is: "What brings you back to the present moment? Not escape — actual presence. What genuinely restores you?"\n\nI know what brings me back to the present. Ask me 3-5 questions to help me explore this more deeply: what would make it easier to access when I need it most?`},
+        {title: 'Small Joys Worth Noticing', prompt: `I'm working on "Small Joys Worth Noticing." The question is: "The small things. A taste. A texture. A moment of light. A laugh. What small joys have you stopped noticing? Why haven't you noticed them before?"\n\nI've named joys I want to notice. Ask me 3-5 questions to help me go deeper: why haven't I noticed them before? What would change if I did?`}
+      ],
+      'Rooting': [
+        {title: 'Your Daily Awareness Practice', prompt: `I'm working on "Your Daily Awareness Practice." The question is: "You've imagined a practice — something that brings you back to presence. What would make it sustainable? How would you actually do it daily?"\n\nI've imagined a practice. Ask me 3-5 questions to help me explore this more deeply: what would make it sustainable? How could I actually do it daily?`},
+        {title: 'Building Consistency', prompt: `I'm working on "Building Consistency." The question is: "Showing up for yourself is an act of love. How can you show up for yourself even on the hard days? What would help you stay consistent?"\n\nI've thought about consistency. Ask me 3-5 questions to help me go deeper: how can I show up for myself? What would help me stay consistent?`}
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>

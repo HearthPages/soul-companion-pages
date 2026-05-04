@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · Rest Over Resistance · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .questions-section > p {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">Rest Over Resistance</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through Rest Over Resistance.
+
+Philosophy: You don't have to be in crisis to deserve rest. Be honest, be gentle, and show up for yourself the way you would show up for someone you love.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Realising': [
+        {title: 'Arriving', prompt: `I'm working on "Arriving." The question is: "Something brought you to this journal. What did you hope for when you picked it up? What does your body need that you haven't let yourself ask for?"\n\nSomething brought me to this journal. Ask me 3-5 questions to help me explore: what am I really hoping for? What does my body need that I haven't let myself ask for?`},
+        {title: 'The Body Knows', prompt: `I'm working on "The Body Knows." The question is: "Your exhaustion lives somewhere in your body. Where? Feel into it. Not the story — the sensation. What has your body been trying to tell you that you haven't been listening to?"\n\nI think I can feel where my exhaustion lives. Ask me 3-5 questions to help me go deeper: what has my body been trying to tell me that I haven't been listening to?`},
+        {title: 'The Pretending', prompt: `I'm working on "The Pretending." The question is: "What are you pushing through? What do you pretend is fine when it's not? What would it mean to stop pretending? What would happen if you admitted how tired you actually are?"\n\nI've written what I feel I'm pushing through. Ask me 3-5 questions to help me look at this more honestly: what would it mean to stop pretending? What would happen if I admitted how tired I actually am?`},
+        {title: 'The Body Scan', prompt: `I'm working on "The Body Scan." The question is: "Close your eyes. Feel through your body. Where is tension? Where is numbness? Where does it ache? Not to fix it — just to listen. What is the pattern? What are these parts trying to tell you?"\n\nI've felt through my body. Ask me 3-5 questions to help me explore what I found more deeply: what is the pattern? What parts of me are most affected? What are they trying to tell me?`}
+      ],
+      'Understanding': [
+        {title: 'Not Yours to Carry', prompt: `I'm working on "Not Yours to Carry." The question is: "What burden are you carrying that isn't yours? Whose responsibility did you pick up? Where did you pick it up? What would it feel like to put it down?"\n\nI think I can identify what I'm carrying that isn't mine. Ask me 3-5 questions to help me go deeper: where did I pick this up? What would it feel like to put it down?`},
+        {title: 'The Roles That Drain', prompt: `I'm working on "The Roles That Drain." The question is: "You play several roles. Caretaker. Helper. Fixer. Which identity have you been performing? What would you be like if you stopped?"\n\nI've identified roles that have become a weight. Ask me 3-5 questions to help me understand: which identity have I been performing? What would I be like if I stopped?`},
+        {title: 'The Unsaid Things', prompt: `I'm working on "The Unsaid Things." The question is: "What have you been pushing down? What would happen if you said it? What are you afraid would happen?"\n\nI've written what I think I've been pushing down. Ask me 3-5 questions to help me explore this more gently: what would it mean to actually say these things? What am I afraid would happen?`},
+        {title: 'What You Were Taught', prompt: `I'm working on "What You Were Taught." The question is: "What messages did you receive about rest? About worthiness? About what you owe? Do you still believe those messages? Where are they showing up in your life now?"\n\nI believe I know the messages I received about rest and worth. Ask me 3-5 questions to help me go deeper: do I still believe them? Where are they showing up in my life now?`}
+      ],
+      'Releasing': [
+        {title: 'Guilt Is Not a Compass', prompt: `I'm working on "Guilt Is Not a Compass." The question is: "Where does guilt show up when you try to rest? What story does it tell you? Is that story actually true? What would happen if you didn't listen to it?"\n\nI think I know where guilt shows up. Ask me 3-5 questions to help me go deeper: what is it really protecting? What would happen if I didn't listen to it?`},
+        {title: 'The Chronic Yes', prompt: `I'm working on "The Chronic Yes." The question is: "Where have you been saying yes when you meant no? Not from choice — from pressure, from obligation, from fear. What would you have said no to if you felt allowed?"\n\nI think I can see where I've been saying yes when I meant no. Ask me 3-5 questions to help me understand: what would I have said no to if I felt allowed? What does that tell me?`},
+        {title: 'What You\'ve Been Protecting', prompt: `I'm working on "What You've Been Protecting." The question is: "If you had permission to stop — to rest, to slow down, to disappoint people — what would fall away? What would you grieve? What would be relief?"\n\nI've written what would fall away if I had permission to stop. Ask me 3-5 questions to help me explore: what does that list tell me about what I actually need?`},
+        {title: 'If You Had Permission', prompt: `I'm working on "If You Had Permission." The question is: "Imagine you woke up tomorrow with complete permission — from yourself, from everyone who matters. What would fall away first? What would you grieve? What would be relief?"\n\nI can see what would fall away first, what I'd grieve, what would be relief. Ask me 3-5 questions to help me understand: what does this tell me about what I'm truly ready to release?`}
+      ],
+      'Returning': [
+        {title: 'What Rest Really Means', prompt: `I'm working on "What Rest Really Means." The question is: "Not sleep. Not productivity disguised as rest. What does genuine rest look like to you? Why have you allowed yourself so little of it? What story have you told yourself?"\n\nI think I know what genuine rest looks like to me. Ask me 3-5 questions to help me go deeper: why have I allowed myself so little of it? What story have I told myself?`},
+        {title: 'What Fills You Up', prompt: `I'm working on "What Fills You Up." The question is: "Not what you think should fill you. Not what looks productive. What genuinely restores you? What's the difference between what actually fills you and what you've been told should fill you?"\n\nI've identified what genuinely restores me. Ask me 3-5 questions to help me explore: what's the difference between what actually fills me and what I've been told should fill me?`},
+        {title: 'What Lighter Feels Like', prompt: `I'm working on "What Lighter Feels Like." The question is: "Imagine waking up without the weight. What specifically would be different? What would you do? How would you move? What's one thing you could do this week?"\n\nI can feel what it would be like to wake up without the weight. Ask me 3-5 questions to help me imagine this more vividly: what specifically needs to change for this to be real? What's one thing I could do this week?`},
+        {title: 'What One Boundary Would Change', prompt: `I'm working on "What One Boundary Would Change." The question is: "If you could set one boundary — around time, energy, emotional labour — what would it be? What am I afraid will happen if I set it? What's it worth?"\n\nI've identified the boundary that matters most. Ask me 3-5 questions to help me understand: what am I afraid will happen if I set it? What's it worth?`}
+      ],
+      'Rooting': [
+        {title: 'When Values Conflict', prompt: `I'm working on "When Values Conflict." The question is: "Sometimes rest conflicts with responsibility. Care for yourself conflicts with care for others. Where do you feel this pull most? What do you actually want to choose?"\n\nI can feel values pulling me in different directions. Ask me 3-5 questions to help me explore: which value do I actually want to choose? What would that mean?`},
+        {title: 'Values and Your Relationships', prompt: `I'm working on "Values and Your Relationships." The question is: "How do your values show up in relationships? Which relationships drain you? In those relationships that drain me, what value is being neglected? What boundary might I need?"\n\nI've looked at how my values show up in relationships. Ask me 3-5 questions to help me go deeper: in the relationships that drain me, what boundary might I need? What's one I could set?`},
+        {title: 'Growing From New Ground', prompt: `I'm working on "Growing From New Ground." The question is: "Imagine a life with room for you in it. What specifically needs to shift? Not fantasies — concrete changes. What's one change you could make?"\n\nI've imagined a life with room for me in it. Ask me 3-5 questions to help me explore this more vividly: what specifically needs to shift? What's one change I could make?`},
+        {title: 'Living It Daily', prompt: `I'm working on "Living It Daily." The question is: "You've identified one small thing you can do. What would make it sustainable? How would you actually do it? When would you do it?"\n\nI've identified one small thing I can do. Ask me 3-5 questions to help me explore: what would make this sustainable? How would I actually do it?`}
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>

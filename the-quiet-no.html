@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · The Quiet No · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .questions-section > p {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">The Quiet No</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through The Quiet No.
+
+Philosophy: Your voice matters. Even the quiet parts of it. This is not about becoming louder — it is about becoming clearer.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Realising': [
+        {title: 'The Last Time You Said Yes', prompt: `I'm working on "The Last Time You Said Yes." The question is: "When was the last time you said yes when you meant no? What did you say yes to, and what was underneath that yes?"\n\nI can see moments when I said yes when I meant no. Ask me 3-5 questions to help me go deeper to find out what fear is driving this? Was I afraid of something if I said no?`},
+        {title: 'What Your Body Knows', prompt: `I'm working on "What Your Body Knows." The question is: "Your body always knows first. Where does the yes-when-you-mean-no register in your body? Tightness? Sinking? A faint chill?"\n\nI can feel where my body responds to the yes-when-I-mean-no. Ask me 3-5 questions to help me understand what it's trying to tell me. What does that feeling protect me from?`},
+        {title: 'What It Has Cost You', prompt: `I'm working on "What It Has Cost You." The question is: "Not in time or energy alone. What have you stopped doing? Who did you stop letting yourself be?"\n\nI can see what activities I've stopped doing. Ask me 3-5 questions to help me explore the deeper cost: what version of myself have I had to set aside? Who would I be if I had more space?`}
+      ],
+      'Understanding': [
+        {title: 'What You Were Taught', prompt: `I'm working on "What You Were Taught." The question is: "What were you taught about being a good girl? About pleasing others? About your responsibility to keep the peace?"\n\nI think I know the messages I received about being a good girl. Ask me 3-5 questions to help me explore: where are those messages still running my life? What would it mean to question them?`},
+        {title: 'What You Were Praised For', prompt: `I'm working on "What You Were Praised For." The question is: "What did you become good at? What earned you praise? What version of yourself learned to show up reliably, agreeably, endlessly available?"\n\nI think I can see what I became good at to earn love. Ask me 3-5 questions to help me understand what I stopped letting myself want or be. Were there parts of me I learnt to hide?`},
+        {title: 'What You Are Protecting', prompt: `I'm working on "What You Are Protecting." The question is: "What are you trying to earn or maintain through over-giving? Safety? Love? Permission to exist? What would it feel like to have that without the performance?"\n\nI think I've identified what I'm trying to earn through over-giving. Ask me 3-5 questions to help me go deeper: what would it feel like to ask for it directly? What am I afraid would happen?`}
+      ],
+      'Releasing': [
+        {title: 'The Story That Keeps You Giving', prompt: `I'm working on "The Story That Keeps You Giving." The question is: "You've probably told yourself something: 'If I don't do this, no one will.' Or 'If I say no, they'll think I'm selfish.' Or 'Saying no will cost me the relationship.' What's the story?"\n\nI can hear the story I've been telling myself. Ask me 3-5 questions to help me question it: is this story actually true? What evidence do I have? What would it mean if the opposite were true?`},
+        {title: 'The Resentment You\'re Not Supposed to Have', prompt: `I'm working on "The Resentment You're Not Supposed to Have." The question is: "Where does resentment live in you? What activities, people, or roles trigger the quiet feeling of being drained or empty?"\n\nI can feel the resentment, exhaustion, or emptiness. Ask me 3-5 questions to help me listen to it. What is it telling me about what I need? Is there a boundary I should be setting?`},
+        {title: 'What Lighter Feels Like', prompt: `I'm working on "What Lighter Feels Like." The question is: "Imagine waking up without the weight of over-responsibility. What would be different? What would you actually say or do that you don't now?"\n\nI think I can imagine waking up without the weight. Ask me 3-5 questions to help me go deeper: what specifically would be different? What would I actually say or do that I don't now?`}
+      ],
+      'Returning': [
+        {title: 'What You Actually Want', prompt: `I'm working on "What You Actually Want." The question is: "Not what you think you should want. Not what would be acceptable or responsible. What genuinely fills you up? What brings you alive?"\n\nI can feel what genuinely fills me up. Ask me 3-5 questions to help me explore: why have I allowed myself so little of this? What story have I told myself about why it's not safe to want this?`},
+        {title: 'What You Have Been Waiting for Permission to Want', prompt: `I'm working on "What You Have Been Waiting for Permission to Want." The question is: "There is probably something you've been hiding even from yourself. A desire you haven't let yourself claim. Where did you learn that this wasn't allowed?"\n\nI can feel the desire I've been hiding. Ask me 3-5 questions to help me understand: where did I learn that this wasn't allowed? What would it mean to give myself permission now?`}
+      ],
+      'Rooting': [
+        {title: 'One Honest Conversation', prompt: `I'm working on "One Honest Conversation." The question is: "There is probably someone you need to speak to. What is the conversation you need to have? What are you actually afraid will happen?"\n\nI can feel the conversation I need to have. Ask me 3-5 questions to help me explore: what am I actually afraid will happen? What do I want to say? What would be different if I did?`},
+        {title: 'What Boundary Feels Most Important', prompt: `I'm working on "What Boundary Feels Most Important." The question is: "If you could set one boundary — one clear, unmoved, authentic no — what would it be? What would shift if you set it?"\n\nI think I can feel which boundary matters most. Ask me 3-5 questions to help me understand: what would shift if I set it? What am I most afraid of?`}
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>
