@@ -1,0 +1,13 @@
+{
+  "name": "soul-companion",
+  "version": "1.0.0",
+  "description": "Soul Companion - AI workbook guides",
+  "main": "src/index.js",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
