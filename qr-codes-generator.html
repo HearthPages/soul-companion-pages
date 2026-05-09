@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion QR Codes</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: normal;
+      margin-bottom: 40px;
+      color: #3D3530;
+    }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .qr-card {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .qr-card h2 {
+      font-size: 16px;
+      font-weight: normal;
+      color: #3D3530;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E8DDD0;
+    }
+
+    .qr-code-container {
+      background: white;
+      padding: 12px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    #qr-quiet-no, #qr-intention, #qr-seen, #qr-rest, #qr-awareness {
+      display: inline-block;
+    }
+
+    .qr-url {
+      font-size: 11px;
+      color: #8B7C6F;
+      word-break: break-all;
+      margin-bottom: 12px;
+      font-family: monospace;
+      background: #FAF6F0;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    .download-btn {
+      background: #3D3530;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: sans-serif;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background: #2A1F1A;
+    }
+
+    .download-btn:active {
+      transform: scale(0.98);
+    }
+
+    .instructions {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 40px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .instructions h3 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #3D3530;
+      margin-bottom: 12px;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .qr-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .instructions {
+        display: none;
+      }
+
+      .qr-grid {
+        gap: 20px;
+      }
+
+      .download-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Soul Companion QR Codes</h1>
+
+    <div class="instructions">
+      <h3>How to use these QR codes:</h3>
+      <ol>
+        <li>Each code links to a specific workbook's Soul Companion landing page</li>
+        <li>Print this page or save individual QR codes for your packaging/materials</li>
+        <li>Customers scan the code for immediate access to conversation prompts for their workbook</li>
+      </ol>
+    </div>
+
+    <div class="qr-grid">
+      <div class="qr-card">
+        <h2>The Quiet No</h2>
+        <div class="qr-code-container" id="qr-quiet-no"></div>
+        <div class="qr-url">https://hearthpages.github.io/soul-companion-pages/the-quiet-no</div>
+        <button class="download-btn" onclick="downloadQR('qr-quiet-no', 'the-quiet-no')">Download QR</button>
+      </div>
+
+      <div class="qr-card">
+        <h2>Intention Over Obligation</h2>
+        <div class="qr-code-container" id="qr-intention"></div>
+        <div class="qr-url">https://hearthpages.github.io/soul-companion-pages/intention-over-obligation</div>
+        <button class="download-btn" onclick="downloadQR('qr-intention', 'intention-over-obligation')">Download QR</button>
+      </div>
+
+      <div class="qr-card">
+        <h2>Seen Over Hidden</h2>
+        <div class="qr-code-container" id="qr-seen"></div>
+        <div class="qr-url">https://hearthpages.github.io/soul-companion-pages/seen-over-hidden</div>
+        <button class="download-btn" onclick="downloadQR('qr-seen', 'seen-over-hidden')">Download QR</button>
+      </div>
+
+      <div class="qr-card">
+        <h2>Rest Over Resistance</h2>
+        <div class="qr-code-container" id="qr-rest"></div>
+        <div class="qr-url">https://hearthpages.github.io/soul-companion-pages/rest-over-resistance</div>
+        <button class="download-btn" onclick="downloadQR('qr-rest', 'rest-over-resistance')">Download QR</button>
+      </div>
+
+      <div class="qr-card">
+        <h2>Awareness Over Autopilot</h2>
+        <div class="qr-code-container" id="qr-awareness"></div>
+        <div class="qr-url">https://hearthpages.github.io/soul-companion-pages/awareness-over-autopilot</div>
+        <button class="download-btn" onclick="downloadQR('qr-awareness', 'awareness-over-autopilot')">Download QR</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate QR codes
+    const qrConfigs = [
+      {
+        id: 'qr-quiet-no',
+        url: 'https://hearthpages.github.io/soul-companion-pages/the-quiet-no'
+      },
+      {
+        id: 'qr-intention',
+        url: 'https://hearthpages.github.io/soul-companion-pages/intention-over-obligation'
+      },
+      {
+        id: 'qr-seen',
+        url: 'https://hearthpages.github.io/soul-companion-pages/seen-over-hidden'
+      },
+      {
+        id: 'qr-rest',
+        url: 'https://hearthpages.github.io/soul-companion-pages/rest-over-resistance'
+      },
+      {
+        id: 'qr-awareness',
+        url: 'https://hearthpages.github.io/soul-companion-pages/awareness-over-autopilot'
+      }
+    ];
+
+    qrConfigs.forEach(config => {
+      new QRCode(document.getElementById(config.id), {
+        text: config.url,
+        width: 200,
+        height: 200,
+        colorDark: '#3D3530',
+        colorLight: '#FAF6F0',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    });
+
+    // Download individual QR code as PNG
+    function downloadQR(elementId, filename) {
+      const qrElement = document.getElementById(elementId);
+      const canvas = qrElement.querySelector('canvas');
+
+      if (canvas) {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `${filename}-qr-code.png`;
+        link.click();
+      }
+    }
+  </script>
+</body>
+</html>

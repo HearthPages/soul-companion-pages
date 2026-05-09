@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · Perfectionism Unraveled · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .questions-section > p {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">Perfectionism Unraveled</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through Perfectionism Unraveled — a workbook about meeting yourself with compassion rather than a standard.
+
+About this workbook: This workbook explores how perfectionism took root, what it has been protecting, and how to begin setting down the standards that were never really yours. It moves through five stages: Realising, Understanding, Releasing, Returning, and Rooting. It is not about fixing yourself. It is about finding yourself again.
+
+Philosophy: She is not broken. She just lost her way for a while. Perfectionism wasn't a flaw she was born with — it was a response. A way of staying safe, staying loved, staying enough. This workbook asks her to look at it honestly, with curiosity and compassion, not blame.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard without adding or fixing. Ask genuine follow-up questions that go a little deeper. Sit with her in the hard moments rather than rushing to solve them.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you are actually listening — like you have all the time in the world.
+
+Length: Natural — 2-4 sentences usually. No lists or structures unless she asks. Just honest, gentle conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Realising': [
+        {
+          title: 'The Cost Inventory',
+          prompt: `I'm working on "The Cost Inventory." The question is: "What has perfectionism actually cost you? Not in theory — in your real life. The evenings lost, the things you didn't start, the moments you couldn't be present."\n\nI've started naming what perfectionism has cost me. Ask me 3-5 questions to help me go deeper: what costs have been hardest to admit? Which area — time, rest, relationships, joy, creativity, or self-talk — feels heaviest right now? Is there a cost I've been avoiding looking at?`
+        },
+        {
+          title: 'The Body Holds It',
+          prompt: `I'm working on "The Body Holds It." The question is: "Where in your body do you feel perfectionism? You know where it lives. What does it feel like to be in your body when perfectionism is in the room?"\n\nI've been noticing where perfectionism lives in my body. Ask me 3-5 questions to help me explore this more carefully: when does this feeling show up first? What does it feel like — tightening, holding, something else? Has my body been trying to tell me something I've been overriding?`
+        },
+        {
+          title: 'The Daily Map',
+          prompt: `I'm working on "The Daily Map." The question is: "Think about a recent ordinary day. When did perfectionism show up? What triggered it? What did you do — or stop yourself from doing — because of it?"\n\nI've been tracing a recent day and noticing where perfectionism appeared. Ask me 3-5 questions to help me look at this more honestly: what was the moment that set it off? What did I do because of it — or not do? What would the day have looked like without that interference?`
+        },
+        {
+          title: 'What Rest Asks of You',
+          prompt: `I'm working on "What Rest Asks of You." The question is: "When did you last feel genuinely at rest? Not just exhausted, but truly easy in yourself. What made it possible? And what usually gets in the way?"\n\nI've been sitting with what rest actually feels like — or how rare it is. Ask me 3-5 questions to help me go deeper: what does it feel like in my body when I'm genuinely at rest? What has to be true for that to happen? What does perfectionism tell me about rest?`
+        }
+      ],
+      'Understanding': [
+        {
+          title: 'The Roots',
+          prompt: `I'm working on "The Roots." The question is: "When did you first notice perfectionism in yourself? How old were you? What was happening around you?"\n\nI've been trying to trace back to where this started. Ask me 3-5 questions to help me go deeper: what do I remember about that time? What did I learn about how to be loved or approved of? Is there a younger version of me I can see in this?`
+        },
+        {
+          title: 'Why This Made Sense',
+          prompt: `I'm working on "Why This Made Sense." The question is: "Where did perfectionism first make sense for you? Not as a character flaw — as a strategy. What might it have been protecting you from?"\n\nI've been looking at perfectionism as a response rather than a flaw. Ask me 3-5 questions to help me explore this with more compassion: what was I protecting myself from? What would have happened if I hadn't been perfect? Does that younger version of me make more sense now?`
+        },
+        {
+          title: 'What It Has Been Keeping Safe',
+          prompt: `I'm working on "What It Has Been Keeping Safe." The question is: "What do you think perfectionism has been protecting you from? Fear of failure, of being seen and found lacking, of losing love or approval?"\n\nI've been sitting with what perfectionism might be protecting. Ask me 3-5 questions to help me look at this more honestly: which fear feels most true — failure, rejection, being seen, something else? What would actually happen if that thing I'm afraid of came true? Is the protection still necessary now?`
+        },
+        {
+          title: 'What It Taught You',
+          prompt: `I'm working on "What It Taught You." The question is: "What has perfectionism taught you — about your worth, about what love looks like, about what you have to do to belong?"\n\nI've been naming the lessons perfectionism taught me, even the unkind ones. Ask me 3-5 questions to help me go deeper: which lesson feels most lodged in me? Where do I still live by it without realising? What would it mean to question it?`
+        }
+      ],
+      'Releasing': [
+        {
+          title: 'When It\'s Running the Show',
+          prompt: `I'm working on "When It's Running the Show." The question is: "Describe a recent moment when you felt perfectionism running things rather than you. Not dramatic — an ordinary one. What happened? What did you do? What couldn't you do?"\n\nI've identified a recent moment when perfectionism was in charge rather than me. Ask me 3-5 questions to help me look at this more closely: what was the moment I handed control over? What would I have done differently if I had been in charge? What was I afraid would happen if I didn't defer to it?`
+        },
+        {
+          title: 'The Standards That Aren\'t Yours',
+          prompt: `I'm working on "The Standards That Aren't Yours." The question is: "Which of your perfectionism standards feel genuinely yours — and which were inherited? Which ones have you been living by without consciously choosing them?"\n\nI've been looking at which standards feel mine and which were handed to me. Ask me 3-5 questions to help me tell them apart: which standard has been there the longest? Who does it sound like? If I chose it for myself today, would I?`
+        },
+        {
+          title: 'The Space Underneath',
+          prompt: `I'm working on "The Space Underneath." The question is: "Is there anything you're ready to set down? It can be small. It doesn't have to be permanent. Write it as if you're setting it on a table — you can pick it back up if you need to."\n\nI've been sitting with what I might be ready to set down — even just for a moment. Ask me 3-5 questions to help me explore this gently: what would it feel like to put it down, even temporarily? What am I afraid would happen if I let it go? What might be possible in that space?`
+        },
+        {
+          title: 'What You\'re Choosing to Keep',
+          prompt: `I'm working on "What You're Choosing to Keep." The question is: "What do you want to keep? What parts of high standards, of care, of deep attention — do you want to carry forward on your own terms, not from fear, but because they're true to who you are?"\n\nI've been thinking about what I actually want to keep — what's genuinely mine. Ask me 3-5 questions to help me be clear: what's the difference between a standard I keep out of fear and one I keep because it's who I am? What would care look like without the pressure? What does my own version of this look like?`
+        }
+      ],
+      'Returning': [
+        {
+          title: 'What Actually Matters',
+          prompt: `I'm working on "What Actually Matters." The question is: "What actually matters to you? Not what should matter, not what you've been measuring yourself against — but what genuinely, quietly matters. What would you grieve if it disappeared?"\n\nI've been sitting with what genuinely matters underneath all the striving. Ask me 3-5 questions to help me get closer to it: what would I grieve most if it were gone? Has perfectionism been crowding any of this out? What does the list look like when I stop editing it?`
+        },
+        {
+          title: 'Before You Had to Earn It',
+          prompt: `I'm working on "Before You Had to Earn It." The question is: "What did you love, enjoy, or care about before perfectionism became the frame? What have you stopped doing, stopped allowing, stopped feeling — because you couldn't do it well enough to justify it?"\n\nI've been trying to remember who I was before I had to earn my place. Ask me 3-5 questions to help me find her: what comes up when I think about that time? What have I stopped allowing myself because I couldn't do it perfectly? Is there something I've been waiting to be good enough at before I let myself have it?`
+        },
+        {
+          title: 'What Brings You Alive',
+          prompt: `I'm working on "What Brings You Alive." The question is: "What brings you genuinely alive? When do you feel most like yourself? It can be small — a kind of music, an afternoon quality of light."\n\nI've been trying to name what genuinely makes me feel alive — without justifying it. Ask me 3-5 questions to help me stay with this: when did I last feel that way? What was different about that moment? Is there something small I could invite more of without having to earn it?`
+        },
+        {
+          title: 'The Quiet Things',
+          prompt: `I'm working on "The Quiet Things." The question is: "What does genuine rest feel like in your body? What actually restores you — as opposed to what you think should? Is there anything you've been quietly allowing yourself to enjoy, without quite giving yourself permission?"\n\nI've been noticing the difference between what I think should restore me and what actually does. Ask me 3-5 questions to help me explore this honestly: what does my body feel like when I'm genuinely resting? Is there something I've been quietly enjoying but not fully letting myself have? What would it feel like to give myself permission?`
+        }
+      ],
+      'Rooting': [
+        {
+          title: 'Imperfection as Practice',
+          prompt: `I'm working on "Imperfection as Practice." The question is: "What would it look like to practise imperfection today — not as self-criticism, but as a deliberate act? What's one small thing you could do, make, say, or send without getting it right first?"\n\nI've been thinking about what it would mean to choose imperfection deliberately rather than fail into it. Ask me 3-5 questions to help me explore this: what would the smallest possible version of this look like? What does perfectionism tell me would happen? What might actually happen instead?`
+        },
+        {
+          title: 'What Done Is Enough Looks Like',
+          prompt: `I'm working on "What Done Is Enough Looks Like." The question is: "Where in your life does 'done is enough' feel most possible right now? And where does it feel most impossible? What is different between those two areas?"\n\nI've been sitting with where done already feels like enough — and where it absolutely doesn't. Ask me 3-5 questions to help me understand the difference: what makes it possible in one area and not another? Is it the stakes, the audience, the history? What would I need to believe for done to be enough in the hard area?`
+        },
+        {
+          title: 'The Anchors That Hold You',
+          prompt: `I'm working on "The Anchors That Hold You." The question is: "What have you discovered across these five stages that you want to return to? A phrase, an insight, a feeling — something that on a hard day could remind you of what's actually true."\n\nI've been looking back across the whole workbook for what I want to hold onto. Ask me 3-5 questions to help me name this clearly: what shifted most? What do I know now that I didn't have words for before? What do I want to remember on a hard day when the old patterns are loud?`
+        },
+        {
+          title: 'The Permission Anchor',
+          prompt: `I'm working on "The Permission Anchor." The question starts with: "I am allowed to..." — a truth to keep close, not a goal or a resolution. Something that reminds me of what I already know on the days it's hard to know it.\n\nI've been trying to write myself a permission statement. Ask me 3-5 questions to help me find the truest version: what do I most need permission for? What would change if I actually believed that? What does the version of me who knows this already look like?`
+        }
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>

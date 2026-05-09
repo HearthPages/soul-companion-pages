@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .intro {
+      font-size: 15px;
+      color: #3D3530;
+      opacity: 0.75;
+      text-align: center;
+    }
+
+    /* Grid View */
+    .workbook-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .workbook-card {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 20px;
+      color: #3D3530;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .workbook-card:hover {
+      border-color: #3D3530;
+      box-shadow: 0 2px 8px rgba(61, 53, 48, 0.1);
+    }
+
+    .workbook-title {
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 4px;
+      color: #3D3530;
+    }
+
+    .workbook-subtitle {
+      font-size: 13px;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .workbook-tagline {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.65;
+      font-style: italic;
+    }
+
+    /* Workbook Detail View */
+    .workbook-detail {
+      display: none;
+    }
+
+    .workbook-detail.active {
+      display: block;
+    }
+
+    .back-button {
+      background: none;
+      border: none;
+      color: #7C9A7E;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 8px 0;
+      margin-bottom: 24px;
+      font-family: Georgia, serif;
+      text-decoration: underline;
+    }
+
+    .back-button:hover {
+      color: #3D3530;
+    }
+
+    .workbook-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .workbook-header h2 {
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 8px;
+      color: #3D3530;
+    }
+
+    .workbook-header .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+    }
+
+    /* Instructions Section */
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    /* Base Prompt Section */
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h3 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    /* Questions Section */
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h3 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <p class="intro">When the questions go deep, here's a space to think out loud. Choose your workbook to get started.</p>
+    </div>
+
+    <!-- Grid View -->
+    <div class="workbook-grid" id="gridView">
+      <div class="workbook-card" onclick="openWorkbook('intention-over-obligation')">
+        <div class="workbook-subtitle">Soul Space</div>
+        <div class="workbook-title">Intention Over Obligation</div>
+        <div class="workbook-tagline">A Journal for Living From Choice</div>
+      </div>
+
+      <div class="workbook-card" onclick="openWorkbook('the-quiet-no')">
+        <div class="workbook-subtitle">Soul Voice</div>
+        <div class="workbook-title">The Quiet No</div>
+        <div class="workbook-tagline">A Journal for Reclaiming Your Voice</div>
+      </div>
+
+      <div class="workbook-card" onclick="openWorkbook('seen-over-hidden')">
+        <div class="workbook-subtitle">Soul Seen</div>
+        <div class="workbook-title">Seen Over Hidden</div>
+        <div class="workbook-tagline">Workbook for Finding What You're Really Made Of</div>
+      </div>
+
+      <div class="workbook-card" onclick="openWorkbook('rest-over-resistance')">
+        <div class="workbook-subtitle">Soul Rest</div>
+        <div class="workbook-title">Rest Over Resistance</div>
+        <div class="workbook-tagline">A Journal for Burnout & Exhaustion Recovery</div>
+      </div>
+
+      <div class="workbook-card" onclick="openWorkbook('awareness-over-autopilot')">
+        <div class="workbook-subtitle">Soul Steady</div>
+        <div class="workbook-title">Awareness Over Autopilot</div>
+        <div class="workbook-tagline">35-Day Mental Wellness Journal</div>
+      </div>
+    </div>
+
+    <!-- Detail Views -->
+    <div id="detailsContainer"></div>
+  </div>
+
+  <script>
+    const workbookData = {
+      'intention-over-obligation': {
+        subtitle: 'Soul Space',
+        title: 'Intention Over Obligation',
+        basePrompt: `You are a warm, thoughtful companion for women working through Intention Over Obligation.
+
+Philosophy: The shift from "I have to" to "I choose to" is one of the most profound acts of self-respect available to us. There are no right answers. Honesty matters more than positivity. Skipping a day is not failure.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.`,
+        sections: {
+          'Realising': [
+            {
+              title: 'The Hum Beneath the Day',
+              prompt: `I'm working on "The Hum Beneath the Day." The question is: "Write down everything you said 'I have to' about in the last week — big and small. Don't filter. Don't justify. Just list."
+
+I've listed what I said "I have to" about this week. I want to explore this more deeply. Ask me 3-5 questions to help me look closer: which of these obligations did I actually choose, and which ones chose me — through expectation, habit, or pressure? What patterns do you notice about where the weight comes from?`
+            },
+            {
+              title: 'What Your Body Already Knows',
+              prompt: `I'm working on "What Your Body Already Knows." The question is: "Your body registers obligation before your mind names it. Tightness across the chest. A heaviness behind the eyes. A faint, familiar dread. Think of something you do regularly from obligation. Where do you feel it in your body? Describe the sensation as honestly as you can."
+
+I think I know where I feel the obligation in my body. Ask me 3-5 questions to help me find out and see if I'm right, and what my body is trying to tell me. What might this be protecting me from?`
+            },
+            {
+              title: 'The Resentment Map',
+              prompt: `I'm working on "The Resentment Map." The question is: "Resentment is not a character flaw. It is information. It shows up wherever you have been giving from pressure rather than choice. Where in your life does quiet resentment live? Write about it without softening it."
+
+I believe I have identified where my resentment lives quietly in my life. Ask me 3-5 questions to help me understand what it's really saying. Resentment is information — what is mine telling me about where I've been giving from pressure rather than choice?`
+            },
+            {
+              title: 'The Cost You Haven\'t Named',
+              prompt: `I'm working on "The Cost You Haven't Named." The question is: "Living from obligation has a cost — not just in energy, but in who you stop being when you are always performing what is expected. What has living from obligation cost you? Not what you have done for others — what have you quietly given up of yourself?"
+
+I can see what I've done for others from obligation. Ask me 3-5 questions to help me explore what I've stopped being. Not what I've given up doing — who have I become by always performing what's expected? What version of myself went quiet?`
+            }
+          ],
+          'Understanding': [
+            {
+              title: 'What You Were Taught About Your Needs',
+              prompt: `I'm working on "What You Were Taught About Your Needs." The question is: "Most women who live from obligation learned early that their needs were either too much, or less important than someone else's. That lesson left a mark. Growing up, what message did you receive about your own needs? Was it safe to have them? Was it safe to say so?"
+
+I think I know what message I received about my needs growing up. Ask me 3-5 questions to help me explore: do I still believe that message? Where does it show up in my life now? What would it mean to question it?`
+            },
+            {
+              title: 'Who You Learned to Be',
+              prompt: `I'm working on "Who You Learned to Be." The question is: "We adapt. We become the version of ourselves that felt safest — the helpful one, the quiet one, the one who never caused trouble. That adaptation made sense then. It kept you safe. But it came at a cost. Who did you learn to be in order to feel loved or safe? What did that version of you have to give up?"
+
+I think I can see the version of myself I became to stay safe or loved. Ask me 3-5 questions to help me understand what that adaptation cost me. What parts of myself did I have to hide or suppress? What did that version give up?`
+            },
+            {
+              title: 'The Voice Behind the Should',
+              prompt: `I'm working on "The Voice Behind the Should." The question is: "Every 'I should' carries a voice. Not always our own. Often someone else's — a parent, a teacher, a culture. Choose one 'should' that sits heavily on you right now. Whose voice is really behind it? What were they afraid of? What were you?"
+
+I think I can hear the voice behind one of my "shoulds" that sits heavily. Ask me 3-5 questions to help me explore: what is that voice really afraid of? And underneath that fear, what am I still afraid of? Where does that fear live in my life now?`
+            },
+            {
+              title: 'A Letter to the Girl Who First Learned This',
+              prompt: `I'm working on "A Letter to the Girl Who First Learned This." The question is: "She did what she had to do. She adapted, she smiled, she made herself smaller or more useful or easier to love. She was doing her best with what she had. She deserves to hear from you now. Write a letter to the younger version of you who first learned to put herself last."
+
+I believe I have identified what that younger version of me learned. Ask me 3-5 questions to help me understand it with compassion. What did she need to hear? What would I tell her about who she actually was underneath the adaptation?`
+            }
+          ],
+          'Releasing': [
+            {
+              title: 'Guilt Is Not a Compass',
+              prompt: `I'm working on "Guilt Is Not a Compass." The question is: "We treat guilt as though it is always telling us the truth — that choosing ourselves makes us selfish. Where in your life does guilt reliably show up when you try to choose yourself? What story does it tell you? Is that story actually true?"
+
+I think I know where guilt shows up when I try to choose myself. Ask me 3-5 questions to help me understand what it's really protecting. What's underneath the guilt? What would happen if I didn't listen to it?`
+            },
+            {
+              title: 'The Chronic Yes',
+              prompt: `I'm working on "The Chronic Yes." The question is: "Every yes that comes from fear or pressure is also a no to something — your time, your energy, your own needs. The cost is real. What have you been saying yes to that you wish you hadn't? What have those yeses cost you?"
+
+I think I can see what I've been saying yes to from fear. Ask me 3-5 questions to help me understand the real cost. What have those yeses quietly prevented me from doing or becoming?`
+            },
+            {
+              title: 'What You\'ve Been Protecting',
+              prompt: `I'm working on "What You've Been Protecting." The question is: "Sometimes we stay small — agreeable, obliging, endlessly available — because it feels safer than the alternative. What is the thing you are most afraid would happen if you stopped? Sit with that fear honestly."
+
+I believe I can name the thing I'm afraid would happen if I stopped obliging. Ask me 3-5 questions to help me look underneath it. What is that fear really about? Where did it come from?`
+            },
+            {
+              title: 'Releasing in Practice',
+              prompt: `I'm working on "Releasing in Practice." The question is: "Releasing is rarely a dramatic gesture. It is usually quiet. A boundary spoken gently but clearly. A no that doesn't come with an apology attached. What is one obligation, one 'should,' one expectation you are genuinely ready to release? What would releasing it look like in practice?"
+
+I believe I have identified something I'm ready to release. Ask me 3-5 questions to help me think through what releasing it would actually look like in my life. What's one small, practical way I could start?`
+            }
+          ],
+          'Returning': [
+            {
+              title: 'What You Actually Enjoy',
+              prompt: `I'm working on "What You Actually Enjoy." The question is: "Not what you think you should enjoy. Not what looks responsible or sounds productive. What you genuinely, quietly enjoy — even if it seems too small to matter. When did you last do something purely because you wanted to? What was it?"
+
+I've named something I genuinely enjoy. Ask me 3-5 questions to help me explore: why have I allowed myself so little of this? What story have I told myself about why it's not allowed? Is that story actually true?`
+            },
+            {
+              title: 'Desire Without the Guilt Filter',
+              prompt: `I'm working on "Desire Without the Guilt Filter." The question is: "Desire filtered through guilt doesn't sound like desire anymore. It sounds like 'maybe someday' or 'I don't really need it.' Remove the filter for a moment. If guilt wasn't in the room, what would you want more of in your life right now?"
+
+I can feel the desire underneath the guilt. Ask me 3-5 questions to help me understand what I'm really wanting. If guilt wasn't there, what would I choose? What does that desire tell me about what matters to me?`
+            },
+            {
+              title: 'What You Deserve',
+              prompt: `I'm working on "What You Deserve." The question is: "This is the one most of us skip. Not because we didn't read it — but because something in us goes quiet when we reach it. What do you believe you don't deserve? Be honest, even if it feels uncomfortable. Where did that belief come from?"
+
+I've named something I believe I don't deserve. Ask me 3-5 questions to help me sit with this more carefully. Is this belief actually mine, or did someone teach it to me? What if it's not true?`
+            },
+            {
+              title: 'What You\'ve Been Calling Selfish',
+              prompt: `I'm working on "What You've Been Calling Selfish." The question is: "Rest. Space. Time that belongs only to you. The word 'selfish' has done a great deal of quiet damage. What have you been calling selfish that is actually just a need? What would it feel like to call it a need instead?"
+
+I've identified something I've been calling selfish. Ask me 3-5 questions to help me explore: is this actually selfish, or is it just a need? What would it feel like to call it what it really is? What would change?`
+            }
+          ],
+          'Rooting': [
+            {
+              title: 'What Choosing Yourself Looks Like',
+              prompt: `I'm working on "What Choosing Yourself Looks Like." The question is: "Not in grand gestures. In the small, ordinary moments of a Tuesday. Choosing yourself often looks unremarkable from the outside — and quietly radical from within. What does choosing yourself look like in your daily life right now — not as an aspiration, but as something small and actual?"
+
+I've identified how I choose myself in small ways. Ask me 3-5 questions to help me explore: what would it look like if I did this more consistently? What small choice could I make today that would move me toward this?`
+            },
+            {
+              title: 'When the Old Patterns Return',
+              prompt: `I'm working on "When the Old Patterns Return." The question is: "They will. Not because you failed, but because habits are grooves worn deep by years of practice. The return of an old pattern is not a relapse — it is information. What are the conditions that make you most likely to slip back into obligation? What will you do when you notice it happening?"
+
+I think I know the conditions that pull me back into obligation. Ask me 3-5 questions to help me prepare: what will I actually do when I notice it happening? What's a concrete step I can take?`
+            },
+            {
+              title: 'Holding Intention When Life Gets Hard',
+              prompt: `I'm working on "Holding Intention When Life Gets Hard." The question is: "Life doesn't pause while we do this work. There will be hard weeks, competing demands, moments when everything asks for more than you have. Intention needs to be simple enough to hold onto. What is the simplest, truest version of your intention — a single sentence you could come back to when everything feels like too much?"
+
+I've found my simplest intention. Ask me 3-5 questions to help me test it: does this actually hold when life gets hard? Is there a way to make it even simpler, even truer?`
+            },
+            {
+              title: 'The Life You Are Building',
+              prompt: `I'm working on "The Life You Are Building." The question is: "Not perfect. Not finished. Just more honest, more chosen, more yours than it was when you began. Looking at where you started and where you are now — what has shifted, even quietly?"
+
+I can see what's shifted. Ask me 3-5 questions to help me go deeper: what am I becoming through these shifts? What's one way I want to keep building on this?`
+            }
+          ]
+        }
+      },
+      'the-quiet-no': {
+        subtitle: 'Soul Voice',
+        title: 'The Quiet No',
+        basePrompt: `You are a warm, thoughtful companion for women working through The Quiet No.
+
+Philosophy: Your voice matters. Even the quiet parts of it. This is not about becoming louder — it is about becoming clearer.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.`,
+        sections: {
+          'Realising': [
+            {title: 'The Last Time You Said Yes', prompt: `I'm working on "The Last Time You Said Yes." The question is: "When was the last time you said yes when you meant no? What did you say yes to, and what was underneath that yes?"\n\nI can see moments when I said yes when I meant no. Ask me 3-5 questions to help me go deeper to find out what fear is driving this? Was I afraid of something if I said no?`},
+            {title: 'What Your Body Knows', prompt: `I'm working on "What Your Body Knows." The question is: "Your body always knows first. Where does the yes-when-you-mean-no register in your body? Tightness? Sinking? A faint chill?"\n\nI can feel where my body responds to the yes-when-I-mean-no. Ask me 3-5 questions to help me understand what it's trying to tell me. What does that feeling protect me from?`},
+            {title: 'What It Has Cost You', prompt: `I'm working on "What It Has Cost You." The question is: "Not in time or energy alone. What have you stopped doing? Who did you stop letting yourself be?"\n\nI can see what activities I've stopped doing. Ask me 3-5 questions to help me explore the deeper cost: what version of myself have I had to set aside? Who would I be if I had more space?`}
+          ],
+          'Understanding': [
+            {title: 'What You Were Taught', prompt: `I'm working on "What You Were Taught." The question is: "What were you taught about being a good girl? About pleasing others? About your responsibility to keep the peace?"\n\nI think I know the messages I received about being a good girl. Ask me 3-5 questions to help me explore: where are those messages still running my life? What would it mean to question them?`},
+            {title: 'What You Were Praised For', prompt: `I'm working on "What You Were Praised For." The question is: "What did you become good at? What earned you praise? What version of yourself learned to show up reliably, agreeably, endlessly available?"\n\nI think I can see what I became good at to earn love. Ask me 3-5 questions to help me understand what I stopped letting myself want or be. Were there parts of me I learnt to hide?`},
+            {title: 'What You Are Protecting', prompt: `I'm working on "What You Are Protecting." The question is: "What are you trying to earn or maintain through over-giving? Safety? Love? Permission to exist? What would it feel like to have that without the performance?"\n\nI think I've identified what I'm trying to earn through over-giving. Ask me 3-5 questions to help me go deeper: what would it feel like to ask for it directly? What am I afraid would happen?`}
+          ],
+          'Releasing': [
+            {title: 'The Story That Keeps You Giving', prompt: `I'm working on "The Story That Keeps You Giving." The question is: "You've probably told yourself something: 'If I don't do this, no one will.' Or 'If I say no, they'll think I'm selfish.' Or 'Saying no will cost me the relationship.' What's the story?"\n\nI can hear the story I've been telling myself. Ask me 3-5 questions to help me question it: is this story actually true? What evidence do I have? What would it mean if the opposite were true?`},
+            {title: 'The Resentment You\'re Not Supposed to Have', prompt: `I'm working on "The Resentment You're Not Supposed to Have." The question is: "Where does resentment live in you? What activities, people, or roles trigger the quiet feeling of being drained or empty?"\n\nI can feel the resentment, exhaustion, or emptiness. Ask me 3-5 questions to help me listen to it. What is it telling me about what I need? Is there a boundary I should be setting?`},
+            {title: 'What Lighter Feels Like', prompt: `I'm working on "What Lighter Feels Like." The question is: "Imagine waking up without the weight of over-responsibility. What would be different? What would you actually say or do that you don't now?"\n\nI think I can imagine waking up without the weight. Ask me 3-5 questions to help me go deeper: what specifically would be different? What would I actually say or do that I don't now?`}
+          ],
+          'Returning': [
+            {title: 'What You Actually Want', prompt: `I'm working on "What You Actually Want." The question is: "Not what you think you should want. Not what would be acceptable or responsible. What genuinely fills you up? What brings you alive?"\n\nI can feel what genuinely fills me up. Ask me 3-5 questions to help me explore: why have I allowed myself so little of this? What story have I told myself about why it's not safe to want this?`},
+            {title: 'What You Have Been Waiting for Permission to Want', prompt: `I'm working on "What You Have Been Waiting for Permission to Want." The question is: "There is probably something you've been hiding even from yourself. A desire you haven't let yourself claim. Where did you learn that this wasn't allowed?"\n\nI can feel the desire I've been hiding. Ask me 3-5 questions to help me understand: where did I learn that this wasn't allowed? What would it mean to give myself permission now?`}
+          ],
+          'Rooting': [
+            {title: 'One Honest Conversation', prompt: `I'm working on "One Honest Conversation." The question is: "There is probably someone you need to speak to. What is the conversation you need to have? What are you actually afraid will happen?"\n\nI can feel the conversation I need to have. Ask me 3-5 questions to help me explore: what am I actually afraid will happen? What do I want to say? What would be different if I did?`},
+            {title: 'What Boundary Feels Most Important', prompt: `I'm working on "What Boundary Feels Most Important." The question is: "If you could set one boundary — one clear, unmoved, authentic no — what would it be? What would shift if you set it?"\n\nI think I can feel which boundary matters most. Ask me 3-5 questions to help me understand: what would shift if I set it? What am I most afraid of?`}
+          ]
+        }
+      },
+      'seen-over-hidden': {
+        subtitle: 'Soul Seen',
+        title: 'Seen Over Hidden',
+        basePrompt: `You are a warm, thoughtful companion for women working through Seen Over Hidden.
+
+Philosophy: You are not trying to build a better version of yourself. You are trying to find the real one. There are no right answers. Only honest ones.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.`,
+        sections: {
+          'Realising': [
+            {title: 'The Rules You Live By', prompt: `I'm working on "The Rules You Live By." The question is: "What are the unspoken rules you live by? Not the ones written in books — the ones written in your body, your choices, your silence. What would be dangerous to do? Selfish? Wrong?"\n\nI've written what I believe to be my unspoken rules. Ask me 3-5 questions to help me explore: where did each one come from? What happened in my history that made these rules feel necessary?`},
+            {title: 'Freedom or Performance', prompt: `I'm working on "Freedom or Performance." The question is: "Some of your values are genuinely yours. Others you perform because you believe you should. Can you feel the difference? Which values light you up? Which ones make you feel small?"\n\nI can feel the difference between a value that's real and one that's performed. Ask me 3-5 questions to help me explore: which of my values are actually mine? Which ones do I live from obligation?`}
+          ],
+          'Understanding': [
+            {title: 'The Teachers', prompt: `I'm working on "The Teachers." The question is: "Who taught you these rules? Parents, teachers, church, culture, social media. What did they believe you needed to become? What were they afraid would happen if you didn't?"\n\nI can name the people who taught me these rules. Ask me 3-5 questions to help me trace this back: what did they believe I needed to become? What were they afraid would happen if I didn't?`},
+            {title: 'What You Were Rewarded For', prompt: `I'm working on "What You Were Rewarded For." The question is: "What did you become good at? What earned you praise, approval, or safety? What had to be small or quiet or hidden for you to fit that image?"\n\nI can see what I became good at. Ask me 3-5 questions to help me understand: what did I have to stop letting myself be or want in order to fit that image? What went underground?`},
+            {title: 'What Was Criticised, Mocked, or Silenced', prompt: `I'm working on "What Was Criticised, Mocked, or Silenced." The question is: "What quality in you was discouraged? Passion? Ambition? Softness? Anger? Sexual desire? Grief? What happened when you tried to be that version of yourself?"\n\nI think I can identify a quality that was discouraged. Ask me 3-5 questions to help me go deeper: what happened when I tried to be that version? What did I learn about myself from that?`}
+          ],
+          'Releasing': [
+            {title: 'The Mirror Exercise', prompt: `I'm working on "The Mirror Exercise." The question is: "There is probably a quality in others that bothers you. That you judge. That you're quick to criticise. What is it? The thing that triggers you tells you something about yourself."\n\nI can see the quality that bothers me in others. Ask me 3-5 questions to help me explore: what does this tell me about myself? What part of me am I actually judging?`},
+            {title: 'The Inherited Rules', prompt: `I'm working on "The Inherited Rules." The question is: "You've written them all out. The shoulds that aren't yours. Which one feels heaviest? Which one, if you released it, would change things most?"\n\nI've written them all out. Ask me 3-5 questions to help me understand: which one feels heaviest? Which one, if I released it, would change things most?`},
+            {title: 'What Went Underground', prompt: `I'm working on "What Went Underground." The question is: "There was a quality in you that was called wrong. That you learned to hide. Not because it was bad — but because it didn't fit the picture. What would it mean to welcome that part back?"\n\nI can identify a quality that was called wrong. Ask me 3-5 questions to help me explore this more gently: what value was hiding inside it? What would it mean to welcome that part of myself back?`}
+          ],
+          'Returning': [
+            {title: 'Peak Moments', prompt: `I'm working on "Peak Moments." The question is: "Think of three moments when you felt most alive. Most yourself. Most authentic. What values were present in all three? What does that tell you about what you're actually made of?"\n\nI've identified three moments when I felt most alive. Ask me 3-5 questions to help me understand the pattern: what values were alive in all three? What does that tell me about what I'm really made of?`},
+            {title: 'The Anger Compass', prompt: `I'm working on "The Anger Compass." The question is: "What makes you genuinely angry? Real, hot anger — not the small irritations, but the things that make something in you rise up. What values are being violated?"\n\nI've named what makes me genuinely angry. Ask me 3-5 questions to help me explore: what values are being violated when I feel this anger? What matters to me that much?`},
+            {title: 'The Admiration Mirror', prompt: `I'm working on "The Admiration Mirror." The question is: "Who do you deeply admire? What qualities in them do you most want to claim in yourself? What's stopping you?"\n\nI've named people I deeply admire. Ask me 3-5 questions to help me understand: which of their qualities do I most want to claim in myself? What's stopping me?`}
+          ],
+          'Rooting': [
+            {title: 'When Values Conflict', prompt: `I'm working on "When Values Conflict." The question is: "Sometimes two values pull against each other. Honesty versus loyalty. Rest versus responsibility. Authenticity versus safety. Where do you feel this conflict most?"\n\nI can feel two values pulling against each other. Ask me 3-5 questions to help me navigate this: in this conflict, what does my gut actually want? What would it mean to choose that?`},
+            {title: 'Values and Your Relationships', prompt: `I'm working on "Values and Your Relationships." The question is: "How do your core values show up in your relationships? In which relationships do you honour them? In which ones do you compromise them? What does that tell you?"\n\nI've looked at how my values show up in relationships. Ask me 3-5 questions to help me go deeper: in the relationship that drains me, what value is being neglected? What boundary might I need?`},
+            {title: 'Living Your Values Daily', prompt: `I'm working on "Living Your Values Daily." The question is: "What is one small daily action that honours each of your core values? How would you actually do this? What would it look like tomorrow?"\n\nI've identified my core values. Ask me 3-5 questions to help me make this concrete: for each value, what's one small daily action that honors it? How would I actually do this?`}
+          ]
+        }
+      },
+      'rest-over-resistance': {
+        subtitle: 'Soul Rest',
+        title: 'Rest Over Resistance',
+        basePrompt: `You are a warm, thoughtful companion for women working through Rest Over Resistance.
+
+Philosophy: You don't have to be in crisis to deserve rest. Be honest, be gentle, and show up for yourself the way you would show up for someone you love.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.`,
+        sections: {
+          'Realising': [
+            {title: 'Arriving', prompt: `I'm working on "Arriving." The question is: "Something brought you to this journal. What did you hope for when you picked it up? What does your body need that you haven't let yourself ask for?"\n\nSomething brought me to this journal. Ask me 3-5 questions to help me explore: what am I really hoping for? What does my body need that I haven't let myself ask for?`},
+            {title: 'The Body Knows', prompt: `I'm working on "The Body Knows." The question is: "Your exhaustion lives somewhere in your body. Where? Feel into it. Not the story — the sensation. What has your body been trying to tell you that you haven't been listening to?"\n\nI think I can feel where my exhaustion lives. Ask me 3-5 questions to help me go deeper: what has my body been trying to tell me that I haven't been listening to?`},
+            {title: 'The Pretending', prompt: `I'm working on "The Pretending." The question is: "What are you pushing through? What do you pretend is fine when it's not? What would it mean to stop pretending? What would happen if you admitted how tired you actually are?"\n\nI've written what I feel I'm pushing through. Ask me 3-5 questions to help me look at this more honestly: what would it mean to stop pretending? What would happen if I admitted how tired I actually am?`},
+            {title: 'The Body Scan', prompt: `I'm working on "The Body Scan." The question is: "Close your eyes. Feel through your body. Where is tension? Where is numbness? Where does it ache? Not to fix it — just to listen. What is the pattern? What are these parts trying to tell you?"\n\nI've felt through my body. Ask me 3-5 questions to help me explore what I found more deeply: what is the pattern? What parts of me are most affected? What are they trying to tell me?`}
+          ],
+          'Understanding': [
+            {title: 'Not Yours to Carry', prompt: `I'm working on "Not Yours to Carry." The question is: "What burden are you carrying that isn't yours? Whose responsibility did you pick up? Where did you pick it up? What would it feel like to put it down?"\n\nI think I can identify what I'm carrying that isn't mine. Ask me 3-5 questions to help me go deeper: where did I pick this up? What would it feel like to put it down?`},
+            {title: 'The Roles That Drain', prompt: `I'm working on "The Roles That Drain." The question is: "You play several roles. Caretaker. Helper. Fixer. Which identity have you been performing? What would you be like if you stopped?"\n\nI've identified roles that have become a weight. Ask me 3-5 questions to help me understand: which identity have I been performing? What would I be like if I stopped?`},
+            {title: 'The Unsaid Things', prompt: `I'm working on "The Unsaid Things." The question is: "What have you been pushing down? What would happen if you said it? What are you afraid would happen?"\n\nI've written what I think I've been pushing down. Ask me 3-5 questions to help me explore this more gently: what would it mean to actually say these things? What am I afraid would happen?`},
+            {title: 'What You Were Taught', prompt: `I'm working on "What You Were Taught." The question is: "What messages did you receive about rest? About worthiness? About what you owe? Do you still believe those messages? Where are they showing up in your life now?"\n\nI believe I know the messages I received about rest and worth. Ask me 3-5 questions to help me go deeper: do I still believe them? Where are they showing up in my life now?`}
+          ],
+          'Releasing': [
+            {title: 'Guilt Is Not a Compass', prompt: `I'm working on "Guilt Is Not a Compass." The question is: "Where does guilt show up when you try to rest? What story does it tell you? Is that story actually true? What would happen if you didn't listen to it?"\n\nI think I know where guilt shows up. Ask me 3-5 questions to help me go deeper: what is it really protecting? What would happen if I didn't listen to it?`},
+            {title: 'The Chronic Yes', prompt: `I'm working on "The Chronic Yes." The question is: "Where have you been saying yes when you meant no? Not from choice — from pressure, from obligation, from fear. What would you have said no to if you felt allowed?"\n\nI think I can see where I've been saying yes when I meant no. Ask me 3-5 questions to help me understand: what would I have said no to if I felt allowed? What does that tell me?`},
+            {title: 'What You\'ve Been Protecting', prompt: `I'm working on "What You've Been Protecting." The question is: "If you had permission to stop — to rest, to slow down, to disappoint people — what would fall away? What would you grieve? What would be relief?"\n\nI've written what would fall away if I had permission to stop. Ask me 3-5 questions to help me explore: what does that list tell me about what I actually need?`},
+            {title: 'If You Had Permission', prompt: `I'm working on "If You Had Permission." The question is: "Imagine you woke up tomorrow with complete permission — from yourself, from everyone who matters. What would fall away first? What would you grieve? What would be relief?"\n\nI can see what would fall away first, what I'd grieve, what would be relief. Ask me 3-5 questions to help me understand: what does this tell me about what I'm truly ready to release?`}
+          ],
+          'Returning': [
+            {title: 'What Rest Really Means', prompt: `I'm working on "What Rest Really Means." The question is: "Not sleep. Not productivity disguised as rest. What does genuine rest look like to you? Why have you allowed yourself so little of it? What story have you told yourself?"\n\nI think I know what genuine rest looks like to me. Ask me 3-5 questions to help me go deeper: why have I allowed myself so little of it? What story have I told myself?`},
+            {title: 'What Fills You Up', prompt: `I'm working on "What Fills You Up." The question is: "Not what you think should fill you. Not what looks productive. What genuinely restores you? What's the difference between what actually fills you and what you've been told should fill you?"\n\nI've identified what genuinely restores me. Ask me 3-5 questions to help me explore: what's the difference between what actually fills me and what I've been told should fill me?`},
+            {title: 'What Lighter Feels Like', prompt: `I'm working on "What Lighter Feels Like." The question is: "Imagine waking up without the weight. What specifically would be different? What would you do? How would you move? What's one thing you could do this week?"\n\nI can feel what it would be like to wake up without the weight. Ask me 3-5 questions to help me imagine this more vividly: what specifically needs to change for this to be real? What's one thing I could do this week?`},
+            {title: 'What One Boundary Would Change', prompt: `I'm working on "What One Boundary Would Change." The question is: "If you could set one boundary — around time, energy, emotional labour — what would it be? What am I afraid will happen if I set it? What's it worth?"\n\nI've identified the boundary that matters most. Ask me 3-5 questions to help me understand: what am I afraid will happen if I set it? What's it worth?`}
+          ],
+          'Rooting': [
+            {title: 'When Values Conflict', prompt: `I'm working on "When Values Conflict." The question is: "Sometimes rest conflicts with responsibility. Care for yourself conflicts with care for others. Where do you feel this pull most? What do you actually want to choose?"\n\nI can feel values pulling me in different directions. Ask me 3-5 questions to help me explore: which value do I actually want to choose? What would that mean?`},
+            {title: 'Values and Your Relationships', prompt: `I'm working on "Values and Your Relationships." The question is: "How do your values show up in relationships? Which relationships drain you? In those relationships that drain me, what value is being neglected? What boundary might I need?"\n\nI've looked at how my values show up in relationships. Ask me 3-5 questions to help me go deeper: in the relationships that drain me, what boundary might I need? What's one I could set?`},
+            {title: 'Growing From New Ground', prompt: `I'm working on "Growing From New Ground." The question is: "Imagine a life with room for you in it. What specifically needs to shift? Not fantasies — concrete changes. What's one change you could make?"\n\nI've imagined a life with room for me in it. Ask me 3-5 questions to help me explore this more vividly: what specifically needs to shift? What's one change I could make?`},
+            {title: 'Living It Daily', prompt: `I'm working on "Living It Daily." The question is: "You've identified one small thing you can do. What would make it sustainable? How would you actually do it? When would you do it?"\n\nI've identified one small thing I can do. Ask me 3-5 questions to help me explore: what would make this sustainable? How would I actually do it?`}
+          ]
+        }
+      },
+      'awareness-over-autopilot': {
+        subtitle: 'Soul Steady',
+        title: 'Awareness Over Autopilot',
+        basePrompt: `You are a warm, thoughtful companion for women working through Awareness Over Autopilot.
+
+Philosophy: There is no perfect journalling. There is only showing up. Your mood does not have to be good to write — that is rather the point. One word is always enough. So is a blank page.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard. Ask genuine follow-up questions that go deeper. Be conversational, like a trusted friend.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.
+
+Length: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.`,
+        sections: {
+          'Realising': [
+            {title: 'Understanding Your Autopilot', prompt: `I'm working on "Understanding Your Autopilot." The question is: "Where do you go when you disappear into autopilot? What are you protecting yourself from by staying numb? What would you have to feel if you woke up?"\n\nI can see my autopilot patterns. Ask me 3-5 questions to help me go deeper: what am I protecting myself from by staying numb? What would I have to feel if I woke up?`},
+            {title: 'Your Mood Patterns', prompt: `I'm working on "Your Mood Patterns." The question is: "You know what a low mood feels like. You probably know what shifts it. Is it something external, or something you're creating inside? What's the actual trigger?"\n\nI know what a low mood feels like and what shifts it. Ask me 3-5 questions to help me explore: what's the actual trigger? Is it something external, or something happening inside me?`},
+            {title: 'Where You\'re Stuck', prompt: `I'm working on "Where You're Stuck." The question is: "Where are you most on autopilot? In relationships? Work? Your own care? What would change if you brought awareness there? What are you afraid you'd see?"\n\nI think I can identify where I'm on autopilot most. Ask me 3-5 questions to help me look at this more carefully: what would change if I brought awareness there? What am I afraid I'd see?`}
+          ],
+          'Understanding': [
+            {title: 'What Triggers Your Mood', prompt: `I'm working on "What Triggers Your Mood." The question is: "What consistently affects your mood? People? Situations? Time of day? Your own internal state? What do your triggers have in common? Are they external events, or something you're creating inside?"\n\nI believe I have identified my mood triggers. Ask me 3-5 questions to help me go deeper: what do they have in common? Are they external events, or something I'm creating inside?`},
+            {title: 'What Genuine Gratitude Feels Like', prompt: `I'm working on "What Genuine Gratitude Feels Like." The question is: "There was a moment when you felt genuinely grateful — not performed, not forced. What was that moment? What was different about it? How could you create more moments like it?"\n\nI remember a moment of genuine gratitude. Ask me 3-5 questions to help me explore this more deeply: what was different about that moment? How could I create more moments like it?`},
+            {title: 'The Habits That Keep You Stuck', prompt: `I'm working on "The Habits That Keep You Stuck." The question is: "What habits keep you on autopilot? Scrolling? Distracting? Numbing? What need is each one meeting? What would happen if you stopped?"\n\nI can name habits that keep me on autopilot. Ask me 3-5 questions to help me look at this more honestly: what need is each habit meeting? What would happen if I stopped?`}
+          ],
+          'Releasing': [
+            {title: 'What You\'re Ready to Stop', prompt: `I'm working on "What You're Ready to Stop." The question is: "There is probably an autopilot behavior you're ready to release. Not in some distant future — now. What would be possible if you stopped? What are you curious about?"\n\nI've identified an autopilot behavior I'm ready to release. Ask me 3-5 questions to help me explore this more deeply: what would be possible if I stopped? What am I curious about?`},
+            {title: 'Habits That Don\'t Serve You', prompt: `I'm working on "Habits That Don't Serve You." The question is: "There is probably a new habit you want to start. Small. Doable. What stops you? What's the smallest possible version you could try? What would it look like?"\n\nI've named a habit I want to start. Ask me 3-5 questions to help me go deeper: what stops me? What's the smallest possible version I could try?`}
+          ],
+          'Returning': [
+            {title: 'What Restores You', prompt: `I'm working on "What Restores You." The question is: "What brings you back to the present moment? Not escape — actual presence. What genuinely restores you?"\n\nI know what brings me back to the present. Ask me 3-5 questions to help me explore this more deeply: what would make it easier to access when I need it most?`},
+            {title: 'Small Joys Worth Noticing', prompt: `I'm working on "Small Joys Worth Noticing." The question is: "The small things. A taste. A texture. A moment of light. A laugh. What small joys have you stopped noticing? Why haven't you noticed them before?"\n\nI've named joys I want to notice. Ask me 3-5 questions to help me go deeper: why haven't I noticed them before? What would change if I did?`}
+          ],
+          'Rooting': [
+            {title: 'Your Daily Awareness Practice', prompt: `I'm working on "Your Daily Awareness Practice." The question is: "You've imagined a practice — something that brings you back to presence. What would make it sustainable? How would you actually do it daily?"\n\nI've imagined a practice. Ask me 3-5 questions to help me explore this more deeply: what would make it sustainable? How could I actually do it daily?`},
+            {title: 'Building Consistency', prompt: `I'm working on "Building Consistency." The question is: "Showing up for yourself is an act of love. How can you show up for yourself even on the hard days? What would help you stay consistent?"\n\nI've thought about consistency. Ask me 3-5 questions to help me go deeper: how can I show up for myself? What would help me stay consistent?`}
+          ]
+        }
+      }
+    };
+
+    function openWorkbook(workbookId) {
+      const workbook = workbookData[workbookId];
+      if (!workbook) return;
+
+      const detailHTML = `
+        <div class="workbook-detail active" id="detail-${workbookId}">
+          <button class="back-button" onclick="backToGrid()">← Back to workbooks</button>
+
+          <div class="workbook-header">
+            <div class="subtitle">${workbook.subtitle}</div>
+            <h2>${workbook.title}</h2>
+          </div>
+
+          <div class="instructions-section">
+            <strong>How to use:</strong>
+            <ol>
+              <li>Copy the base system prompt below</li>
+              <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+              <li>Paste the prompt into a new conversation</li>
+              <li>Add what you're working through after the prompt</li>
+              <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+            </ol>
+          </div>
+
+          <div class="base-prompt-section">
+            <h3>Base System Prompt</h3>
+            <div class="prompt-box">${escapeHtml(workbook.basePrompt)}</div>
+            <button class="copy-button" onclick="copyPrompt('${workbookId}-base')">Copy Base Prompt</button>
+          </div>
+
+          <div class="questions-section">
+            <h3>Deep Exploration Prompts</h3>
+            <p style="font-size: 13px; color: #3D3530; opacity: 0.7; margin-bottom: 16px;">Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+            <div id="questions-${workbookId}"></div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('detailsContainer').insertAdjacentHTML('beforeend', detailHTML);
+      document.getElementById('gridView').style.display = 'none';
+
+      renderQuestionsForWorkbook(workbookId, workbook.sections);
+      window.currentWorkbookId = workbookId;
+    }
+
+    function renderQuestionsForWorkbook(workbookId, sections) {
+      const container = document.getElementById(`questions-${workbookId}`);
+      if (!container) return;
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+          const uniqueId = `${workbookId}-${sectionName}-${idx}`;
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyPrompt(type) {
+      let text = '';
+      if (type.includes('-base')) {
+        text = document.querySelector(`.prompt-box`).textContent;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function backToGrid() {
+      document.getElementById('gridView').style.display = 'flex';
+      document.getElementById('detailsContainer').innerHTML = '';
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+  </script>
+</body>
+</html>

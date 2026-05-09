@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion QR Codes</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .qr-card {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .qr-card h3 {
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+    }
+
+    .qr-code {
+      display: inline-block;
+      padding: 12px;
+      background: white;
+      border: 1px solid #E8E0D0;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .qr-code canvas {
+      display: block;
+    }
+
+    .url {
+      font-size: 11px;
+      color: #C4B9A8;
+      word-break: break-all;
+      font-family: monospace;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    .qr-card .download-btn {
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    .qr-card .download-btn:hover {
+      background: #6A8A6D;
+    }
+
+    .download-section {
+      text-align: center;
+      padding: 20px;
+      background: #F5EDDF;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+
+    .download-section p {
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Soul Companion QR Codes</h1>
+      <p>Hearth and Pages Workbook Guides</p>
+    </div>
+
+    <div class="qr-grid">
+      <div class="qr-card">
+        <h3>Intention Over Obligation</h3>
+        <div class="qr-code" id="qr1"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/intention-over-obligation</div>
+        <button class="download-btn" onclick="downloadQR('qr1', 'intention-over-obligation')">Download QR Code</button>
+      </div>
+
+      <div class="qr-card">
+        <h3>The Quiet No</h3>
+        <div class="qr-code" id="qr2"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/the-quiet-no</div>
+        <button class="download-btn" onclick="downloadQR('qr2', 'the-quiet-no')">Download QR Code</button>
+      </div>
+
+      <div class="qr-card">
+        <h3>Rest Over Resistance</h3>
+        <div class="qr-code" id="qr3"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/rest-over-resistance</div>
+        <button class="download-btn" onclick="downloadQR('qr3', 'rest-over-resistance')">Download QR Code</button>
+      </div>
+
+      <div class="qr-card">
+        <h3>Seen Over Hidden</h3>
+        <div class="qr-code" id="qr4"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/seen-over-hidden</div>
+        <button class="download-btn" onclick="downloadQR('qr4', 'seen-over-hidden')">Download QR Code</button>
+      </div>
+
+      <div class="qr-card">
+        <h3>Awareness Over Autopilot</h3>
+        <div class="qr-code" id="qr5"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/awareness-over-autopilot</div>
+        <button class="download-btn" onclick="downloadQR('qr5', 'awareness-over-autopilot')">Download QR Code</button>
+      </div>
+
+      <div class="qr-card">
+        <h3>Perfectionism Unraveled</h3>
+        <div class="qr-code" id="qr6"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/perfectionism-unraveled</div>
+        <button class="download-btn" onclick="downloadQR('qr6', 'perfectionism-unraveled')">Download QR Code</button>
+      </div>
+    </div>
+
+    <div class="download-section">
+      <p>Right-click on any QR code to save it as an image for print or digital use.</p>
+    </div>
+  </div>
+
+  <script>
+    // Generate QR codes
+    new QRCode(document.getElementById("qr1"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/intention-over-obligation",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr2"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/the-quiet-no",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr3"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/rest-over-resistance",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr4"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/seen-over-hidden",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr5"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/awareness-over-autopilot",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr6"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/perfectionism-unraveled",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Download function
+    function downloadQR(elementId, filename) {
+      const canvas = document.getElementById(elementId).querySelector('canvas');
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `soul-companion-${filename}.png`;
+      link.click();
+    }
+  </script>
+</body>
+</html>

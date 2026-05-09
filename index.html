@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Soul Companion · Hearth and Pages</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#FAF6F0;font-family:Georgia,serif}
+  textarea:focus{outline:none}
+  button{cursor:pointer}
+  @keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useRef,useEffect} = React;
+const CREAM="#FAF6F0",STONE="#C4B9A8",DARK="#3D3530",SAGE="#7C9A7E";
+
+const howToUse={
+  "soul-space":{
+    journal:`Soul Space is not a productivity tool. It is an awareness practice.\n\nEach page asks you to slow down and notice — not to improve, optimise, or perform. The questions are invitations, not assignments. Answer one and leave the rest. That is enough.\n\nPart One holds six foundational exercises. Work through them once at the start, or return whenever you feel disconnected from yourself. Part Two is your 30-day daily practice — 5–10 minutes per day. Even doing one prompt is meaningful.\n\nOn heavy days, the small box at the bottom of each page is enough. One word, one sentence, or nothing at all still counts as showing up.\n\nThere are no right answers. Honesty matters more than positivity. Skipping a day is not failure.`,
+    companion:`This journal comes with a free AI Soul Companion — a gentle space to think out loud when the prompts feel hard and the words won't come.\n\nSelect the section or day you're on below. Tell the companion where you are. Talk it through. When something lands — return to your journal and write it down.\n\nThe journal is where the work lives. The companion is simply here so you don't have to do it alone.`
+  },
+  "soul-voice":{
+    journal:`The Quiet No is not about becoming louder. It is about becoming clearer.\n\nThis workbook asks you to explore the patterns of people-pleasing that live in your body and your nervous system. To notice where you have learned to shrink. And to practice reclaiming your voice — not in grand gestures, but in small, steady moments of honesty.\n\nThere is no timeline for this work. You can move through the pages in order, or jump to what feels most urgent. Some days you will do one exercise. Some days, just reading the opening will be enough.\n\nYour voice matters. Even the quiet parts of it.`,
+    companion:`This workbook comes with a free AI Soul Companion — for the moments when you want to explore what's underneath your people-pleasing patterns, or when you're learning to hear your own voice again.\n\nSelect the section you're working through below. Use the companion to think it through — then return to your page and write what you found.\n\nReclaiming your voice is not loud or dramatic. It's quiet, steady, and real. The companion is here to help you find the words.`
+  },
+  "soul-seen":{
+    journal:`Soul Seen is not asking you to become someone new. It is asking you to remember who you already are — underneath the expectations, the conditioning, and the roles you have learned to play.\n\nThere are five parts. Part One introduces values and the difference between what you truly want and what you were taught to want. Part Two has exercises to identify your real values. Part Three is shadow work — uncovering values you were shamed out of or learned to hide. Part Four brings it all together in relationships, daily life, and when values conflict. Part Five is about living what you have discovered.\n\nThis workbook may bring up things that surprise you. There are no right answers. Only honest ones. If something feels too raw, set it down and come back when you're ready.`,
+    companion:`This workbook comes with a free AI Soul Companion — especially useful for the shadow work sections, where the questions go deep and it helps to have somewhere to think out loud first.\n\nSelect the exercise you're working on below. Let the conversation help you find your words — then come back and write your honest answer in your workbook.\n\nYou don't have to arrive with answers. That's the whole point.`
+  },
+  "soul-rest":{
+    journal:`You don't have to be in crisis to deserve rest.\n\nGo at your own pace — this is not a race. Write without editing. The messy, unpolished truth is always more useful than a neat version of it. You don't have to share this with anyone.\n\nOver five sections, you'll acknowledge how tired you really are, set down what you've been carrying, find your way back to what restores you, reconnect with who you are beneath the exhaustion, and begin to imagine a different way forward.\n\nIf anything brings up feelings that feel overwhelming, please reach out to a trusted person or professional. This journal is a companion — not a substitute for support.`,
+    companion:`This journal comes with a free AI Soul Companion — a quiet, unhurried space for the days when the prompts feel too heavy to face alone, or when you know something is there but can't find the words.\n\nSelect your section below. Tell the companion where you are — even if that's just "I don't know where to start." Let the conversation be gentle. Then return to your journal when you're ready.\n\nOn the heavy days especially — it's here. You don't have to do this alone.`
+  },
+  "soul-steady":{
+    journal:`Soul Steady is an awareness practice. Each page asks you to slow down and notice — not to improve, optimise, or perform.\n\nInside you'll find 35 daily pages with morning intention, midday check-in, and evening reflection. A 30-day habit tracker. Weekly mood overviews. And a closing reflection.\n\nEach daily page takes 5–10 minutes — but even one prompt is meaningful. There is no perfect journalling. There is only showing up. Your mood does not have to be good to write. One word is always enough. So is a blank page.`,
+    companion:`This journal comes with a free AI Soul Companion — for the moments when you want to go deeper than the page alone can take you, or when an emotion is sitting with you that you can't quite name.\n\nSelect your day below. Use the companion to explore what's underneath your first answer — then return to your journal and write what you found.\n\nThe habit tracker and mood tracking work best when paired with honest reflection. The companion helps you get there.`
+  }
+};
+
+const journals={
+  "soul-space":{id:"soul-space",title:"Soul Space",subtitle:"Intention Over Obligation",tagline:"A Journal for Living From Choice",color:"#7C9A7E",
+    philosophy:"The shift from 'I have to' to 'I choose to' is one of the most profound acts of self-respect available to us. There are no right answers. Honesty matters more than positivity. Skipping a day is not failure.",
+    namedSections:[
+      {id:"s1",label:"Section One · Realising",subtitle:"Noticing how much of your life is running on obligation",prompts:[
+        {id:"s1a",title:"The Hum Beneath the Day",prompt:"Obligation rarely announces itself. It lives in the language we use before we even think about it. Write down everything you said 'I have to' about in the last week — big and small. Don't filter. Don't justify. Just list."},
+        {id:"s1b",title:"What Your Body Already Knows",prompt:"Your body registers obligation before your mind names it. Tightness across the chest. A heaviness behind the eyes. A faint, familiar dread. Think of something you do regularly from obligation. Where do you feel it in your body? Describe the sensation as honestly as you can."},
+        {id:"s1c",title:"The Resentment Map",prompt:"Resentment is not a character flaw. It is information. It shows up wherever you have been giving from pressure rather than choice. Where in your life does quiet resentment live? Write about it without softening it."},
+        {id:"s1d",title:"The Cost You Haven't Named",prompt:"Living from obligation has a cost — not just in energy, but in who you stop being when you are always performing what is expected. What has living from obligation cost you? Not what you have done for others — what have you quietly given up of yourself?"},
+        {id:"s1e",title:"Toolkit · The Obligation Audit",prompt:"This is about seeing clearly how much of your life is driven by pressure rather than genuine choice. For each life area — relationships, work, home, how you show up for others, how you treat yourself — mark: C = Choice or P = Pressure. Then: where is obligation taking the most from you?"}
+      ]},
+      {id:"s2",label:"Section Two · Understanding",subtitle:"Seeing where it came from",prompts:[
+        {id:"s2a",title:"What You Were Taught About Your Needs",prompt:"Most women who live from obligation learned early that their needs were either too much, or less important than someone else's. That lesson left a mark. Growing up, what message did you receive about your own needs? Was it safe to have them? Was it safe to say so?"},
+        {id:"s2b",title:"Who You Learned to Be",prompt:"We adapt. We become the version of ourselves that felt safest — the helpful one, the quiet one, the one who never caused trouble. That adaptation made sense then. It kept you safe. But it came at a cost. Who did you learn to be in order to feel loved or safe? What did that version of you have to give up?"},
+        {id:"s2c",title:"The Voice Behind the Should",prompt:"Every 'I should' carries a voice. Not always our own. Often someone else's — a parent, a teacher, a culture. Choose one 'should' that sits heavily on you right now. Whose voice is really behind it? What were they afraid of? What were you?"},
+        {id:"s2d",title:"A Letter to the Girl Who First Learned This",prompt:"She did what she had to do. She adapted, she smiled, she made herself smaller or more useful or easier to love. She was doing her best with what she had. She deserves to hear from you now. Write a letter to the younger version of you who first learned to put herself last."},
+        {id:"s2e",title:"Toolkit · The Should Inventory",prompt:"List up to six 'shoulds' that regularly appear in your life. For each, trace: whose voice is it, what fear does it carry, and is it truly yours? Which of these did you realise, perhaps for the first time, was never truly yours?"}
+      ]},
+      {id:"s3",label:"Section Three · Releasing",subtitle:"Letting go of what was never truly yours to carry",prompts:[
+        {id:"s3a",title:"Guilt Is Not a Compass",prompt:"We treat guilt as though it is always telling us the truth — that choosing ourselves makes us selfish. Where in your life does guilt reliably show up when you try to choose yourself? What story does it tell you? Is that story actually true?"},
+        {id:"s3b",title:"The Chronic Yes",prompt:"Every yes that comes from fear or pressure is also a no to something — your time, your energy, your own needs. The cost is real. What have you been saying yes to that you wish you hadn't? What have those yeses cost you?"},
+        {id:"s3c",title:"What You've Been Protecting",prompt:"Sometimes we stay small — agreeable, obliging, endlessly available — because it feels safer than the alternative. What is the thing you are most afraid would happen if you stopped? Sit with that fear honestly."},
+        {id:"s3d",title:"Releasing in Practice",prompt:"Releasing is rarely a dramatic gesture. It is usually quiet. A boundary spoken gently but clearly. A no that doesn't come with an apology attached. What is one obligation, one 'should,' one expectation you are genuinely ready to release? What would releasing it look like in practice?"},
+        {id:"s3e",title:"Toolkit · Not Yours to Carry",prompt:"Write freely. No editing. No justifying. What am I choosing to set down? What am I choosing to keep — because it is genuinely mine?"}
+      ]},
+      {id:"s4",label:"Section Four · Returning",subtitle:"Finding your way back to choice",prompts:[
+        {id:"s4a",title:"What You Actually Enjoy",prompt:"Not what you think you should enjoy. Not what looks responsible or sounds productive. What you genuinely, quietly enjoy — even if it seems too small to matter. When did you last do something purely because you wanted to? What was it?"},
+        {id:"s4b",title:"Desire Without the Guilt Filter",prompt:"Desire filtered through guilt doesn't sound like desire anymore. It sounds like 'maybe someday' or 'I don't really need it.' Remove the filter for a moment. If guilt wasn't in the room, what would you want more of in your life right now?"},
+        {id:"s4c",title:"What You Deserve",prompt:"This is the one most of us skip. Not because we didn't read it — but because something in us goes quiet when we reach it. What do you believe you don't deserve? Be honest, even if it feels uncomfortable. Where did that belief come from?"},
+        {id:"s4d",title:"What You've Been Calling Selfish",prompt:"Rest. Space. Time that belongs only to you. The word 'selfish' has done a great deal of quiet damage. What have you been calling selfish that is actually just a need? What would it feel like to call it a need instead?"},
+        {id:"s4e",title:"Toolkit · The Values Clarifier",prompt:"These questions reveal your values through lived experience. When have you felt most like yourself? When have you felt most out of alignment? If you removed fear entirely, what would you spend more time doing?"}
+      ]},
+      {id:"s5",label:"Section Five · Rooting",subtitle:"Making choice the default",prompts:[
+        {id:"s5a",title:"What Choosing Yourself Looks Like",prompt:"Not in grand gestures. In the small, ordinary moments of a Tuesday. Choosing yourself often looks unremarkable from the outside — and quietly radical from within. What does choosing yourself look like in your daily life right now — not as an aspiration, but as something small and actual?"},
+        {id:"s5b",title:"When the Old Patterns Return",prompt:"They will. Not because you failed, but because habits are grooves worn deep by years of practice. The return of an old pattern is not a relapse — it is information. What are the conditions that make you most likely to slip back into obligation? What will you do when you notice it happening?"},
+        {id:"s5c",title:"Holding Intention When Life Gets Hard",prompt:"Life doesn't pause while we do this work. There will be hard weeks, competing demands, moments when everything asks for more than you have. Intention needs to be simple enough to hold onto. What is the simplest, truest version of your intention — a single sentence you could come back to when everything feels like too much?"},
+        {id:"s5d",title:"The Life You Are Building",prompt:"Not perfect. Not finished. Just more honest, more chosen, more yours than it was when you began. Looking at where you started and where you are now — what has shifted, even quietly?"},
+        {id:"s5e",title:"Toolkit · The Daily Anchor",prompt:"This is not a routine to perform. It is a small, consistent act of coming back to yourself. Design your own anchor practice: a morning intention, an evening honest check-in, or something that feels true to you."}
+      ]}
+    ],
+    sectionContext:(s,p)=>`Soul Space — ${s.label}: ${s.subtitle}. The reader is on: "${p.title}". This is about returning to intention and choice. Be warm, honest, and grounded.`,
+    sectionOpening:(s,p)=>`${p.title} 🌿\n\n${p.prompt}\n\nTake your time. There's no right answer here. What's coming up for you?`
+  },
+
+  "soul-voice":{id:"soul-voice",title:"Soul Voice",subtitle:"The Quiet No",tagline:"A Journal for Reclaiming Your Voice",color:"#B06A4E",
+    philosophy:"Your voice matters. Even the quiet parts of it. This is not about becoming louder — it is about becoming clearer.",
+    namedSections:[
+      {id:"v1",label:"Section One · Realising",subtitle:"Seeing it clearly for the first time",prompts:[
+        {id:"v1a",title:"The Last Time You Said Yes",prompt:"Most of us have said yes so many times we've stopped noticing. But when you look closely at one specific moment, something becomes clear. Think about the last time you said yes to something when you wanted to say no. What happened in the moment you agreed? What did you tell yourself?"},
+        {id:"v1b",title:"What Your Body Knows",prompt:"The body usually registers the yes-when-you-mean-no before the mind does. There is a feeling — sometimes just a flicker. What does your body do when you're about to agree to something you don't want to do? Is there a feeling in your chest, your throat, your stomach?"},
+        {id:"v1c",title:"What It Has Cost You",prompt:"What have you stopped doing — hobbies, friendships, rest, things just for you — because there wasn't room after you said yes to everything else? What would change in your daily life if the highest-scoring area shifted even slightly?"},
+        {id:"v1d",title:"Toolkit · People-Pleasing Audit",prompt:"Score each area of your life on how much people-pleasing costs you there. Relationships, work, health, time for yourself. Where is the cost highest? What surprised you about what you see?"}
+      ]},
+      {id:"v2",label:"Section Two · Understanding",subtitle:"Where you learned this, and why",prompts:[
+        {id:"v2a",title:"What You Were Taught",prompt:"People pleasing is not a personality trait. It is something that was learned — usually very early, usually for very good reasons. A way of staying safe, staying loved, keeping the peace. What messages did you receive, directly or indirectly, about what a good girl does?"},
+        {id:"v2b",title:"What You Were Praised For",prompt:"We learn early what earns us love, approval, and safety. We become very good at those things. What behaviours and qualities earned you praise, love, or approval when you were younger? Being helpful, quiet, achieving, not needing too much?"},
+        {id:"v2c",title:"What You Are Protecting",prompt:"What do you most need from the people in your life — that you have been trying to earn through over-giving? What would it mean to ask for it directly, without earning it first?"},
+        {id:"v2d",title:"Toolkit · The Fawn Response Pattern",prompt:"The fawn response is a learned survival strategy. What were the conditions — at home, at school, in early relationships — in which fawning made sense? What would it mean to understand this as a learned response rather than a character flaw?"}
+      ]},
+      {id:"v3",label:"Section Three · Releasing",subtitle:"Setting down what was never yours to carry",prompts:[
+        {id:"v3a",title:"The Story That Keeps You Giving",prompt:"We are often held in place not by circumstances but by a story we keep telling ourselves. 'I'm just a caring person.' 'I don't mind really.' 'It's easier this way.' What is the story you have told yourself about why you are this way? Where did that story come from?"},
+        {id:"v3b",title:"The Resentment You're Not Supposed to Have",prompt:"One of the most honest signs that something has gone wrong is resentment. It builds quietly in the place where boundaries should be. What emotions come up most often as a result of saying yes when you meant no? Sit with the resentment, the exhaustion, the emptiness."},
+        {id:"v3c",title:"What Lighter Feels Like",prompt:"Imagine waking up without the weight of trying to be what everyone needs. What is the cost of letting fear make your decisions for you? What would you say to a friend who was being driven by this same fear?"},
+        {id:"v3d",title:"Toolkit · Permission to Say No",prompt:"Write your own permission slip. Permission to say no. Permission to disappoint someone. Permission to choose yourself. What do you need to give yourself permission for?"}
+      ]},
+      {id:"v4",label:"Section Four · Returning",subtitle:"Finding your way back to what is actually true",prompts:[
+        {id:"v4a",title:"What You Actually Want",prompt:"This is not a small question. Women who have been people pleasing for a long time often discover they have lost genuine contact with what they want — beneath the layer of what everyone else needs. What do you actually enjoy — not providing for others, but what fills something in you?"},
+        {id:"v4b",title:"What You Have Been Waiting for Permission to Want",prompt:"Some desires get silenced so early we stop recognising them as desires at all. We file them under 'unrealistic' or 'selfish' until we forget we ever had them. What have you been waiting for permission to want? What would it mean to give it to yourself?"},
+        {id:"v4c",title:"Toolkit · Quiet Yes Practice",prompt:"Find three small things this week that are a quiet yes to yourself — something you do purely because you want to, not because anyone needs it from you."}
+      ]},
+      {id:"v5",label:"Section Five · Rooting",subtitle:"Growing from a place that is genuinely yours",prompts:[
+        {id:"v5a",title:"One Honest Conversation",prompt:"Returning to yourself sometimes asks something of you — not a dramatic overhaul, but one quiet, honest step. A conversation you have been avoiding. A boundary you have been aware of but not yet spoken. What is one honest conversation this workbook is now asking you to move toward?"},
+        {id:"v5b",title:"What Boundary Feels Most Important",prompt:"Not all boundaries carry the same weight. Some are small. Others, if set and kept, would change the shape of your life significantly. Of all the places you have looked at — which boundary feels most important to establish?"},
+        {id:"v5c",title:"Toolkit · The Steady No",prompt:"Write it down. Your no. Not angry, not apologetic. Just clear and true. What does your steady no sound like?"}
+      ]}
+    ],
+    sectionContext:(s,p)=>`Soul Voice — ${s.label}: ${s.subtitle}. The reader is on: "${p.title}". This is about reclaiming voice and recognizing people-pleasing patterns. Be warm, supportive, and encouraging.`,
+    sectionOpening:(s,p)=>`${p.title} 🌿\n\n${p.prompt}\n\nTake your time. There's no right answer here. What's coming up for you?`
+  },
+
+  "soul-seen":{id:"soul-seen",title:"Soul Seen",subtitle:"Seen Over Hidden",tagline:"Workbook for Finding What You're Really Made Of",color:"#8B7355",
+    philosophy:"You are not trying to build a better version of yourself. You are trying to find the real one. There are no right answers. Only honest ones.",
+    namedSections:[
+      {id:"ss1",label:"Section One · Realising",subtitle:"You have been living by someone else's rules",prompts:[
+        {id:"ss1a",title:"The Rules You Live By",prompt:"Most of us don't realise we are following rules we never actually agreed to. They arrived early — in how we were praised, what was criticised, what was never spoken but always felt. Write out the unspoken rules you live by. 'I must always...' 'I should never...' 'Good people don't...'"},
+        {id:"ss1b",title:"Freedom or Performance",prompt:"There is a difference between a value that lives in your body — that makes you feel alive and like yourself — and a rule that lives in your head, enforced by guilt. Think of a value you always say you have. Does living it feel like freedom or performance?"},
+        {id:"ss1c",title:"Toolkit · Values vs Rules Inventory",prompt:"Make two lists: the values you perform (because you should), and the values you genuinely hold but rarely say out loud. What's the difference between them?"}
+      ]},
+      {id:"ss2",label:"Section Two · Understanding",subtitle:"Where those rules came from",prompts:[
+        {id:"ss2a",title:"The Teachers",prompt:"Rules don't appear from nowhere. Someone taught them to you — not always with words. Sometimes through silence, through a look, through what was rewarded and what was punished. Who were the main teachers of your unspoken rules?"},
+        {id:"ss2b",title:"What You Were Rewarded For",prompt:"We learn early what earns us love, approval, and safety. We become very good at those things. What behaviours and qualities earned you praise when you were younger? Being helpful, quiet, achieving, not needing too much?"},
+        {id:"ss2c",title:"What Was Criticised, Mocked, or Silenced",prompt:"Somewhere in your history, there is a version of yourself who was louder, clearer, less careful. What qualities in you were discouraged or made to feel wrong?"},
+        {id:"ss2d",title:"Toolkit · Tracing Your Rules Back",prompt:"For each major rule you identified, trace it back: who taught it to you, what did you learn would happen if you broke it, what were you praised for instead?"}
+      ]},
+      {id:"ss3",label:"Section Three · Releasing",subtitle:"Setting down what was never yours",prompts:[
+        {id:"ss3a",title:"The Mirror Exercise",prompt:"What we judge most harshly in others is often what we are most afraid of in ourselves — or what we most secretly want but have been told we cannot have. Name a quality in other people that you find particularly irritating. Is there any version of this quality you secretly wish you had more of?"},
+        {id:"ss3b",title:"The Inherited Rules",prompt:"There is something powerful about getting it all out of your head and onto the page. Every rule, every should, every must, every 'you're not allowed to.' Write them all out."},
+        {id:"ss3c",title:"What Went Underground",prompt:"The parts of ourselves that were called too much, not enough, or simply wrong didn't disappear. They went underground. What is a quality in you that was criticised or discouraged when you were younger? What value was hiding inside that quality?"},
+        {id:"ss3d",title:"Toolkit · Reclaiming Hidden Values",prompt:"Now that you've begun to see the values that went underground, consciously welcome them back. Name a value you have been hiding or suppressing. If you gave yourself permission to claim it fully — what might change?"}
+      ]},
+      {id:"ss4",label:"Section Four · Returning",subtitle:"Finding what's actually yours",prompts:[
+        {id:"ss4a",title:"Peak Moments",prompt:"Your values leave a trail. The moments when you felt most alive, most like yourself, most deeply right — those moments are a map. Think of three peak moments. What values were you living in that moment? What does the pattern tell you?"},
+        {id:"ss4b",title:"The Anger Compass",prompt:"Anger is one of the most underused tools for understanding your values. We tend to feel angry when something we care about is violated. What makes you genuinely angry in the world? For each — what value does this anger protect?"},
+        {id:"ss4c",title:"The Admiration Mirror",prompt:"The qualities you most admire in others are often the values you most want to live yourself. Think of three people you deeply admire. What is it about them that moves you? What values do those qualities point to?"},
+        {id:"ss4d",title:"Toolkit · Finding Your Core Values",prompt:"From everything you've explored — your peak moments, your anger, your admiration — what are your core values? Not what you think they should be, but what they actually are?"}
+      ]},
+      {id:"ss5",label:"Section Five · Rooting",subtitle:"Growing from what's real",prompts:[
+        {id:"ss5a",title:"When Values Conflict",prompt:"One of the most honest parts of having values is that they sometimes pull in opposite directions. You value freedom and security. Connection and solitude. Honesty and kindness. Name two values that sometimes pull against each other. In this conflict, what does your gut actually want you to choose?"},
+        {id:"ss5b",title:"Values and Your Relationships",prompt:"Our relationships are often where our values are most tested — and most visible. Name a relationship that feels most aligned with your values. Then a relationship that sometimes feels draining — what value is being neglected there?"},
+        {id:"ss5c",title:"Living Your Values Daily",prompt:"Knowing your values is the beginning. Living them is the daily practice. Not grand gestures — small, consistent choices. For each of your core values, write one small daily action that honours it."},
+        {id:"ss5d",title:"Toolkit · Your Values in Action",prompt:"Which of your values did you honour this week? Which did you neglect? No judgment — just honest noticing. What's one way you can live more aligned this week?"}
+      ]}
+    ],
+    sectionContext:(s,p)=>`Soul Seen — ${s.label}: ${s.subtitle}. The reader is on: "${p.title}". This is deep values and identity work. Be honest, grounded and unhurried.`,
+    sectionOpening:(s,p)=>`${p.title} 🌿\n\n${p.prompt}\n\nTake your time. There's no right answer here. What's coming up for you?`
+  },
+
+  "soul-rest":{id:"soul-rest",title:"Soul Rest",subtitle:"Rest Over Resistance",tagline:"A Journal for Burnout & Exhaustion Recovery",color:"#7A8FA6",
+    philosophy:"You don't have to be in crisis to deserve rest. Be honest, be gentle, and show up for yourself the way you would show up for someone you love.",
+    namedSections:[
+      {id:"sr1",label:"Section One · Realising",subtitle:"Telling the truth about how tired you really are",prompts:[
+        {id:"sr1a",title:"Arriving",prompt:"You picked up this journal for a reason. You don't have to know exactly what that reason is yet. Something in you recognised that you needed this. What made you pick this up? What are you hoping for — even quietly, even if it feels too fragile to say out loud?"},
+        {id:"sr1b",title:"The Body Knows",prompt:"Burnout lives in the body long before the mind admits it. Tight shoulders. A heaviness behind the eyes. Waking up tired even after a full night's sleep. Where does your exhaustion live in your body right now? What has your body been trying to tell you?"},
+        {id:"sr1c",title:"The Pretending",prompt:"What are you pushing through lately? List it all — big things, small things, the things that feel too small to name. The hidden weight of things you have stopped saying no to."},
+        {id:"sr1d",title:"The Body Scan",prompt:"Move through your body slowly. Head, neck, shoulders, chest, belly, hips, legs. What do you feel in each area? What is the weight or texture of it? What is your gut telling you right now?"},
+        {id:"sr1e",title:"Toolkit · What Exhaustion Looks Like",prompt:"What surprised you about where your exhaustion actually lives? Write freely. No editing. Just the truth."}
+      ]},
+      {id:"sr2",label:"Section Two · Understanding",subtitle:"Seeing why it happened",prompts:[
+        {id:"sr2a",title:"Not Yours to Carry",prompt:"Some of what exhausts us was never really ours to begin with. Other people's worries. Expectations we inherited. Standards we never actually agreed to. What are you carrying that isn't truly yours?"},
+        {id:"sr2b",title:"The Roles That Drain",prompt:"We play many roles — carer, provider, fixer, helper, the strong one. Some of these feel like us. Others have slowly become a weight. Which roles or expectations have been draining you most? What identity have you been performing that no longer fits?"},
+        {id:"sr2c",title:"The Unsaid Things",prompt:"What have you been pushing down, managing alone, not saying? The things you keep going through without naming. Write about the things you haven't let yourself say."},
+        {id:"sr2d",title:"What You Were Taught",prompt:"What did you inherit about rest and worth? From your family, your culture, your experiences? What messages did you receive about whether you deserved to slow down?"},
+        {id:"sr2e",title:"Toolkit · The Energy Audit",prompt:"Where does your energy actually go? Work, relationships, caring for others, managing expectations, holding things together? What would a week designed around your energy actually look like?"}
+      ]},
+      {id:"sr3",label:"Section Three · Releasing",subtitle:"Letting go of what isn't serving you",prompts:[
+        {id:"sr3a",title:"Guilt Is Not a Compass",prompt:"We treat guilt as though it is always telling us the truth — that choosing ourselves makes us selfish. Where does guilt show up for you when you try to rest or slow down? Is that guilt actually true?"},
+        {id:"sr3b",title:"The Chronic Yes",prompt:"Every time we say yes when we mean no, we spend a little more of ourselves. Over time, those small spends add up. Where have you been saying yes when you meant no? What would you have said no to if you felt allowed?"},
+        {id:"sr3c",title:"What You've Been Protecting",prompt:"So much of what exhausts us is what we feel we have to do. What if you had full permission to stop? Write a list — uncensored — of everything you would stop doing if you had complete permission."},
+        {id:"sr3d",title:"If You Had Permission",prompt:"What would fall away first? What would you grieve about losing? What would be a relief?"},
+        {id:"sr3e",title:"Toolkit · Permission to Rest",prompt:"Write yourself permission. Permission to slow down. Permission to ask for help. Permission to say no. Permission to rest. What permission do you most need?"}
+      ]},
+      {id:"sr4",label:"Section Four · Returning",subtitle:"Coming back to yourself",prompts:[
+        {id:"sr4a",title:"What Rest Really Means",prompt:"We are often told to 'rest' without anyone explaining what that actually means. What does rest genuinely mean to you — not sleep, not scrolling, not collapsing? When you imagine being truly restored, what does that look like?"},
+        {id:"sr4b",title:"What Fills You Up",prompt:"Not everything that passes time restores us. Some things quietly drain us while appearing to be breaks. Make two lists: what genuinely fills you up, and what drains you — even if it looks like rest from the outside."},
+        {id:"sr4c",title:"What Lighter Feels Like",prompt:"Imagine waking up without the weight of pushing through everything. What is different? What do you notice first? What would you do, or not do?"},
+        {id:"sr4d",title:"What One Boundary Would Change",prompt:"Of all the places you have looked at in this journal — which boundary feels most important to establish? What one boundary would change this most?"},
+        {id:"sr4e",title:"Toolkit · My Quiet Joy List",prompt:"The small, unhurried things that feel like peace. Write as many as you can — big and small, ordinary and unexpected. This list belongs to no one but you."}
+      ]},
+      {id:"sr5",label:"Section Five · Rooting",subtitle:"Growing from new ground",prompts:[
+        {id:"sr5a",title:"When Values Conflict",prompt:"One of the most honest parts of this is that your values sometimes pull in different directions. You value productivity and rest. Caring for others and self-care. Honesty and keeping the peace. What values keep pulling you back into exhaustion?"},
+        {id:"sr5b",title:"Values and Your Relationships",prompt:"Which relationships support your rest, and which demand everything? What needs to change in the relationships that drain you?"},
+        {id:"sr5c",title:"Growing From New Ground",prompt:"You don't go back to the life that brought you here. You build something different — something that has room for you in it. What would a life with room for you in it look like?"},
+        {id:"sr5d",title:"Living It Daily",prompt:"Not perfect. Not even sustainable forever. Just today. Just this week. What is one small thing you can do this week that chooses rest or your wellbeing?"},
+        {id:"sr5e",title:"Toolkit · Building a Life With Room for You",prompt:"What are three non-negotiables for your rest and wellbeing? What will you protect? What will you say no to, gently and consistently?"}
+      ]}
+    ],
+    sectionContext:(s,p)=>`Soul Rest — ${s.label}: ${s.subtitle}. The reader is on: ${p.title}. Be especially gentle and unhurried.`,
+    sectionOpening:(s,p)=>`${p.title} 🌿\n\n${p.prompt}\n\nTake your time. There's no right answer here. What's coming up for you?`
+  },
+
+  "soul-steady":{id:"soul-steady",title:"Soul Steady",subtitle:"Awareness Over Autopilot",tagline:"35-Day Mental Wellness Journal",color:"#9B8DB0",
+    philosophy:"There is no perfect journalling. There is only showing up. Your mood does not have to be good to write — that is rather the point. One word is always enough. So is a blank page.",
+    namedSections:[
+      {id:"ss1",label:"Section One · Realising",subtitle:"Noticing your autopilot patterns",prompts:[
+        {id:"ss1a",title:"Understanding Your Autopilot",prompt:"Most of us live on autopilot without noticing. We react instead of respond. We move through days without being present. This section asks you to simply notice. What does your autopilot look like? When do you find yourself checked out?"},
+        {id:"ss1b",title:"Your Mood Patterns",prompt:"What does a low mood feel like in your body? What tends to trigger a shift in your mood — for better or worse? What does a genuinely good day look like for you?"},
+        {id:"ss1c",title:"Where You're Stuck",prompt:"Where do you notice yourself on autopilot most? In relationships, at work, in how you treat yourself? What would change if you brought awareness to that?"},
+        {id:"ss1d",title:"Toolkit · Autopilot Audit",prompt:"For a full day, notice when you're on autopilot and when you're present. What triggers autopilot? What brings you back?"}
+      ]},
+      {id:"ss2",label:"Section Two · Understanding",subtitle:"Seeing what drives your mood",prompts:[
+        {id:"ss2a",title:"What Triggers Your Mood",prompt:"Mood shifts don't happen in a vacuum. Something shifts you. What are your top mood triggers — both positive and negative? What patterns do you see?"},
+        {id:"ss2b",title:"What Genuine Gratitude Feels Like",prompt:"We talk about gratitude a lot, but what does genuine gratitude actually feel like? Not forced, not performed. When have you felt it genuinely? What were you grateful for?"},
+        {id:"ss2c",title:"The Habits That Keep You Stuck",prompt:"What habits keep you on autopilot? Scrolling, people-pleasing, staying busy, avoiding? What would you be doing if you weren't on autopilot?"},
+        {id:"ss2d",title:"Toolkit · Mood Map",prompt:"Track your mood over three days. When it shifts, note what shifted it. What three small things tend to go unnoticed but matter to you?"}
+      ]},
+      {id:"ss3",label:"Section Three · Releasing",subtitle:"What you're ready to let go of",prompts:[
+        {id:"ss3a",title:"What You're Ready to Stop",prompt:"What autopilot behaviour are you genuinely ready to release? Not because you should, but because you actually want to see what comes next?"},
+        {id:"ss3b",title:"Habits That Don't Serve You",prompt:"A habit you have that genuinely supports your wellbeing. A habit you keep meaning to start — and what stops you. The smallest possible version of that habit you could try tomorrow."},
+        {id:"ss3c",title:"Toolkit · Breaking the Pattern",prompt:"Pick one autopilot pattern. What would you do instead if you brought awareness to it?"}
+      ]},
+      {id:"ss4",label:"Section Four · Returning",subtitle:"Coming back to presence",prompts:[
+        {id:"ss4a",title:"What Restores You",prompt:"When you're present instead of on autopilot, what matters? What restores you? What brings you back to yourself?"},
+        {id:"ss4b",title:"Small Joys Worth Noticing",prompt:"The moments that matter but go unnoticed. A good coffee. Sunlight. A kind word. What small joys do you want to start noticing?"},
+        {id:"ss4c",title:"Toolkit · Quiet Restoration",prompt:"Design three 5-minute practices that bring you back to presence and restore you."}
+      ]},
+      {id:"ss5",label:"Section Five · Rooting",subtitle:"Making awareness your default",prompts:[
+        {id:"ss5a",title:"Your Daily Awareness Practice",prompt:"What small practice, done daily, would help you stay present instead of slipping into autopilot? Not a big change. Something you can actually do."},
+        {id:"ss5b",title:"Building Consistency",prompt:"Day by day, breath by breath, moment by moment. What does consistency look like for you? How will you show up for yourself?"},
+        {id:"ss5c",title:"Toolkit · Daily Anchor Practice",prompt:"Design your own anchor practice. Something small, true, and yours. Something you can return to again and again."}
+      ]}
+    ],
+    totalDays:35,dailyLabel:"35-Day Practice",
+    dailyContext:(d)=>`Day ${d} of 35. Week ${Math.ceil(d/7)}. Morning intention, midday check-in (obligation/intention/autopilot), evening emotion reflection, daily win, mood tracking.`,
+    dailyOpening:(d)=>d===1?`Welcome to Day 1. 🌿\n\nThis is a practice in noticing — not fixing, not optimising. Just showing up.\n\nWhat are you choosing to focus on today, and what do you want to release?`:d===35?`Day 35. 🌿\n\nThirty-five days of awareness. That is not a small thing.\n\nHow have you grown? What surprised you most? What will you carry forward?`:d%7===0?`Day ${d} — end of week ${d/7}. 🌿\n\nA natural moment to pause. What was the highlight of this week? What did you learn about yourself?`:`Day ${d}. 🌿\n\nMorning, midday, evening — or just one. What emotion is sitting with you right now, and what might it need?`,
+    sectionContext:(s,p)=>`Soul Steady — ${s.label}: ${s.subtitle}. The reader is on: "${p.title}". This is about building awareness and presence. Be gentle, grounded, and encouraging.`,
+    sectionOpening:(s,p)=>`${p.title} 🌿\n\n${p.prompt}\n\nTake your time. There's no right answer here. What's coming up for you?`
+  }
+};
+
+const getJournalFromURL=()=>{try{const p=new URLSearchParams(window.location.search);const id=p.get("journal");if(id&&journals[id])return journals[id];}catch{}return null;};
+
+function App(){
+  const jFromURL=getJournalFromURL();
+  const [j]=useState(jFromURL);
+  const [screen,setScreen]=useState(jFromURL?"sections":"invalid");
+  const [selSection,setSelSection]=useState(null);
+  const [selDay,setSelDay]=useState(null);
+  const [chatMode,setChatMode]=useState(null);
+  const [messages,setMessages]=useState([]);
+  const [input,setInput]=useState("");
+  const [loading,setLoading]=useState(false);
+  const bottomRef=useRef(null);
+
+  useEffect(()=>{bottomRef.current?.scrollIntoView({behavior:"smooth"});},[messages,loading]);
+
+  const sysPrompt=()=>{
+    const ctx=chatMode==="howto"
+      ?`The reader has just opened the companion for the first time. Guide them warmly through how to use this journal and the companion alongside it.`
+      :selNamedSection&&selNamedPrompt
+        ?j.sectionContext(selNamedSection,selNamedPrompt)
+        :selDay?j.dailyContext(selDay)
+        :selSection?`Section: "${selSection.label}". Prompt: "${selSection.prompt}"`
+        :"";
+    return `You are a warm, thoughtful companion for women working through the "${j.title}" journal.\n\nPhilosophy: ${j.philosophy}\n\nContext: ${ctx}\n\nYour role: Listen carefully to what she shares. Reflect back what you heard. Ask one genuine follow-up question that goes deeper. Be conversational, like a trusted friend having a real conversation.\n\nTone: Warm, present, unhurried. Never clinical or performative. Speak like you're actually listening.\n\nLength: Keep it natural — 2-4 sentences usually. No lists or structures. Just real conversation.`;
+  };
+
+  const [selNamedSection,setSelNamedSection]=useState(null);
+  const [selNamedPrompt,setSelNamedPrompt]=useState(null);
+
+  const startChat=(section,day,mode=null,namedSection=null,namedPrompt=null)=>{
+    setSelSection(section);setSelDay(day);setChatMode(mode);
+    setSelNamedSection(namedSection);setSelNamedPrompt(namedPrompt);
+    const h=howToUse[j.id];
+    let opening="";
+    if(mode==="howto"){opening=`Welcome to ${j.title}. 🌿\n\nBefore you begin, let me walk you through how this journal works — and how to use this companion alongside it.\n\n✦ About the journal\n\n${h.journal}\n\n✦ Your Soul Companion\n\n${h.companion}\n\nWhen you're ready — choose your section or prompt from the menu and I'll be right here.\n\nIs there anything you'd like to ask before you begin?`;}
+    else if(namedSection&&namedPrompt){opening=`${namedPrompt.title} 🌿\n\n${namedPrompt.prompt}\n\nThis isn't about getting it right. It's about noticing what's actually true for you. Take your time — tell me what's coming up, even if it feels incomplete or messy.`;}
+    else if(day){opening=j.dailyOpening(day);}
+    else if(section){opening=`${section.label} 🌿\n\n${section.prompt}\n\nThis isn't about getting it right. It's about noticing what's actually true for you. Take your time — tell me what's coming up, even if it feels incomplete or messy.`;}
+    setMessages([{role:"assistant",content:opening}]);
+    setScreen("chat");
+  };
+
+  const send=async()=>{
+    if(!input.trim()||loading)return;
+    const userMsg={role:"user",content:input.trim()};
+    const newMsgs=[...messages,userMsg];
+    setMessages(newMsgs);setInput("");setLoading(true);
+    try{
+      const res=await fetch("/.netlify/functions/claude",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:newMsgs.map(m=>({role:m.role,content:m.content})),systemPrompt:sysPrompt()})});
+      if(!res.ok){throw new Error(`Function returned ${res.status}`);}
+      const data=await res.json();
+      const text=data.text||"I'm here — take your time. 🌿";
+      setMessages(prev=>[...prev,{role:"assistant",content:text}]);
+    }catch(e){
+      console.error("Error:",e);
+      setMessages(prev=>[...prev,{role:"assistant",content:"Something went quiet for a moment. Take your time, and try again when you're ready. 🌿"}]);
+    }
+    setLoading(false);
+  };
+
+  const renderText=(text)=>text.split(/\*([^*]+)\*/g).map((p,i)=>i%2===1?React.createElement("em",{key:i},p):p);
+  const accent=j?.color||SAGE;
+
+  if(screen==="invalid")return(
+    <div style={{minHeight:"100vh",background:CREAM,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 20px",textAlign:"center"}}>
+      <div style={{fontSize:10,letterSpacing:5,color:STONE,marginBottom:24,fontFamily:"sans-serif",textTransform:"uppercase"}}>Hearth and Pages</div>
+      <h1 style={{fontSize:22,color:DARK,fontWeight:"normal",marginBottom:16}}>Soul Companion</h1>
+      <div style={{width:32,height:1,background:STONE,margin:"0 auto 32px"}}/>
+      <p style={{fontSize:14,color:DARK,lineHeight:1.9,opacity:0.7,maxWidth:320}}>This companion is accessed via the QR code inside your journal. Please scan the QR code in your journal to begin.</p>
+    </div>
+  );
+
+  if(screen==="sections")return(
+    <div style={{minHeight:"100vh",background:CREAM,padding:"32px 20px"}}>
+      <div style={{maxWidth:420,margin:"0 auto"}}>
+        <div style={{fontSize:10,letterSpacing:4,color:STONE,marginBottom:4,fontFamily:"sans-serif",textTransform:"uppercase"}}>Hearth and Pages</div>
+        <div style={{fontSize:10,letterSpacing:3,color:j.color,fontFamily:"sans-serif",textTransform:"uppercase",marginBottom:4}}>{j.title}</div>
+        <h2 style={{fontSize:22,color:DARK,fontWeight:"normal",marginBottom:24}}>Where are you in the journal?</h2>
+        <button onClick={()=>startChat(null,null,"howto")} style={{width:"100%",textAlign:"left",background:j.color,border:"none",borderRadius:4,padding:"16px 18px",marginBottom:24,cursor:"pointer"}}>
+          <div style={{fontSize:14,color:"white",marginBottom:2}}>✦ Start Here</div>
+          <div style={{fontSize:12,color:"rgba(255,255,255,0.8)",fontFamily:"sans-serif"}}>How to use this journal + your Soul Companion</div>
+        </button>
+
+        {j.namedSections&&j.namedSections.map(s=>(
+          <div key={s.id} style={{marginBottom:28}}>
+            <div style={{fontSize:11,color:j.color,fontFamily:"sans-serif",letterSpacing:1,marginBottom:2,textTransform:"uppercase"}}>{s.label}</div>
+            {s.subtitle&&<div style={{fontSize:12,color:STONE,fontFamily:"sans-serif",marginBottom:12,fontStyle:"italic"}}>{s.subtitle}</div>}
+            {s.prompts.map(p=>(
+              <button key={p.id} onClick={()=>startChat(null,null,null,s,p)}
+                style={{width:"100%",textAlign:"left",background:"white",border:`1px solid ${STONE}`,borderRadius:4,padding:"13px 16px",marginBottom:8,cursor:"pointer",fontSize:14,color:DARK,fontFamily:"Georgia,serif"}}>
+                {p.title}
+              </button>
+            ))}
+          </div>
+        ))}
+
+        {j.totalDays&&(
+          <div>
+            <div style={{fontSize:10,letterSpacing:3,color:STONE,fontFamily:"sans-serif",textTransform:"uppercase",marginBottom:12}}>{j.dailyLabel||"Daily Practice"}</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:6}}>
+              {Array.from({length:j.totalDays},(_,i)=>i+1).map(d=>(
+                <button key={d} onClick={()=>startChat(null,d)} style={{background:"white",border:`1px solid ${STONE}`,borderRadius:4,padding:"9px 2px",cursor:"pointer",fontFamily:"sans-serif",fontSize:12,color:DARK,textAlign:"center"}}>{d}</button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  return(
+    <div style={{minHeight:"100vh",background:CREAM,display:"flex",flexDirection:"column"}}>
+      <div style={{background:"white",borderBottom:`1px solid ${STONE}`,padding:"14px 18px",display:"flex",alignItems:"center",gap:12}}>
+        <button onClick={()=>setScreen("sections")} style={{background:"none",border:"none",color:STONE,fontSize:18,padding:0}}>←</button>
+        <div style={{flex:1}}>
+          <div style={{fontSize:10,color:accent,fontFamily:"sans-serif",letterSpacing:2,textTransform:"uppercase"}}>Hearth and Pages · {j.title}</div>
+          <div style={{fontSize:14,color:DARK}}>{chatMode==="howto"?"Start Here · How to Use":selNamedPrompt?selNamedPrompt.title:selDay?`Day ${selDay}`:selSection?.label}</div>
+        </div>
+      </div>
+      <div style={{flex:1,overflowY:"auto",padding:"24px 18px",display:"flex",flexDirection:"column",gap:16}}>
+        {messages.map((m,i)=>(
+          <div key={i} style={{display:"flex",justifyContent:m.role==="user"?"flex-end":"flex-start"}}>
+            <div style={{maxWidth:"84%",background:m.role==="user"?accent:"white",color:m.role==="user"?"white":DARK,border:m.role==="assistant"?`1px solid ${STONE}`:"none",borderRadius:m.role==="user"?"16px 16px 4px 16px":"16px 16px 16px 4px",padding:"12px 16px",fontSize:15,lineHeight:1.75}}>
+              {m.content.split("\n").map((line,j)=><span key={j}>{renderText(line)}{j<m.content.split("\n").length-1&&<br/>}</span>)}
+            </div>
+          </div>
+        ))}
+        {loading&&(
+          <div style={{display:"flex"}}>
+            <div style={{background:"white",border:`1px solid ${STONE}`,borderRadius:"16px 16px 16px 4px",padding:"12px 20px"}}>
+              <div style={{display:"flex",gap:4}}>{[0,1,2].map(i=><div key={i} style={{width:6,height:6,borderRadius:"50%",background:STONE,animation:`pulse 1.2s ${i*0.2}s ease-in-out infinite`}}/>)}</div>
+            </div>
+          </div>
+        )}
+        <div ref={bottomRef}/>
+      </div>
+      <div style={{background:"white",borderTop:`1px solid ${STONE}`,padding:"14px 18px",display:"flex",gap:10,alignItems:"flex-end"}}>
+        <textarea value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}} placeholder="Write whatever is coming up for you…" rows={2}
+          style={{flex:1,border:`1px solid ${STONE}`,borderRadius:8,padding:"10px 14px",fontSize:14,fontFamily:"Georgia,serif",color:DARK,background:CREAM,resize:"none",lineHeight:1.6}}/>
+        <button onClick={send} disabled={loading||!input.trim()} style={{background:input.trim()?accent:STONE,border:"none",borderRadius:8,padding:"10px 16px",color:"white",fontSize:13,fontFamily:"sans-serif",transition:"background 0.2s"}}>Send</button>
+      </div>
+      <style>{`@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}`}</style>
+    </div>
+  );
+}
+
+ReactDOM.render(React.createElement(App),document.getElementById("root"));
+</script>
+</body>
+</html>

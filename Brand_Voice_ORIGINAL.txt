@@ -1,0 +1,360 @@
+She is not broken. She just lost her way for a while.
+
+---
+
+## The Transformation
+
+She knows who she is. She is rooted in her worth. She knows what she deserves.
+
+---
+
+## The Products
+
+### Workbooks
+| Title | Theme |
+|---|---|
+| Rest Over Resistance | Burnout & exhaustion recovery |
+| The Quiet No | People pleasing & boundaries |
+| Awareness Over Autopilot | Waking up to your own life |
+| Seen Over Hidden | Shadow work |
+| Intention Over Obligation | Values
+
+---
+
+## The Soul Companion
+
+Free AI companion accessed via QR code on page 2 of every workbook. Guides her deeper into the prompts when words feel too heavy. Named Soul Companion. This is the biggest differentiator — it must be prominent in all marketing.
+
+---
+
+## The Workbook Framework
+
+Every product follows this five-stage journey. **No day numbers — the workbook is stage-based, not time-based.**
+
+1. **Realising** — acknowledging something is wrong
+2. **Understanding** — seeing why it happened
+3. **Releasing** — letting go of what isn't serving her
+4. **Returning** — coming back to herself
+5. **Rooting** — growing from new ground
+
+Prompts must follow a narrative arc — not isolated questions. 
+---
+
+## Standard Page Structure
+
+Every workbook follows this order:
+
+1. Cover
+2. Soul Companion page (QR code, warm intro, "you don't have to do this alone")
+3. Before you begin (how to use, permission to go slowly)
+4. Starting check-in (body, mind, heart — one word each)
+5. Realising — prompts + toolkit
+6. Understanding — prompts + toolkit
+7. Releasing — prompts + toolkit
+8. Returning — prompts + toolkit
+9. Rooting — prompts + toolkit
+10. Closing check-in + reflection pages
+11. Safe space / notes pages (maximum 2)
+12. Back cover (other workbooks in the series)
+
+---
+
+## Toolkit Placement
+
+Each toolkit belongs to the stage it serves — woven into the journey, not bolted on at the end.
+
+| Stage | Toolkits |
+|---|---|
+| Realising | Body check-in, emotion wheel, body scan |
+| Understanding | Fawn/freeze response explainer, values clarifier, timeline reflection |
+| Releasing | EFT tapping, boundary audit, not yours to carry list |
+| Returning | Wheel of self, rest menu, quiet joy list |
+| Rooting | Habit tracker, daily anchor practice, letter to future self |
+
+2–3 toolkits per workbook minimum. Every toolkit must feel inevitable — like it could only belong in that specific workbook.
+
+---
+
+## Brand World & Feeling
+
+She should feel: **Safe. Heard. Understood. Home.**
+
+The visual world is: candlelight on cream linen, pressed flowers on parchment, a handwritten note on aged paper. Warm, textured, organic. Never cold. Never corporate. Never sparse.
+
+Reference images: cosy reading nooks, fairy lights, open fires, chunky knit blankets, steaming mugs, rain on windows, candlelight, warm amber glow, old books.
+
+---
+
+## Visual Style Per Workbook
+
+Each workbook has its own personality within the same brand family: Search the internet for SEO optimised workbooks, toolkits selling well on Etsy
+
+| Workbook | Mood | Colours | Motif Style |
+|---|---|---|---|
+| Rest Over Resistance | Warm minimal | Cream, soft oat, muted taupe | Bare botanical branches, fine twigs |
+| The Quiet No | Soft botanical | Blush, muted sage, parchment | Pressed flowers, fine leaves |
+| Seen Over Hidden | Dark romantic | Deep forest, moody amber, cream | Celestial, moon, stars |
+| Awareness Over Autopilot | Textured organic | Kraft, earthy taupe, warm brown | Roots, earth, organic texture |
+| Intention Over Obligation | Warm minimal | Cream, gold, soft amber | Fine line geometric, clean |
+| Future workbooks | Assigned at creation | Within the brand world | Relevant to theme |
+| All Workbooks | Small Relevant Motif | bottom right side of every 2 pages | 
+
+---
+
+## Colour Palette
+
+### Base palette (all workbooks)
+| Name | Hex | Use |
+|---|---|---|
+| Warm parchment | #FAFAF7 | All interior page backgrounds |
+| Soft oat | #F4F1EB | Section and cover page backgrounds |
+| Muted rose taupe | #B8A090 | Accents, motifs |
+| Deep hearth | #2C2018 | Primary body text |
+| Worn taupe | #7A6858 | Secondary text, subtitles |
+| Dark ember | #3D2E22 | Headings, titles |
+| Warm gold | #C8B8A8 | Divider lines |
+| Light gold | #E2D8CE | Writing lines |
+| Brand light | #A89888 | Brand name label |
+
+**Important:** Backgrounds must be light — no solid dark areas. The palette should feel like aged parchment, never clinical white and never heavy.
+
+### Extended palette (per workbook)
+| Name | Hex | Use |
+|---|---|---|
+| Blush | #F1DCDC | The Quiet No covers/sections |
+| Soft lavender | #EDE3F0 | Accent only — never dominant |
+| Muted sage | #C4CCBA | The Quiet No botanical details |
+| Deep forest | #2C3B2C | Seen Over Hidden covers/sections |
+
+---
+
+## Typography
+
+Both fonts are free on Google Fonts. Download: **Cormorant Garamond** (Light 300 + Light Italic) and **Jost** (Light 300).
+
+| Element | Font | Size | Colour |
+|---|---|---|---|
+| Brand name (cover/back only) | Jost Light | 7.5pt | #A89888 |
+| Section label | Jost Light | 8pt | #7A6858 |
+| Workbook title (cover) | Cormorant Garamond Light Italic | 44pt | #3D2E22 |
+| Section title | Cormorant Garamond Light | 38pt | #3D2E22 |
+| Toolkit / closing titles | Cormorant Garamond Light Italic | 26pt | #3D2E22 |
+| Prompt titles | Cormorant Garamond Light Italic | 21pt | #3D2E22 |
+| Subtitle / tagline | Cormorant Garamond Light Italic | 13pt | #7A6858 |
+| Intro text (italic) | Cormorant Garamond Light Italic | 11pt | #7A6858 |
+| Body / prompts | Jost Light | 10.5pt | #2C2018 |
+| Toolkit body | Jost Light | 10.5pt | #2C2018 |
+| Labels / metadata | Jost Light | 8–9pt | #7A6858 |
+| Gold divider line | — | 0.4pt weight | #C8B8A8 |
+| Writing lines | — | 0.4pt weight | #E2D8CE |
+
+---
+
+## Spacing Specifications
+
+These measurements are exact and must be applied consistently across all workbooks.
+
+### Page margins
+- Left: 58pt | Right: 58pt | Top: 62pt | Bottom: 48pt
+
+### Header structure (every interior page)
+Every interior page opens with this exact sequence:
+1. Gold divider line at top margin
+2. **14pt gap** — section label in Jost 8pt centred
+3. **8pt gap** — second gold divider line
+4. **44pt gap** — first content element begins here
+
+This 44pt gap after the second header line is fixed and must not vary between pages.
+
+### Title to content spacing
+After any large title, the gap before the next element must be:
+- 26pt title (toolkit/closing): minimum **24pt gap** before next element
+- 22pt title (toolkit page 2 headings): minimum **22pt gap** before next element
+- 22pt title (prompt titles): **16pt gap** before intro text
+
+### Prompt page structure
+1. Top gline → 16pt gap → **Prompt title** (Cormorant Italic 21pt, no underline)
+2. 16pt gap → Intro text (Cormorant Italic 11pt, taupe)
+3. 12pt gap → Question text (Jost 10.5pt, deep)
+4. Optional starter phrase (Cormorant Italic 11pt, taupe, indented 8pt)
+5. 14pt gap → Writing lines begin (no separator gline before lines)
+6. Writing lines at 20pt spacing to bottom margin
+
+**No underline beneath the prompt title.** The title stands alone.
+
+### Writing lines
+- Weight: 0.4pt
+- Colour: #E2D8CE
+- Spacing: 20pt between lines
+- Run full text width (margin to margin)
+- No separator line between question text and first writing line
+- Writing lines begin 4pt below the last line of question text
+
+### Prompt pairing
+Where two short prompts share a page (combined character count under 760):
+- First prompt: full layout + 9 writing lines
+- Second prompt: starts after a 10pt gap + divider line (0.3pt) + 28pt gap, then full layout + writing lines filling remaining page to bottom margin
+- **Both prompts must have writing lines.** Never leave a prompt with no writing space.
+
+---
+
+## Page-Type Specifications
+
+### Cover
+- Background: Soft oat (#F4F1EB)
+- Brand name (Jost, 7.5pt) at very top
+- Botanical motif centred, positioned **above** the title text — bottom of motif must clear the top of the title by at least 40pt
+- Main title in Cormorant Garamond Light Italic, 44pt, two lines
+- Subtitle in Jost Light, 8.5pt, taupe
+- Tagline in Cormorant Italic, 12pt, taupe — below title area
+- "You Don't Have To Do This Alone" circle badge: top-right area, Ember filled, Jost 7pt cream text, 3 lines centred mathematically in circle using: first baseline = circle_centre_y + (n-1) × line_height / 2
+- Brand name repeated at bottom
+
+### Soul Companion page (page 2)
+- Interior parchment background
+- Header label: "SOUL COMPANION"
+- Opening line in Cormorant Italic 22pt
+- Two paragraphs in Jost 10.5pt
+- QR code placeholder — square, 3cm x 3cm centred, prominent
+- No brand name on this page
+
+### Section pages
+- Background: Soft oat (#F4F1EB)
+- Header label: "SECTION [NUMBER]"
+- Botanical motif centred in the middle of the page
+- Section title in Cormorant Light 38pt below motif
+- Subtitle in Cormorant Italic 13pt
+- Short intro paragraph in Jost 10.5pt
+
+### Prompt pages
+See Spacing Specifications above.
+
+### Toolkit pages
+- Header label: "TOOLKIT — [SECTION NAME]"
+- Toolkit title in Cormorant Italic 22pt — minimum 16pt gap below title before subtitle
+- Subtitle in Jost 9pt, taupe
+- Intro paragraph in Jost 10.5pt
+- Interactive content (grids, lists, fill-in lines)
+- Reflection questions with writing lines to fill page
+
+### Check-in pages
+- Body / Mind / Heart box fields
+- Date line
+- 3–4 reflection questions with 3 writing lines each
+
+### Safe space pages
+- Minimal — "Use this space freely." in Cormorant Italic 18pt, 16pt gap before note text
+- Note in Jost Italic 10.5pt
+- Writing lines fill entire page at 20pt spacing
+
+---
+
+## Motif Direction
+
+Motifs are purchased as SVG or PNG files with transparent (or white) backgrounds. Black line art on white background can be colour-tinted on production. Target: fine line, delicate, not heavy or chunky.
+
+Sources: Creative Fabrica, Etsy (£3–£8 per set).
+
+| Workbook | Motif Style | Notes |
+|---|---|---|
+| Rest Over Resistance | Bare botanical branches, fine twigs | Used: upright bare branch (cover), diagonal bare branch (section pages). No roots. |
+| The Quiet No | Pressed flowers, delicate leaves | Fine line floral SVG, pressed flower illustration |
+| Seen Over Hidden | Moon phases, celestial, stars | Fine line celestial SVG, moon phase illustration |
+| Awareness Over Autopilot | Roots, earth, organic texture | Fine line roots SVG, botanical earth illustration |
+| Intention Over Obligation | Clean geometric, intentional lines | Fine line geometric SVG, minimal line art |
+
+### Motif placement rules
+- Cover: motif sits **above** the title — never overlapping text
+- Section pages: motif centred in page, between header lines and section title band
+- Closing page: motif above closing text
+- Interior prompt/toolkit pages: **no motifs** — clean parchment only
+- Motif colour: converted to match brand palette (deep warm brown #3D2E22 or muted taupe)
+
+---
+
+## Design Rules
+
+- Every page earns its place — no filler, no empty space dressed up as breathing room
+- **No day numbers** — workbooks are stage-based, not time-based
+- **No prompt numbers visible** — prompts flow naturally, no numbering
+- **No underline beneath prompt titles** — the title stands alone
+- Hearth and Pages appears on the **cover and back cover only** — not on interior pages
+- All designs must be printer friendly — no solid dark backgrounds
+- Writing lines must appear after every single prompt — no prompt left without writing space
+- Motifs never overlap text on any page
+- Spacing between header line and first content element is always 44pt — consistent across all pages
+- Gap between the line and the title heading is always 22pt — consistent whether it is the top of the page or a mid-page divider
+
+---
+
+## Workbook Interior Design Summary
+
+- **Cover and section pages** — soft oat background + fine line motif
+- **Interior pages** — warm parchment (#FAFAF7), clean and light
+- **Section pages** carry: section number (Jost, small), motif, section title (Cormorant large), italic subtitle, short intro
+- **Prompt pages** carry: prompt title (no number, no underline), italic intro, question text, writing lines
+- **Toolkit pages** carry: toolkit title, subtitle, instructions, interactive element, reflection writing lines
+- **Check-in pages** carry: Body / Mind / Heart fields, date, reflection questions
+- **Safe space pages**: minimal text, maximum writing lines
+
+---
+
+## Pinterest Strategy
+
+### 5 Boards
+1. Digital Journals For Women
+2. Shadow Work Journal
+3. Mental Wellness Journal
+4. Burnout Recovery Journal
+5. Journal Prompts For Women
+
+### Targets
+- 30+ pins per board minimum
+- 3 pins per week minimum, consistent
+- Lifestyle images outperform designed graphics — prioritise warm, cosy photography
+
+### Pin Description Formula
+Emotion first → keywords woven into natural sentences → clear CTA → no hashtag lists
+
+### Example Description
+"If you're exhausted in a way sleep doesn't fix, this is for you. Rest Over Resistance is a printable burnout recovery workbook for women who are ready to stop pushing and start coming back to themselves. Instant download. hearthandpages on Etsy."
+
+---
+
+## Selling Platforms
+
+- **Etsy** — primary platform, hearthandpages
+- **Gumroad** — secondary, needs direct traffic driven to it
+
+---
+
+## Pricing Direction
+
+- Current £7.99 is underpriced given Soul Companion differentiator
+- Target price range: £17–£27 for workbooks
+- Intention Over Obligation journal — separate pricing conversation needed
+- Low price signals low value in this market — her woman is already questioning her own worth, she needs to trust the product
+
+---
+
+## Key Differentiator
+
+The Soul Companion. No other workbook in this space has an AI companion built in. It removes the wall that makes people abandon workbooks — getting stuck on a question and never returning. This must be front and centre in every product listing, every pin description, and every piece of marketing copy.
+
+---
+
+## Brand Voice
+
+Warm. Honest. Unhurried. Like a letter from a woman who has been through it too.
+
+- Never clinical
+- Never motivational or loud
+- Never toxic positivity
+- Always honest about the difficulty
+- Always holding the hope quietly
+
+Write as if you are sitting across from her with a warm drink, in a safe room, with nowhere else to be.
+
+---
+
+*This document is the master reference for all Hearth and Pages tasks. Every workbook, listing, pin, and piece of copy should be built from this foundation.*
