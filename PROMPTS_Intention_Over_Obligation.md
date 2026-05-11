@@ -58,6 +58,14 @@ I can see what I've done for others from obligation. Ask me 3-5 questions to hel
 
 ---
 
+**What Freedom Feels Like**
+
+I'm working on "What Freedom Feels Like." The question is: "When you imagine a day that belongs entirely to you — no performance, no pressure, nothing owed — what does it feel like? Not what you'd do. How it feels in your body."
+
+I've tried to sit with what freedom actually feels like, not just what I'd do with it. Ask me 3-5 questions to help me explore: what does this feeling tell me about what I've been living without? What is the quiet knowing underneath — about what I actually need? What makes that feeling feel so far away?
+
+---
+
 ### Section Two · Understanding
 
 **What You Were Taught About Your Needs**
@@ -92,6 +100,14 @@ I believe I have identified what that younger version of me learned. Ask me 3-5 
 
 ---
 
+**What You Believed About Yourself**
+
+I'm working on "What You Believed About Yourself." The question is: "Somewhere in all of this, a belief took root. Not a dramatic one — a quiet one. Something about what you deserve, what you're worth, what you have to earn before it's okay to want something for yourself. What do you believe, underneath everything, that you have to be or do in order to deserve rest? Softness? Space?"
+
+I've named the belief I carry about what I have to earn before I deserve softness. Ask me 3-5 questions to help me examine it. Is this belief actually mine, or was it handed to me wrapped up to look like fact? What would change if I simply let myself be enough, as I am?
+
+---
+
 ### Section Three · Releasing
 
 **Guilt Is Not a Compass**
@@ -118,11 +134,19 @@ I believe I can name the thing I'm afraid would happen if I stopped obliging. As
 
 ---
 
-**Releasing in Practice**
+**What Releasing Actually Looks Like**
 
-I'm working on "Releasing in Practice." The question is: "Releasing is rarely a dramatic gesture. It is usually quiet. A boundary spoken gently but clearly. A no that doesn't come with an apology attached. What is one obligation, one 'should,' one expectation you are genuinely ready to release? What would releasing it look like in practice?"
+I'm working on "What Releasing Actually Looks Like." The question is: "Releasing is rarely a dramatic gesture. It is usually quiet. A boundary held gently but clearly. A no that doesn't come with an apology attached. What is one obligation you are genuinely ready to release? What would releasing it look like in practice — not in theory, but in your actual life?"
 
-I believe I have identified something I'm ready to release. Ask me 3-5 questions to help me think through what releasing it would actually look like in my life. What's one small, practical way I could start?
+I believe I have identified something I'm ready to release. Ask me 3-5 questions to help me think through what releasing it would actually look like — not in the abstract, but concretely. What do I need to believe about myself in order to actually do it?
+
+---
+
+**The Space Left Behind**
+
+I'm working on "The Space Left Behind." The question is: "When we release something we've been carrying for a long time, there is often a strange feeling that follows. Not just relief. Sometimes grief. Sometimes unfamiliarity. Sometimes a quiet that feels unearned. If you let go of the obligation or pattern you named — what might the space left behind feel like? What might be possible in it?"
+
+I've tried to imagine the space that would open if I let something go. Ask me 3-5 questions to help me sit in that space more honestly. What am I afraid might be in it? What am I quietly hoping for? What would I want to grow there?
 
 ---
 
@@ -160,6 +184,14 @@ I've identified something I've been calling selfish. Ask me 3-5 questions to hel
 
 ---
 
+**The Things You've Missed**
+
+I'm working on "The Things You've Missed." The question is: "You have been here. You showed up. You gave. But in the giving, something of you got quieter — the parts that weren't useful, weren't needed, weren't convenient. What parts of yourself have you been missing? Not who you want to become — who you used to be, or who you sense you still are, underneath everything."
+
+I've named parts of myself that have gone quiet. Ask me 3-5 questions to help me understand them more fully. When did they go quiet? What made them go quiet? What would it actually take to let even one part back in?
+
+---
+
 ### Section Five · Rooting
 
 **What Choosing Yourself Looks Like**
@@ -170,19 +202,19 @@ I've identified how I choose myself in small ways. Ask me 3-5 questions to help 
 
 ---
 
-**When the Old Patterns Return**
+**When Old Habits Come Back**
 
-I'm working on "When the Old Patterns Return." The question is: "They will. Not because you failed, but because habits are grooves worn deep by years of practice. The return of an old pattern is not a relapse — it is information. What are the conditions that make you most likely to slip back into obligation? What will you do when you notice it happening?"
+I'm working on "When Old Habits Come Back." The question is: "They will. Not because you failed, but because habits are grooves worn deep by years of practice. The return of an old pattern is not failure — it is information. What are the conditions that make you most likely to slip back into obligation? What are the early signs?"
 
-I think I know the conditions that pull me back into obligation. Ask me 3-5 questions to help me prepare: what will I actually do when I notice it happening? What's a concrete step I can take?
+I think I know the conditions that pull me back into obligation. Ask me 3-5 questions to help me prepare: what are the earliest signs I notice? What will I actually do when I see them? Not to punish myself — just to come back.
 
 ---
 
-**Holding Intention When Life Gets Hard**
+**Holding Intention When Life Gets Loud**
 
-I'm working on "Holding Intention When Life Gets Hard." The question is: "Life doesn't pause while we do this work. There will be hard weeks, competing demands, moments when everything asks for more than you have. Intention needs to be simple enough to hold onto. What is the simplest, truest version of your intention — a single sentence you could come back to when everything feels like too much?"
+I'm working on "Holding Intention When Life Gets Loud." The question is: "Life doesn't pause while you do this work. There will be hard weeks, competing demands, moments when everything asks for more than you have. Intention needs to be simple enough to hold onto. What is the simplest, truest version of your intention — one sentence you could come back to when everything feels like too much?"
 
-I've found my simplest intention. Ask me 3-5 questions to help me test it: does this actually hold when life gets hard? Is there a way to make it even simpler, even truer?
+I've found my simplest intention. Ask me 3-5 questions to help me test it: does this actually hold when life gets loud? What helps me hold it? Is there a way to make it even simpler, even truer?
 
 ---
 
@@ -190,4 +222,12 @@ I've found my simplest intention. Ask me 3-5 questions to help me test it: does 
 
 I'm working on "The Life You Are Building." The question is: "Not perfect. Not finished. Just more honest, more chosen, more yours than it was when you began. Looking at where you started and where you are now — what has shifted, even quietly?"
 
-I can see what's shifted. Ask me 3-5 questions to help me go deeper: what am I becoming through these shifts? What's one way I want to keep building on this?
+I can see what's shifted. Ask me 3-5 questions to help me go deeper: what am I becoming through these shifts? What does a life led more by intention than obligation look like for me, in ordinary everyday terms?
+
+---
+
+**What You Know Now**
+
+I'm working on "What You Know Now." The question is: "You have held something in these pages that you didn't have words for when you began. You have looked honestly at things that were easier not to look at. What do you know now that you didn't know — or couldn't let yourself know — when you opened this workbook?"
+
+I've written what I know now that I didn't when I began. Ask me 3-5 questions to help me sit with this more fully. What shifted the most quietly? What do I most want to carry forward — not as a resolution, but as something true?
