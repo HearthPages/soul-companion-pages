@@ -166,6 +166,13 @@
         <div class="url">https://hearthpages.github.io/soul-companion-pages/perfectionism-unraveled</div>
         <button class="download-btn" onclick="downloadQR('qr6', 'perfectionism-unraveled')">Download QR Code</button>
       </div>
+
+      <div class="qr-card">
+        <h3>Women on Standby</h3>
+        <div class="qr-code" id="qr7"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/women-on-standby</div>
+        <button class="download-btn" onclick="downloadQR('qr7', 'women-on-standby')">Download QR Code</button>
+      </div>
     </div>
 
     <div class="download-section">
@@ -222,6 +229,15 @@
 
     new QRCode(document.getElementById("qr6"), {
       text: "https://hearthpages.github.io/soul-companion-pages/perfectionism-unraveled",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr7"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/women-on-standby",
       width: 200,
       height: 200,
       colorDark: "#3D3530",
