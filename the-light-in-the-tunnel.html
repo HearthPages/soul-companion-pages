@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · The Light in the Tunnel · Hearth and Pages</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #FAF6F0; font-family: Georgia, serif; color: #3D3530; line-height: 1.8; }
+    .container { max-width: 520px; margin: 0 auto; padding: 32px 20px; min-height: 100vh; display: flex; flex-direction: column; }
+    .header { text-align: center; margin-bottom: 32px; }
+    .branding { font-size: 10px; letter-spacing: 5px; color: #C4B9A8; text-transform: uppercase; margin-bottom: 24px; font-family: sans-serif; }
+    h1 { font-size: 24px; font-weight: normal; margin-bottom: 12px; color: #3D3530; }
+    .divider { width: 32px; height: 1px; background: #C4B9A8; margin: 0 auto 24px; }
+    .subtitle { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #C4B9A8; font-family: sans-serif; margin-bottom: 16px; }
+    .instructions-section { background: white; border: 1px solid #C4B9A8; border-radius: 6px; padding: 16px; font-size: 13px; line-height: 1.7; color: #3D3530; margin-bottom: 24px; }
+    .instructions-section strong { color: #3D3530; }
+    .instructions-section ol { margin-left: 20px; margin-top: 8px; }
+    .instructions-section li { margin-bottom: 8px; }
+    .base-prompt-section { margin-bottom: 32px; }
+    .base-prompt-section h2 { font-size: 14px; font-weight: normal; margin-bottom: 12px; color: #3D3530; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; }
+    .prompt-box { background: white; border: 1px solid #C4B9A8; border-radius: 6px; padding: 16px; margin-bottom: 12px; font-size: 13px; line-height: 1.7; color: #3D3530; white-space: pre-wrap; word-wrap: break-word; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; }
+    .copy-button { width: 100%; background: #7C9A7E; color: white; border: none; border-radius: 6px; padding: 12px; font-size: 14px; font-family: Georgia, serif; cursor: pointer; transition: background 0.3s ease; margin-bottom: 32px; }
+    .copy-button:hover { background: #6A8A6D; }
+    .copy-button.copied { background: #C4B9A8; }
+    .questions-section { margin-bottom: 32px; }
+    .questions-section h2 { font-size: 14px; font-weight: normal; margin-bottom: 16px; color: #3D3530; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; }
+    .questions-section > p { font-size: 13px; color: #3D3530; opacity: 0.7; margin-bottom: 16px; }
+    .section-group { margin-bottom: 24px; }
+    .section-title { font-size: 12px; font-weight: normal; color: #C4B9A8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #E8E0D0; font-family: sans-serif; }
+    .question-item { background: white; border: 1px solid #C4B9A8; border-radius: 6px; margin-bottom: 8px; overflow: hidden; }
+    .question-button { width: 100%; background: white; border: none; padding: 12px 16px; text-align: left; cursor: pointer; font-size: 13px; color: #3D3530; font-family: Georgia, serif; transition: background 0.2s ease; display: flex; justify-content: space-between; align-items: center; }
+    .question-button:hover { background: #FAF6F0; }
+    .question-button.expanded { background: #F5EDDF; border-bottom: 1px solid #C4B9A8; }
+    .toggle-icon { font-size: 16px; color: #C4B9A8; transition: transform 0.3s ease; }
+    .question-button.expanded .toggle-icon { transform: rotate(180deg); }
+    .question-content { display: none; padding: 16px; border-top: 1px solid #C4B9A8; background: white; }
+    .question-content.expanded { display: block; }
+    .deep-prompt-box { background: #FAF6F0; border: 1px solid #C4B9A8; border-radius: 6px; padding: 12px; font-size: 13px; line-height: 1.6; color: #3D3530; white-space: pre-wrap; word-wrap: break-word; max-height: 250px; overflow-y: auto; margin-bottom: 12px; font-family: 'Courier New', monospace; }
+    .copy-deep-button { width: 100%; background: #7C9A7E; color: white; border: none; border-radius: 6px; padding: 10px; font-size: 13px; font-family: Georgia, serif; cursor: pointer; transition: background 0.3s ease; }
+    .copy-deep-button:hover { background: #6A8A6D; }
+    .copy-deep-button.copied { background: #C4B9A8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">The Light in the Tunnel</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through The Light in the Tunnel — a workbook for finding your way back to yourself after a hard season.
+
+About this workbook: This workbook is for women who have been through something difficult and kept going. It acknowledges the cost of what she survived and asks her to recognise that the strength that carried her through was always hers. She was the light in the tunnel — not waiting for rescue, but holding her own flame. It moves through five stages: Acknowledging, Understanding, Releasing, Returning, and Burning.
+
+Philosophy: She was never waiting for the light. She was it. She always was. This workbook does not ask her to perform her healing or rush her grief. It asks her to look at what she has been carrying, understand why it made sense, gently set down what was never hers to keep, and step into who she already is.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard without adding or fixing. Ask genuine follow-up questions that go a little deeper. Sit with her in the hard moments rather than rushing to solve them. Trust that she knows her own experience better than anyone.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you are actually listening — like you have all the time in the world and nowhere else to be.
+
+Length: Natural — 2-4 sentences usually. No lists or structures unless she asks. Just honest, gentle conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Acknowledging': [
+        {
+          title: 'The Weight of It',
+          prompt: `I'm working on "The Weight of It." The question is: "What has this hard season actually cost you? Not in theory — in your real, ordinary days. The evenings that felt flat, the things you couldn't bring yourself to do, the version of yourself you couldn't quite access."\n\nI've started naming what this season has cost me. Ask me 3-5 questions to help me go deeper: what costs have been hardest to admit? Which area — my energy, relationships, creativity, sense of self, hope — feels heaviest? Is there something I've been reluctant to name even here?`
+        },
+        {
+          title: 'What You Have Been Telling Yourself',
+          prompt: `I'm working on "What You Have Been Telling Yourself." The question is: "What have you been telling yourself about what you've been through? Write the story you've been living with — the one that minimises it, or rushes past it, or finds a reason it doesn't quite count."\n\nI've been looking at the story I've been carrying about this season. Ask me 3-5 questions to help me examine it honestly: where does this story come from? What would I say if a person I loved told me the same story? What am I afraid would happen if I stopped telling it?`
+        },
+        {
+          title: 'Where It Lives in Your Body',
+          prompt: `I'm working on "Where It Lives in Your Body." The question is: "Where do you feel it? The tightness in your chest, the heaviness in your shoulders, the place that clenches when you think too carefully about certain things."\n\nI've been noticing where this season lives physically in my body. Ask me 3-5 questions to help me stay with this: when did I first notice this feeling in my body? What does it feel like — tension, heaviness, numbness, something else? What might my body be trying to tell me that my mind has been overriding?`
+        },
+        {
+          title: 'The Moment You Knew',
+          prompt: `I'm working on "The Moment You Knew." The question is: "There's often a moment — not dramatic, not a breaking point, just quiet — when you realised something had shifted. Can you find that moment?"\n\nI've been looking for the moment when I understood, in some wordless way, that things weren't okay. Ask me 3-5 questions to help me explore it: what was happening around that moment? What did I do with that knowing? Was there a part of me that already knew before that?`
+        },
+        {
+          title: 'What You Have Been Waiting For',
+          prompt: `I'm working on "What You Have Been Waiting For." The question is: "What have you been waiting for before you allowed yourself to name this as real? To feel better first? To understand it? To make sure no one is watching?"\n\nI've been sitting with what permission I've been waiting for. Ask me 3-5 questions to help me look at this honestly: why hasn't it felt safe to name this? Whose permission have I been waiting for? What would it mean to simply say — that was hard, and I am still feeling it?`
+        },
+        {
+          title: 'What Has Held You',
+          prompt: `I'm working on "What Has Held You." The question is: "Looking back at the hardest parts of this season — what held you? Not what should have helped. What actually kept you going, even a little?"\n\nI've been trying to name what held me through the worst of it. Ask me 3-5 questions to help me find it: what was the smallest thing that kept me moving? Is there a part of me I'm not giving enough credit to? What does it mean that I made it here?`
+        }
+      ],
+      'Understanding': [
+        {
+          title: 'How You Kept Going',
+          prompt: `I'm working on "How You Kept Going." The question is: "What did you reach for? What did you do — practically, emotionally, day to day — to keep yourself moving through it? Which of those things genuinely helped, and which ones cost you something?"\n\nI've been looking at how I got through this season. Ask me 3-5 questions to help me look at this honestly: which strategies helped and which ones I'm still using even now that it's over? What does that tell me about what I was protecting? Is there something I did to survive that I'm now ready to put down?`
+        },
+        {
+          title: 'What You Learned About Being Safe',
+          prompt: `I'm working on "What You Learned About Being Safe." The question is: "Long before this hard season, you were already learning lessons about how to keep yourself safe. What did younger you learn about how to handle things that were too big?"\n\nI've been tracing back to where I first learned the patterns I'm still living in. Ask me 3-5 questions to help me find that with compassion: what do I remember learning about how to stay safe? What did I have to hide or perform? What was younger me trying to protect?`
+        },
+        {
+          title: 'The Story Underneath the Story',
+          prompt: `I'm working on "The Story Underneath the Story." The question is: "What did this hard season tell you about yourself? Not what's objectively true — but what it felt like it meant. 'I am someone who...' or 'People always...'"\n\nI've been sitting with the story I've been carrying underneath the surface. Ask me 3-5 questions to help me trace it: where did this story first come from? How long have I been living inside it? What would change if I questioned whether it was true?`
+        },
+        {
+          title: 'The Part of You That Kept You Going',
+          prompt: `I'm working on "The Part of You That Kept You Going." The question is: "There is a part of you — steady, quiet, underneath everything — that never stopped. Can you find her?"\n\nI've been trying to find the part of me that held steady through all of it. Ask me 3-5 questions to help me recognise her: what does this part of me feel like? When have I felt her most clearly? What has it cost her to keep me going all this time?`
+        },
+        {
+          title: 'What This Hard Season Was Protecting',
+          prompt: `I'm working on "What This Hard Season Was Protecting." The question is: "Sometimes the difficult response — the shutting down, the keeping busy — was protecting something tender underneath. What were you not quite ready to feel?"\n\nI've been sitting with what the hardest parts of this season might have been protecting. Ask me 3-5 questions to help me look gently at this: what was I not ready to feel in the middle of it? Now that some time has passed, is any of that safe to feel now? What does the protection tell me about what is tender in me?`
+        },
+        {
+          title: 'The Compassionate Look',
+          prompt: `I'm working on "The Compassionate Look." The question is: "If you could speak to the younger version of you who first learned to respond this way — what would you want her to know? What would you want her to feel from you?"\n\nI've been trying to find compassion for the version of me who learned these patterns. Ask me 3-5 questions to help me stay in that tenderness: what would I most want her to hear? What did she deserve that she didn't get? What would it mean to give that to myself now?`
+        }
+      ],
+      'Releasing': [
+        {
+          title: 'What You Have Been Holding That Is Not Yours',
+          prompt: `I'm working on "What You Have Been Holding That Isn't Yours." The question is: "What have you been carrying that doesn't actually belong to you? Other people's expectations, inherited beliefs, shame that came from somewhere long before this season."\n\nI've been naming what I've been carrying that was never mine to begin with. Ask me 3-5 questions to help me be specific: whose expectations am I carrying? Which beliefs were handed to me so long ago I stopped questioning them? What would it feel like to put one of these down?`
+        },
+        {
+          title: 'The Belief That Needs to Go',
+          prompt: `I'm working on "The Belief That Needs to Go." The question is: "There is probably one belief — about yourself, about what you deserve — that has been running quietly underneath everything. Name it, as plainly as you can."\n\nI've been trying to name the belief that's been running underneath this whole season. Ask me 3-5 questions to help me look at it honestly: where did this belief come from? How long have I been living inside it? Does it have to come with me into what comes next?`
+        },
+        {
+          title: 'The Apology You Are Still Waiting For',
+          prompt: `I'm working on "The Apology You Are Still Waiting For." The question asks me to write the apology I needed, as if I were the person who should have said it — then receive it, and release it.\n\nI've been sitting with something unresolved that I needed to hear. Ask me 3-5 questions to help me name what's there: what did I most need to hear that I never received? What would it mean to give that to myself, even now? What do I want to carry forward from this?`
+        },
+        {
+          title: 'What Keeping It Has Given You',
+          prompt: `I'm working on "What Keeping It Has Given You." The question is: "What has holding onto this hard season given you? Has the holding been protecting you from something? Keeping you from having to risk something?"\n\nI've been sitting honestly with what I might be getting from holding onto this. Ask me 3-5 questions to help me look at this without judgment: what would I have to face if I put it down? What has this been protecting me from? Am I ready to face that now?`
+        },
+        {
+          title: 'The Permission to Be Done',
+          prompt: `I'm working on "The Permission to Be Done." The question is: "What would it mean for you to be done? Not fine — just done with letting this define the shape of your days?"\n\nI've been sitting with what it would mean to be done carrying this as my primary weight. Ask me 3-5 questions to help me find what's in the way: what does 'done' feel like different from 'fine'? What am I afraid would happen if I stopped organising my life around this? What would I do with the space?`
+        },
+        {
+          title: 'What You Are Choosing to Keep',
+          prompt: `I'm working on "What You Are Choosing to Keep." The question is: "Not everything from a hard season needs to be released. What emerged that you'd rather not leave behind — about your strength, your clarity, what you actually need?"\n\nI've been thinking about what I want to take with me intentionally. Ask me 3-5 questions to help me name it: what do I know now that I didn't before? What do I value differently? What would I want to remember even on the days when this all feels far away?`
+        }
+      ],
+      'Returning': [
+        {
+          title: 'Who You Are When No One Needs Anything From You',
+          prompt: `I'm working on "Who You Are When No One Needs Anything From You." The question is: "Who are you when there's nothing to perform and no one to take care of? What do you do? What does your body want?"\n\nI've been trying to find the version of me that exists in the quietest moments. Ask me 3-5 questions to help me find her: when did I last feel like that? What was I doing? Is there something I've been waiting to give myself permission to want?`
+        },
+        {
+          title: 'What You Have Missed',
+          prompt: `I'm working on "What You Have Missed." The question is: "What have you missed? Not what you think you should miss — what you actually, genuinely miss. Small things count."\n\nI've been naming what went quiet during this hard season. Ask me 3-5 questions to help me find what's there: what's the smallest thing I've missed? Is there something I stopped allowing myself before I even noticed? What would it feel like to have that back?`
+        },
+        {
+          title: 'What Genuinely Restores You',
+          prompt: `I'm working on "What Genuinely Restores You." The question is: "Not what should restore you. Not what looks like self-care. What actually works — what genuinely brings you back to yourself, even a little?"\n\nI've been making a list of what actually helps. Ask me 3-5 questions to help me be honest: which of these am I actually doing? What gets in the way? Is there something on the list I'm not quite letting myself have?`
+        },
+        {
+          title: 'What You Actually Value',
+          prompt: `I'm working on "What You Actually Value." The question is: "What does this season tell you about what you actually value? Not what you've been acting like you value — what you genuinely do?"\n\nI've been sitting with what this season clarified about what matters. Ask me 3-5 questions to help me name it: what mattered most in the hardest moments? What was I spending energy on that I can see now wasn't worth it? What small shift would bring my days closer to what I actually value?`
+        },
+        {
+          title: 'A Letter From the You Who Made It',
+          prompt: `I'm working on "A Letter From the You Who Made It." The question asks me to write to the version of me who was in the hardest moment of this season — to tell her what I know now that she didn't.\n\nI've been trying to find what I would want that version of me to hear. Ask me 3-5 questions to help me find the most important thing: what did she most need to know that I can tell her now? What did she do right that she couldn't see at the time? What do I want her to feel from me?`
+        },
+        {
+          title: 'What Love Looks Like Without Earning It',
+          prompt: `I'm working on "What Love Looks Like Without Earning It." The question is: "What would it feel like to receive care — from yourself — without earning it first?"\n\nI've been sitting with what it would mean to stop earning kindness from myself. Ask me 3-5 questions to help me get closer to this: what does my inner voice say when I try to give myself care I haven't earned? Where did that voice come from? What would change if I practised receiving without earning — even once?`
+        }
+      ],
+      'Burning': [
+        {
+          title: 'The Evidence',
+          prompt: `I'm working on "The Evidence." The question is: "Look back at everything you've written. What does the evidence tell you about who you are? Not who you wish you were — who you demonstrably, provably are, based on what you've actually done."\n\nI've been looking back at everything I've written in this workbook and trying to read it as evidence about who I am. Ask me 3-5 questions to help me see myself clearly: what does the evidence actually show? What would I say to someone I loved if they had done everything I've done? What am I most reluctant to take credit for?`
+        },
+        {
+          title: 'What the Dark Showed You',
+          prompt: `I'm working on "What the Dark Showed You." The question is: "What did this hard season show you? What did the dark illuminate that you might not have seen in better light?"\n\nI've been sitting with what the hardest parts of this season revealed. Ask me 3-5 questions to help me name it honestly: what do I know now that I couldn't have known without going through this? What surprised me about myself? Is there something the dark showed me that I'm still reluctant to look at directly?`
+        },
+        {
+          title: 'The Version of You Who Exists Now',
+          prompt: `I'm working on "The Version of You Who Exists Now." The question is: "Who are you now, having been through this? What is different?"\n\nI've been trying to write a description of myself as I actually am now — not as I was, not as I wish I were. Ask me 3-5 questions to help me find the most honest version: what has shifted in me that I can feel but haven't quite named? What won't I tolerate now that I used to accept? What am I more certain of?`
+        },
+        {
+          title: 'What You Are Choosing to Take With You',
+          prompt: `I'm working on "What You Are Choosing to Take With You." The question asks me to pack intentionally — to choose what comes from this season, and what stays behind.\n\nI've been thinking about what I want to carry forward deliberately. Ask me 3-5 questions to help me be clear: what's the single most important thing I'm taking with me? What am I choosing to leave? Is there something I'm still uncertain about — taking or leaving?`
+        },
+        {
+          title: 'What You Want to Remember',
+          prompt: `I'm working on "What You Want to Remember." The question asks me to write for the version of me who will forget — who will need to be reminded on the harder days ahead.\n\nI've been trying to write the most important things I want to remember. Ask me 3-5 questions to help me find what matters most: what do I most fear forgetting? What would I want her to know on the day the old patterns come back loud? What is the truest thing I know right now?`
+        },
+        {
+          title: 'A Promise to Your Light',
+          prompt: `I'm working on "A Promise to Your Light." The question asks me to make a promise — not a goal, not a resolution — to the part of me that never went out. The quiet, steady light that kept me moving even when I couldn't feel it.\n\nI've been trying to find the most honest promise I can make to that part of myself. Ask me 3-5 questions to help me find it: what does that part of me most need to hear from me? What have I been withholding from her? What promise am I actually willing to keep?`
+        }
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Stage · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+        questions.forEach((q) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+      document.querySelectorAll('.question-content').forEach(c => c.classList.remove('expanded'));
+      document.querySelectorAll('.question-button').forEach(b => b.classList.remove('expanded'));
+      if (!isExpanded) { content.classList.add('expanded'); btn.classList.add('expanded'); }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy Base Prompt'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>
