@@ -173,6 +173,13 @@
         <div class="url">https://hearthpages.github.io/soul-companion-pages/women-on-standby</div>
         <button class="download-btn" onclick="downloadQR('qr7', 'women-on-standby')">Download QR Code</button>
       </div>
+
+      <div class="qr-card">
+        <h3>The Light in the Tunnel</h3>
+        <div class="qr-code" id="qr8"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/the-light-in-the-tunnel</div>
+        <button class="download-btn" onclick="downloadQR('qr8', 'the-light-in-the-tunnel')">Download QR Code</button>
+      </div>
     </div>
 
     <div class="download-section">
@@ -238,6 +245,15 @@
 
     new QRCode(document.getElementById("qr7"), {
       text: "https://hearthpages.github.io/soul-companion-pages/women-on-standby",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr8"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/the-light-in-the-tunnel",
       width: 200,
       height: 200,
       colorDark: "#3D3530",
