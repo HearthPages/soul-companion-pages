@@ -180,6 +180,13 @@
         <div class="url">https://hearthpages.github.io/soul-companion-pages/the-light-in-the-tunnel</div>
         <button class="download-btn" onclick="downloadQR('qr8', 'the-light-in-the-tunnel')">Download QR Code</button>
       </div>
+
+      <div class="qr-card">
+        <h3>When the Mind Won't Rest</h3>
+        <div class="qr-code" id="qr9"></div>
+        <div class="url">https://hearthpages.github.io/soul-companion-pages/when-the-mind-wont-rest</div>
+        <button class="download-btn" onclick="downloadQR('qr9', 'when-the-mind-wont-rest')">Download QR Code</button>
+      </div>
     </div>
 
     <div class="download-section">
@@ -254,6 +261,15 @@
 
     new QRCode(document.getElementById("qr8"), {
       text: "https://hearthpages.github.io/soul-companion-pages/the-light-in-the-tunnel",
+      width: 200,
+      height: 200,
+      colorDark: "#3D3530",
+      colorLight: "#FAF6F0",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    new QRCode(document.getElementById("qr9"), {
+      text: "https://hearthpages.github.io/soul-companion-pages/when-the-mind-wont-rest",
       width: 200,
       height: 200,
       colorDark: "#3D3530",

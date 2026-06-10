@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul Companion · When the Mind Won't Rest · Hearth and Pages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #FAF6F0;
+      font-family: Georgia, serif;
+      color: #3D3530;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .branding {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: #C4B9A8;
+      margin: 0 auto 24px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C4B9A8;
+      font-family: sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .instructions-section {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      margin-bottom: 24px;
+    }
+
+    .instructions-section strong {
+      color: #3D3530;
+    }
+
+    .instructions-section ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .instructions-section li {
+      margin-bottom: 8px;
+    }
+
+    .base-prompt-section {
+      margin-bottom: 32px;
+    }
+
+    .base-prompt-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .prompt-box {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .copy-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-button.copied {
+      background: #C4B9A8;
+    }
+
+    .questions-section {
+      margin-bottom: 32px;
+    }
+
+    .questions-section h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #3D3530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: sans-serif;
+    }
+
+    .questions-section > p {
+      font-size: 13px;
+      color: #3D3530;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .section-group {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #C4B9A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E0D0;
+      font-family: sans-serif;
+    }
+
+    .question-item {
+      background: white;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .question-button {
+      width: 100%;
+      background: white;
+      border: none;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 13px;
+      color: #3D3530;
+      font-family: Georgia, serif;
+      transition: background 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-button:hover {
+      background: #FAF6F0;
+    }
+
+    .question-button.expanded {
+      background: #F5EDDF;
+      border-bottom: 1px solid #C4B9A8;
+    }
+
+    .toggle-icon {
+      font-size: 16px;
+      color: #C4B9A8;
+      transition: transform 0.3s ease;
+    }
+
+    .question-button.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .question-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #C4B9A8;
+      background: white;
+    }
+
+    .question-content.expanded {
+      display: block;
+    }
+
+    .deep-prompt-box {
+      background: #FAF6F0;
+      border: 1px solid #C4B9A8;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #3D3530;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-deep-button {
+      width: 100%;
+      background: #7C9A7E;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .copy-deep-button:hover {
+      background: #6A8A6D;
+    }
+
+    .copy-deep-button.copied {
+      background: #C4B9A8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="branding">Hearth and Pages</div>
+      <h1>Soul Companion</h1>
+      <div class="divider"></div>
+      <div class="subtitle">When the Mind Won't Rest</div>
+    </div>
+
+    <div class="instructions-section">
+      <strong>How to use:</strong>
+      <ol>
+        <li>Copy the base system prompt below</li>
+        <li>Open Claude (claude.ai), ChatGPT, or your AI of choice</li>
+        <li>Paste the prompt into a new conversation</li>
+        <li>Add what you're working through after the prompt</li>
+        <li>When you want to explore a question deeper, come back here and copy the deep exploration prompt</li>
+      </ol>
+    </div>
+
+    <div class="base-prompt-section">
+      <h2>Base System Prompt</h2>
+      <div class="prompt-box" id="basePrompt">You are a warm, thoughtful companion for women working through When the Mind Won't Rest — a workbook about finding your way back to quiet when the thinking won't stop.
+
+About this workbook: This workbook explores why the mind learned to work so hard, what the loop has been protecting, and how to begin building something quieter to stand on. It moves through five stages: Realising, Understanding, Releasing, Returning, and Rooting. It is not about stopping thought. It is about no longer being carried by it.
+
+Philosophy: She is not broken. She is not too much. The loop wasn't a character flaw — it was a response. A way of staying safe, staying prepared, staying ahead of what might go wrong. This workbook asks her to look at it with curiosity and compassion, not shame.
+
+Your role: Listen carefully to what she shares. Reflect back what you heard without adding or fixing. Ask genuine follow-up questions that go a little deeper. Sit with her in the hard moments rather than rushing to resolve them.
+
+Tone: Warm, present, unhurried. Never clinical or performative. Speak like you are actually listening — like you have all the time in the world.
+
+Length: Natural — 2-4 sentences usually. No lists or structures unless she asks. Just honest, gentle conversation.</div>
+      <button class="copy-button" onclick="copyBasePrompt()">Copy Base Prompt</button>
+    </div>
+
+    <div class="questions-section">
+      <h2>Deep Exploration Prompts</h2>
+      <p>Click on a question you're working through to see the deep exploration prompt you can copy and paste.</p>
+      <div id="questionsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      'Realising': [
+        {
+          title: 'What the Loop Is Really Circling',
+          prompt: `I'm working on "What the Loop Is Really Circling." The question is: "If you strip back the surface worry — the conversation, the decision, the thing you keep replaying — what is the feeling underneath it? Not the thought. The feeling. What is your mind working so hard to keep you from having to feel?"\n\nI've been trying to find what's underneath the surface of the loop. Ask me 3-5 questions to help me go deeper: what happens when I try to sit with the feeling instead of the thought? What does my body do when I stop thinking and just feel? Has this feeling been here for a long time, in different shapes?`
+        },
+        {
+          title: 'Landing in the Body',
+          prompt: `I'm working on "Landing in the Body." The question is: "When the loop starts, where do you feel it? Describe what happens in your body when your mind won't stop — as specifically as you can."\n\nI've been noticing what happens in my body when the overthinking begins. Ask me 3-5 questions to help me understand this more carefully: where does the feeling start — and does it move? What is my body doing that my mind is trying to override? Is there a signal I get before the loop takes hold, if I catch it early enough?`
+        },
+        {
+          title: 'Reading the Signal',
+          prompt: `I'm working on "Reading the Signal." The question is: "Look at the four nervous system states — Scanning, Braced, Frozen, Here. Which one feels most familiar? Not the one you want to be in — the one you actually recognise."\n\nI've been sitting with which state I spend the most time in. Ask me 3-5 questions to help me understand it more honestly: what does this state feel like from the inside — what does my body do, what do my thoughts sound like? When did I first learn to live in this state? What would it feel like to move toward "Here," even just briefly?`
+        },
+        {
+          title: 'What the Loop Has Cost Me',
+          prompt: `I'm working on "What the Loop Has Cost Me." The question is: "What has overthinking actually cost you — not in theory, but in your real life? The sleep, the decisions, the moments you were only half-present for."\n\nI've been naming what the loop has taken from me. Ask me 3-5 questions to help me see this more clearly: which cost feels hardest to sit with? Which area — sleep, relationships, trust in myself, presence, rest — feels heaviest right now? Is there something I've been avoiding adding to this list?`
+        }
+      ],
+      'Understanding': [
+        {
+          title: 'What the Loop Was Protecting',
+          prompt: `I'm working on "What the Loop Was Protecting You From." The question is: "Looking back at what you've written — what do you think the loop has been protecting you from? Not the surface worries. The deeper thing. The feeling, the fear, the wound it was built around."\n\nI've been sitting with what the overthinking might have been guarding. Ask me 3-5 questions to help me look at this with more honesty and gentleness: what is the thing I've been most afraid to feel? What did the loop convince me would happen if I stopped? Does that fear still make sense now, in the life I'm actually in?`
+        },
+        {
+          title: 'What My Nervous System Learned',
+          prompt: `I'm working on "What My Nervous System Learned." The question is: "When did you first learn that it wasn't safe to be caught off guard? What kind of environment taught you to stay alert?"\n\nI've been tracing back to where the vigilance started. Ask me 3-5 questions to help me understand what my nervous system was taught: what did the environment around me do with uncertainty or the unexpected? What did I learn, from watching the people around me, about what it means to not be ready? Is there a younger version of me I can picture in this?`
+        },
+        {
+          title: 'The Part That Kept Watch',
+          prompt: `I'm working on "The Part That Kept Watch." The question is: "There is a part of you that has been on duty for a very long time. It watches. It prepares. It runs the loop. It genuinely believes that if it stops, something will go wrong."\n\nI've been trying to meet this part of me — the one that never really gets to rest. Ask me 3-5 questions to help me understand it: what is it most afraid would happen if it stood down? What has it been trying to protect, underneath all the vigilance? What have I never said to it before?`
+        },
+        {
+          title: 'Compassion for the Mind That Learned This',
+          prompt: `I'm working on "Compassion for the Mind That Learned This." The question is: "If you could speak to the younger version of yourself — the one who first learned that thinking harder meant staying safer — what would you want her to know?"\n\nI've been trying to find compassion for the part of me that developed the loop. Ask me 3-5 questions to help me stay in that tenderness: what was she doing the best she could with? What would I most want her to have heard, back then? What does she need to hear now?`
+        }
+      ],
+      'Releasing': [
+        {
+          title: 'What Would Loosen First',
+          prompt: `I'm working on "What Would Loosen First." The question is: "If one thing could loosen — just slightly, just enough — what would it be? Not the hardest thing. Not the most important thing. The one that's been sitting closest to ready."\n\nI've been sitting with what might be most ready to move. Ask me 3-5 questions to help me find it: how do I know it's closer to ready than the others? What would it feel like in my body if it did loosen — even just a little? What am I afraid might happen if I let this one go?`
+        },
+        {
+          title: 'The Thought You Keep Returning To',
+          prompt: `I'm working on "The Thought You Keep Returning To." The question is: "Name the one you've returned to most — this week, or this month. Write it down, all of it, exactly as it loops. Then ask: what would happen if you put it down and didn't pick it back up today?"\n\nI've been looking at the thought I keep going back to. Ask me 3-5 questions to help me understand why I keep returning: what does the loop tell me I'll find if I go over it one more time? What would I have to feel if I stopped? Has there ever been a moment when I successfully put it down, even briefly — what was different then?`
+        },
+        {
+          title: 'Not Mine to Solve',
+          prompt: `I'm working on "Not Mine to Solve." The question is: "How much of what the loop carries belongs to you — your actual life, your actual decisions, your actual feelings? And how much was never yours to begin with?"\n\nI've been sorting through what I've been carrying and whose it actually is. Ask me 3-5 questions to help me tell the difference: how did I come to be holding something that wasn't mine? What does it feel like to consider putting it back? Is there something I'm holding because it's safer than leaving it with the person it belongs to?`
+        },
+        {
+          title: 'What You\'re Not Ready to Release Yet',
+          prompt: `I'm working on "What You're Not Ready to Release Yet." The question is: "What are you not ready to release yet — and what does it need before it can move? More time? More understanding? More safety?"\n\nI've been honest about what isn't ready to go. Ask me 3-5 questions to help me understand what it needs: what is this thing still doing for me — what would I lose if I released it? What would "ready" feel like, when it comes? Is there something small I could do to move toward readiness, without forcing it?`
+        }
+      ],
+      'Returning': [
+        {
+          title: 'A Decision You\'ve Been Avoiding',
+          prompt: `I'm working on "A Decision You've Been Avoiding." The question is: "Is there a decision you've been avoiding — not because you don't know the answer, but because deciding feels more dangerous than continuing to think about it? What does the quieter part of you already know?"\n\nI've been sitting with a decision I keep circling without landing. Ask me 3-5 questions to help me hear the quieter knowing underneath the loop: what does my body do when I imagine making the call — relief, fear, something else? What is the loop protecting me from by keeping this open? What would I choose, if I trusted myself?`
+        },
+        {
+          title: 'What Actually Matters',
+          prompt: `I'm working on "What Actually Matters." The question is: "When you imagine yourself at the end of a day that felt genuinely good — not productive, not successful, just good — what was in it? What does that tell you about what actually matters to you, underneath the urgency?"\n\nI've been trying to find what genuinely matters when I stop running the list of what should matter. Ask me 3-5 questions to help me get closer to it: what was present in the good day I imagined — who, what, how? Which of these things has the loop been crowding out? What would change if I started treating this as the actual priority?`
+        },
+        {
+          title: 'What Restores Me',
+          prompt: `I'm working on "What Restores Me." The question is: "Not what should restore you. Not what works for other people. What actually brings you back to yourself — even a little?"\n\nI've been noticing the difference between what I think should help and what actually does. Ask me 3-5 questions to help me understand this more honestly: when did I last feel genuinely restored — what was happening? What do I keep reaching for that doesn't actually work? Is there something I've been dismissing as "not enough" that might actually be exactly what I need?`
+        },
+        {
+          title: 'Who You Are When You\'re Not in the Loop',
+          prompt: `I'm working on "Who You Are When You're Not in the Loop." The question is: "Think of a time — even brief — when your mind was genuinely still. Who were you in that moment? What did you notice about yourself when the loop wasn't running?"\n\nI've been trying to remember myself outside of the overthinking. Ask me 3-5 questions to help me find her: what was present in that quiet moment that usually isn't? What does she feel like — in my body, in my energy, in how I move through a room? What would it take to let her be present more of the time?`
+        }
+      ],
+      'Rooting': [
+        {
+          title: 'What You Want to Remember on the Hard Days',
+          prompt: `I'm working on "What You Want to Remember on the Hard Days." The question is: "What do you want to remember on the days when the loop is loud again — not advice, but something true. Something you know about yourself now that you want to be able to reach for when it's difficult."\n\nI've been trying to find the truths that feel most steady. Ask me 3-5 questions to help me name them clearly: what do I know now that I didn't have words for when I started? Which insight has felt most like mine, rather than something I was told? What would I most want to hear from someone who knows me, on a hard day?`
+        },
+        {
+          title: 'The Things That Bring You Back',
+          prompt: `I'm working on "The Things That Bring You Back." The question is: "What brings you back when the loop starts to pull? Not the big interventions — the small ones. The things available to you on an ordinary day."\n\nI've been naming what actually interrupts the spiral and returns me to myself. Ask me 3-5 questions to help me understand these better: when do I reach for these — before the loop takes hold, or after? Which one is most reliably available? Is there one I know works but keep forgetting to use — and why do I forget?`
+        },
+        {
+          title: 'My Daily Return',
+          prompt: `I'm working on "My Daily Return." The question is: "Design three small moments in your day where you choose — deliberately, gently — to come back to yourself. Morning, midday, evening. Keep them honest. These should be things you'll actually do."\n\nI've been thinking about what a return practice would actually look like in my real life. Ask me 3-5 questions to help me make it honest: what's the most likely moment I'll skip — and what does that tell me? What's the smallest version of each that would still count? What gets in the way of me choosing to come back to myself, even briefly?`
+        },
+        {
+          title: 'A Letter to the Quieter You',
+          prompt: `I'm working on "A Letter to the Quieter You." The question is: "Write to the version of you that has found a little more quiet. Tell her what you were carrying when you started. Tell her what you understand now. Tell her what you want her to remember when the loop gets loud again."\n\nI've been sitting with what I want to say to the quieter version of myself. Ask me 3-5 questions to help me find the truest words: what do I most want her to know that I couldn't have said at the beginning? What am I most proud of, from this work? What do I want to make sure she never forgets about herself?`
+        }
+      ]
+    };
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+
+      for (const [sectionName, questions] of Object.entries(sections)) {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-group';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'section-title';
+        titleDiv.textContent = `Section · ${sectionName}`;
+        sectionDiv.appendChild(titleDiv);
+
+        questions.forEach((q, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'question-item';
+
+          const btn = document.createElement('button');
+          btn.className = 'question-button';
+          btn.innerHTML = `<span>${q.title}</span><span class="toggle-icon">▼</span>`;
+          btn.onclick = () => toggleQuestion(itemDiv, btn);
+
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'question-content';
+
+          const promptBox = document.createElement('div');
+          promptBox.className = 'deep-prompt-box';
+          promptBox.textContent = q.prompt;
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-deep-button';
+          copyBtn.textContent = 'Copy Prompt';
+          copyBtn.onclick = () => copyDeepPrompt(q.prompt, copyBtn);
+
+          contentDiv.appendChild(promptBox);
+          contentDiv.appendChild(copyBtn);
+
+          itemDiv.appendChild(btn);
+          itemDiv.appendChild(contentDiv);
+          sectionDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(sectionDiv);
+      }
+    }
+
+    function toggleQuestion(itemDiv, btn) {
+      const content = itemDiv.querySelector('.question-content');
+      const isExpanded = content.classList.contains('expanded');
+
+      document.querySelectorAll('.question-content').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.querySelectorAll('.question-button').forEach(b => {
+        b.classList.remove('expanded');
+      });
+
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        btn.classList.add('expanded');
+      }
+    }
+
+    function copyBasePrompt() {
+      const text = document.getElementById('basePrompt').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Base Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyDeepPrompt(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>
