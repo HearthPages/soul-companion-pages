@@ -316,115 +316,156 @@ Length: Natural — 2-4 sentences usually. No lists or structures unless she ask
     const sections = {
       'Realising': [
         {
-          title: 'The Moment You Notice It Starting',
-          prompt: `I'm working on "The Moment You Notice It Starting." The question is: "Think about the last time the loop started — not when it was already in full swing, but the earliest moment you could have noticed it beginning. What was the signal? A tightening somewhere. A thought that arrived and didn't leave. A restlessness that wasn't there five minutes ago. If you could get to it one moment earlier — what would you be looking for?"\n\nI've been trying to catch the loop before it takes hold. Ask me 3-5 questions to help me understand my earliest signals: where in my body does it first show up — before I've even named it as overthinking? Is there a particular time of day or kind of situation where it tends to start? What does it feel like to notice it early — is there something that makes me want to ignore the signal rather than pay attention?`
+          title: 'What the Voice Says',
+          prompt: `I'm working on "What the Voice Says." The question is: "Write down the thoughts that loop most often. The exact words, if you can. The ones that come back before sleep, or when you are in the middle of something else entirely. Read them back. Whose voice does that sound like?"\n\nI've been trying to put the looping thoughts into actual words and notice where they came from. Ask me 3-5 questions to help me go deeper: when I read the words back, what do I notice — do they sound like me, or like someone else? What is the underlying message underneath the most frequent thought? How long have these words been running?`
+        },
+        {
+          title: 'Where It Shows Up',
+          prompt: `I'm working on "Where It Shows Up." The question is: "Think about the last week. Where did the overthinking show up? At night before sleep? In a conversation you kept returning to? In a decision you made and unmade five times? Name two or three specific moments."\n\nI've been tracking where the loop appears in my actual days. Ask me 3-5 questions to help me see the pattern: is there a time of day or a type of situation where it reliably starts? What was I doing — or trying not to feel — when it showed up? What does it feel like to notice it now, rather than being inside it?`
+        },
+        {
+          title: 'What Your Body Does',
+          prompt: `I'm working on "What Your Body Does." The question is: "When the loop starts, where do you feel it? Describe what happens in your body when your mind won't stop. As specifically as you can — not 'I feel stressed', but where, and what it feels like."\n\nI've been trying to describe the physical signature of the overthinking, not just the mental one. Ask me 3-5 questions to help me understand this more carefully: where does it start in my body, and does it move or stay in one place? What does my body seem to be preparing for when the loop runs? Is there a moment — before the thought fully arrives — where my body knows first?`
+        },
+        {
+          title: "What It's Been Doing For You",
+          prompt: `I'm working on "What It's Been Doing For You." The question is: "What has the loop been doing for you? Not what it has cost you — what has it given you? Has it kept you prepared? Kept you from being caught off guard? Kept you from having to feel something you were not ready for?"\n\nI've been trying to look honestly at what the overthinking has been protecting or providing. Ask me 3-5 questions to help me see this clearly: what would have happened — or what would I have had to feel — if the loop hadn't been running? Is there a part of me that still believes I need it? What has it made possible that I'm reluctant to give up?`
+        },
+        {
+          title: "The Life That's Running Underneath",
+          prompt: `I'm working on "The Life That's Running Underneath." The question is: "What has the overthinking pulled you away from — not in big dramatic ways, but in the small ordinary moments? What have you been present for in body but somewhere else in mind? What did you miss, that you wish you had been there for?"\n\nI've been naming the moments the loop has pulled me out of. Ask me 3-5 questions to help me feel the weight of this honestly: which loss feels sharpest — a relationship, a moment, a version of myself? What would it have felt like to have been fully present there? Is there something I can still return to, even now?`
         },
         {
           title: 'What the Loop Is Really Circling',
           prompt: `I'm working on "What the Loop Is Really Circling." The question is: "If you strip back the surface worry — the conversation, the decision, the thing you keep replaying — what is the feeling underneath it? Not the thought. The feeling. What is your mind working so hard to keep you from having to feel?"\n\nI've been trying to find what's underneath the surface of the loop. Ask me 3-5 questions to help me go deeper: what happens when I try to sit with the feeling instead of the thought? What does my body do when I stop thinking and just feel? Has this feeling been here for a long time, in different shapes?`
         },
         {
-          title: 'Landing in the Body',
-          prompt: `I'm working on "Landing in the Body." The question is: "When the loop starts, where do you feel it? Describe what happens in your body when your mind won't stop — as specifically as you can."\n\nI've been noticing what happens in my body when the overthinking begins. Ask me 3-5 questions to help me understand this more carefully: where does the feeling start — and does it move? What is my body doing that my mind is trying to override? Is there a signal I get before the loop takes hold, if I catch it early enough?`
-        },
-        {
-          title: 'Reading the Signal',
-          prompt: `I'm working on "Reading the Signal." The question is: "Look at the four nervous system states — Scanning, Braced, Frozen, Here. Which one feels most familiar? Not the one you want to be in — the one you actually recognise."\n\nI've been sitting with which state I spend the most time in. Ask me 3-5 questions to help me understand it more honestly: what does this state feel like from the inside — what does my body do, what do my thoughts sound like? When did I first learn to live in this state? What would it feel like to move toward "Here," even just briefly?`
-        },
-        {
-          title: 'What the Loop Has Cost Me',
-          prompt: `I'm working on "What the Loop Has Cost Me." The question is: "What has overthinking actually cost you — not in theory, but in your real life? The sleep, the decisions, the moments you were only half-present for."\n\nI've been naming what the loop has taken from me. Ask me 3-5 questions to help me see this more clearly: which cost feels hardest to sit with? Which area — sleep, relationships, trust in myself, presence, rest — feels heaviest right now? Is there something I've been avoiding adding to this list?`
+          title: 'What Would Be Different',
+          prompt: `I'm working on "What Would Be Different." The question is: "If the loop quieted — not gone, just quieter — what would be different? Not in some vague, better version of your life. Specifically, in this week. In today. Describe it as clearly as you can."\n\nI've been trying to imagine what a quieter week would actually look and feel like. Ask me 3-5 questions to help me make it concrete: what is the first thing that would change — in the morning, in a specific relationship, in how I feel at the end of the day? What would I do with the energy the loop has been using? What feels most hopeful about that picture?`
         }
       ],
       'Understanding': [
         {
-          title: 'The Story You\'ve Been Telling About It',
-          prompt: `I'm working on "The Story You've Been Telling About It." The question is: "What story have you been telling about why your mind works this way? Not the explanation you give other people — the private one. The one that sounds like: 'I'm just a worrier', or 'This is just how I am', or 'I can't help it.' Where did that story come from? And is it actually true — or is it something you absorbed so long ago it just became the air you breathe?"\n\nI've been looking at the private story I tell about my own overthinking. Ask me 3-5 questions to help me examine it honestly: what does that story let me off the hook for — what would change if I stopped believing it? Who or what taught me this story? What would a different story sound like — one that's still honest, but doesn't lock me into this pattern forever?`
+          title: 'The First Time You Needed to Be Ready',
+          prompt: `I'm working on "The First Time You Needed to Be Ready." The question is: "When did you first learn that it was not safe to be caught off guard? What kind of environment taught you to stay alert? You do not need a clear memory. Even a vague sense of 'it felt like this' is enough."\n\nI've been tracing back to when the vigilance first started. Ask me 3-5 questions to help me understand what I learned: what was the atmosphere — was it a specific person, an unpredictability, a sense of something being wrong without being named? What did being caught off guard feel like back then? What did staying alert protect me from?`
         },
         {
-          title: 'What the Loop Was Protecting',
-          prompt: `I'm working on "What the Loop Was Protecting You From." The question is: "Looking back at what you've written — what do you think the loop has been protecting you from? Not the surface worries. The deeper thing. The feeling, the fear, the wound it was built around."\n\nI've been sitting with what the overthinking might have been guarding. Ask me 3-5 questions to help me look at this with more honesty and gentleness: what is the thing I've been most afraid to feel? What did the loop convince me would happen if I stopped? Does that fear still make sense now, in the life I'm actually in?`
+          title: 'What Uncertainty Felt Like',
+          prompt: `I'm working on "What Uncertainty Felt Like." The question is: "What did uncertainty feel like when you were younger? Not just in your mind — in your body, in the atmosphere around you. Was it something you were allowed to sit with, or something that needed to be resolved immediately? What did the people around you do with the things they did not know or could not control?"\n\nI've been trying to understand what uncertainty was taught to mean in my early life. Ask me 3-5 questions to help me go deeper: was not knowing treated as something dangerous, or just uncomfortable? What happened to me or around me when things were uncertain? What did I learn I was supposed to do with uncertainty — manage it, avoid it, solve it?`
         },
         {
-          title: 'What My Nervous System Learned',
-          prompt: `I'm working on "What My Nervous System Learned." The question is: "When did you first learn that it wasn't safe to be caught off guard? What kind of environment taught you to stay alert?"\n\nI've been tracing back to where the vigilance started. Ask me 3-5 questions to help me understand what my nervous system was taught: what did the environment around me do with uncertainty or the unexpected? What did I learn, from watching the people around me, about what it means to not be ready? Is there a younger version of me I can picture in this?`
+          title: 'The Rules You Absorbed',
+          prompt: `I'm working on "The Rules You Absorbed." The question is: "What were the unspoken rules in the house, the classroom, the relationships where you grew up? What did you learn about what was expected — how to behave, what to feel, how much space you were allowed to take up? Which of those rules is your overthinking still trying to follow?"\n\nI've been trying to name the rules I absorbed without being told. Ask me 3-5 questions to help me see them clearly: which rule feels most familiar — most like something I still live by without questioning it? What happens inside me when I imagine breaking one of them? Where did I learn that following these rules kept me safe?`
         },
         {
-          title: 'The Part That Kept Watch',
-          prompt: `I'm working on "The Part That Kept Watch." The question is: "There is a part of you that has been on duty for a very long time. It watches. It prepares. It runs the loop. It genuinely believes that if it stops, something will go wrong."\n\nI've been trying to meet this part of me — the one that never really gets to rest. Ask me 3-5 questions to help me understand it: what is it most afraid would happen if it stood down? What has it been trying to protect, underneath all the vigilance? What have I never said to it before?`
+          title: 'Who You Were Trying to Protect',
+          prompt: `I'm working on "Who You Were Trying to Protect." The question is: "Was there anyone in your early life whose mood, wellbeing, or reactions you felt responsible for monitoring? Someone you needed to read carefully — to stay ahead of, to manage, to not disappoint? What did that teach your mind to do? And is it still doing that now — for people who never asked you to?"\n\nI've been sitting with whether the loop learned to protect someone else, not just me. Ask me 3-5 questions to help me understand this: what did it feel like to be responsible for that — was it heavy, or did it feel normal? Who am I still monitoring now, without realising it? What would it feel like to stop?`
+        },
+        {
+          title: 'What the Loop Was Protecting You From',
+          prompt: `I'm working on "What the Loop Was Protecting You From." The question is: "Looking back at what you've written — what do you think the loop has been protecting you from? Not the surface worries. The deeper thing. The feeling, the fear, the wound it was built around. Write it as gently as you can."\n\nI've been sitting with what the overthinking has been guarding underneath. Ask me 3-5 questions to help me look at this with honesty and gentleness: what is the thing I've been most afraid to feel? What did the loop convince me would happen if I stopped? Does that fear still make sense now, in the life I'm actually in?`
         },
         {
           title: 'Compassion for the Mind That Learned This',
-          prompt: `I'm working on "Compassion for the Mind That Learned This." The question is: "If you could speak to the younger version of yourself — the one who first learned that thinking harder meant staying safer — what would you want her to know?"\n\nI've been trying to find compassion for the part of me that developed the loop. Ask me 3-5 questions to help me stay in that tenderness: what was she doing the best she could with? What would I most want her to have heard, back then? What does she need to hear now?`
+          prompt: `I'm working on "Compassion for the Mind That Learned This." The question is: "If you could speak to the younger version of yourself — the one who first learned that thinking harder meant staying safer — what would you want her to know? Not what she should have done differently. What you want her to know now."\n\nI've been trying to find compassion for the part of me that developed the loop. Ask me 3-5 questions to help me stay in that tenderness: what was she doing the best she could with? What would I most want her to have heard, back then? What does she need to hear now?`
+        },
+        {
+          title: 'The Voice That Holds It In Place',
+          prompt: `I'm working on "The Voice That Holds It In Place." The question is: "What is the reasoning that justifies the overthinking? Write the internal logic out in full — 'if I stop thinking about it, ___'. 'If I let myself relax, ___'. Now ask: is this actually true? Who taught you this was the only safe way to be?"\n\nI've been trying to name the story the loop tells to keep itself running. Ask me 3-5 questions to help me examine it: where did this logic come from — is it a voice I recognise? What has the loop convinced me will happen if I stand down? What would actually happen, in reality, if I stopped?`
         }
       ],
       'Releasing': [
         {
-          title: 'What Quiet Would Actually Feel Like',
-          prompt: `I'm working on "What Quiet Would Actually Feel Like." The question is: "Imagine your mind genuinely quiet. Not numb, not asleep — just still. What is your first reaction to that image? Is it peaceful? Or does some part of you feel uneasy when you try to hold it? If quiet feels unfamiliar or even a little frightening — what does that tell you? What has the noise been doing that stillness can't?"\n\nI've been sitting with the image of genuine quiet and noticing my reaction to it. Ask me 3-5 questions to help me understand my relationship with stillness: when was the last time my mind was genuinely quiet — what was happening and what did it feel like? If quiet feels uncomfortable, what does it remind me of — is there a memory or feeling underneath it? What would I have to trust in order to let myself rest in the stillness, even briefly?`
-        },
-        {
-          title: 'What Would Loosen First',
-          prompt: `I'm working on "What Would Loosen First." The question is: "If one thing could loosen — just slightly, just enough — what would it be? Not the hardest thing. Not the most important thing. The one that's been sitting closest to ready."\n\nI've been sitting with what might be most ready to move. Ask me 3-5 questions to help me find it: how do I know it's closer to ready than the others? What would it feel like in my body if it did loosen — even just a little? What am I afraid might happen if I let this one go?`
+          title: "What You've Been Bracing For",
+          prompt: `I'm working on "What You've Been Bracing For." The question is: "What are you bracing for? Not the surface worry — underneath that. What is the thing, if it happened, that your loop is trying to keep you prepared for? What would it mean to stop bracing for it — even for an hour?"\n\nI've been trying to name the deeper fear that keeps the loop on high alert. Ask me 3-5 questions to help me understand it: how long have I been bracing for this — is it something recent or something old? What does my body do when I imagine it actually happening? What would I lose if I stopped bracing — and what might I gain?`
         },
         {
           title: 'The Thought You Keep Returning To',
           prompt: `I'm working on "The Thought You Keep Returning To." The question is: "Name the one you've returned to most — this week, or this month. Write it down, all of it, exactly as it loops. Then ask: what would happen if you put it down and didn't pick it back up today?"\n\nI've been looking at the thought I keep going back to. Ask me 3-5 questions to help me understand why I keep returning: what does the loop tell me I'll find if I go over it one more time? What would I have to feel if I stopped? Has there ever been a moment when I successfully put it down, even briefly — what was different then?`
         },
         {
-          title: 'Not Mine to Solve',
-          prompt: `I'm working on "Not Mine to Solve." The question is: "How much of what the loop carries belongs to you — your actual life, your actual decisions, your actual feelings? And how much was never yours to begin with?"\n\nI've been sorting through what I've been carrying and whose it actually is. Ask me 3-5 questions to help me tell the difference: how did I come to be holding something that wasn't mine? What does it feel like to consider putting it back? Is there something I'm holding because it's safer than leaving it with the person it belongs to?`
+          title: "What Belongs to You and What Doesn't",
+          prompt: `I'm working on "What Belongs to You and What Doesn't." The question is: "How much of what the loop carries belongs to you — your actual life, your actual decisions, your actual feelings? And how much of it is someone else's worry, expectation, or unresolved thing that found its way into your head? What would you be willing to put back?"\n\nI've been sorting through what I've been carrying and whose it actually is. Ask me 3-5 questions to help me tell the difference: how did I come to be holding something that wasn't mine? What does it feel like to consider putting it back? Is there something I'm holding because it's safer than leaving it with the person it belongs to?`
         },
         {
-          title: 'What You\'re Not Ready to Release Yet',
-          prompt: `I'm working on "What You're Not Ready to Release Yet." The question is: "What are you not ready to release yet — and what does it need before it can move? More time? More understanding? More safety?"\n\nI've been honest about what isn't ready to go. Ask me 3-5 questions to help me understand what it needs: what is this thing still doing for me — what would I lose if I released it? What would "ready" feel like, when it comes? Is there something small I could do to move toward readiness, without forcing it?`
+          title: "The Permission You've Been Waiting For",
+          prompt: `I'm working on "The Permission You've Been Waiting For." The question is: "Who taught you that your mind being quiet was not safe — that to stop thinking was to be unprepared, irresponsible, caught off guard? What would it mean to decide that you do not have to have it all figured out? Not permanently — just for now, just for today."\n\nI've been sitting with the belief that I need permission to rest my mind. Ask me 3-5 questions to help me examine where that belief came from: whose voice does the 'you must keep thinking' come from? What am I afraid will happen if I give myself permission to not have it solved? What would the smallest version of that permission look like — one I might actually let myself have?`
+        },
+        {
+          title: 'What Would Loosen First',
+          prompt: `I'm working on "What Would Loosen First." The question is: "If one thing could loosen — just slightly, just enough — what would it be? Not the hardest thing. Not the most important thing. The one that's closest to ready. Write it here. Then write what it would feel like if it did."\n\nI've been sitting with what might be most ready to move. Ask me 3-5 questions to help me find it: how do I know it's closer to ready than the others? What would it feel like in my body if it did loosen — even just a little? What am I afraid might happen if I let this one go?`
+        },
+        {
+          title: "What You're Not Ready to Release Yet",
+          prompt: `I'm working on "What You're Not Ready to Release Yet." The question is: "What are you not ready to release yet — and what does it need before it can move? More time? More understanding? More safety? Write it without judgement. It is allowed to stay a little longer."\n\nI've been honest about what isn't ready to go. Ask me 3-5 questions to help me understand what it needs: what is this thing still doing for me — what would I lose if I released it? What would "ready" feel like, when it comes? Is there something small I could do to move toward readiness, without forcing it?`
+        },
+        {
+          title: 'One Act of Letting Go',
+          prompt: `I'm working on "One Act of Letting Go." The question is: "Is there one small thing you could do today — one concrete act of setting something down, even symbolically? A conversation you stop rehearsing. A worry you choose not to follow for one hour. A story you tell yourself slightly differently. Write what it is. Write what it would mean to do it."\n\nI've been trying to find something small and real I could actually do. Ask me 3-5 questions to help me make it concrete: what makes this feel manageable — or does some part of me resist even the smallest act of release? What would I need to believe about myself to follow through? What would it feel like, on the other side of even this one small thing?`
         }
       ],
       'Returning': [
         {
-          title: 'What You Want Your Days to Feel Like',
-          prompt: `I'm working on "What You Want Your Days to Feel Like." The question is: "Not what you want to accomplish. Not what you want to produce. What do you want your days to feel like — in your body, in the ordinary moments, in the texture of a Tuesday? Write as specifically as you can. Not 'calm' or 'happy' — but what calm and happy actually look and feel like when they are real."\n\nI've been trying to find the specific texture of what I actually want — not achievements, but feeling. Ask me 3-5 questions to help me get more specific: what does a good ordinary day feel like in my body by evening? Which part of my current days feels most different from what I described — and why? What one small thing would make a Tuesday feel more like the day I described?`
+          title: "Who You Are When You're Not in the Loop",
+          prompt: `I'm working on "Who You Are When You're Not in the Loop." The question is: "Think of a time — even a brief one — when your mind was genuinely still. Who were you in that moment? What did you notice about yourself when the loop was not running?"\n\nI've been trying to remember myself outside of the overthinking. Ask me 3-5 questions to help me find her: what was present in that quiet moment that usually isn't? What does she feel like — in my body, in my energy, in how I move through a room? What would it take to let her be present more of the time?`
         },
         {
-          title: 'A Decision You\'ve Been Avoiding',
-          prompt: `I'm working on "A Decision You've Been Avoiding." The question is: "Is there a decision you've been avoiding — not because you don't know the answer, but because deciding feels more dangerous than continuing to think about it? What does the quieter part of you already know?"\n\nI've been sitting with a decision I keep circling without landing. Ask me 3-5 questions to help me hear the quieter knowing underneath the loop: what does my body do when I imagine making the call — relief, fear, something else? What is the loop protecting me from by keeping this open? What would I choose, if I trusted myself?`
+          title: "What You've Been Putting Off Feeling",
+          prompt: `I'm working on "What You've Been Putting Off Feeling." The question is: "Now that there is a little more space — what has been waiting? Not a thought. A feeling. Something that has been patient, sitting quietly behind all the noise. Let it come. Write without editing it into something more manageable."\n\nI've been trying to make room for what the loop has been keeping at a distance. Ask me 3-5 questions to help me stay with it: what does this feeling want me to know? How long has it been waiting — does it feel recent or old? What does my body do when I let it come rather than think around it?`
         },
         {
           title: 'What Actually Matters',
           prompt: `I'm working on "What Actually Matters." The question is: "When you imagine yourself at the end of a day that felt genuinely good — not productive, not successful, just good — what was in it? What does that tell you about what actually matters to you, underneath the urgency?"\n\nI've been trying to find what genuinely matters when I stop running the list of what should matter. Ask me 3-5 questions to help me get closer to it: what was present in the good day I imagined — who, what, how? Which of these things has the loop been crowding out? What would change if I started treating this as the actual priority?`
         },
         {
-          title: 'What Restores Me',
-          prompt: `I'm working on "What Restores Me." The question is: "Not what should restore you. Not what works for other people. What actually brings you back to yourself — even a little?"\n\nI've been noticing the difference between what I think should help and what actually does. Ask me 3-5 questions to help me understand this more honestly: when did I last feel genuinely restored — what was happening? What do I keep reaching for that doesn't actually work? Is there something I've been dismissing as "not enough" that might actually be exactly what I need?`
+          title: "What You've Been Missing",
+          prompt: `I'm working on "What You've Been Missing." The question is: "What have you missed while the loop was running? Not the big things necessarily — the small ones. The ordinary moments that deserved more of you than they got. What do you want to come back to?"\n\nI've been naming what the overthinking has cost me in presence. Ask me 3-5 questions to help me feel this honestly: which missed moment feels most significant — and why that one? What would it have meant to have been fully there? What is still available to me — what can I come back to even now?`
         },
         {
-          title: 'Who You Are When You\'re Not in the Loop',
-          prompt: `I'm working on "Who You Are When You're Not in the Loop." The question is: "Think of a time — even brief — when your mind was genuinely still. Who were you in that moment? What did you notice about yourself when the loop wasn't running?"\n\nI've been trying to remember myself outside of the overthinking. Ask me 3-5 questions to help me find her: what was present in that quiet moment that usually isn't? What does she feel like — in my body, in my energy, in how I move through a room? What would it take to let her be present more of the time?`
+          title: "A Decision You've Been Avoiding",
+          prompt: `I'm working on "A Decision You've Been Avoiding." The question is: "Is there a decision you've been avoiding — not because you don't know the answer, but because deciding feels more dangerous than continuing to think about it? What does the quieter part of you already know?"\n\nI've been sitting with a decision I keep circling without landing. Ask me 3-5 questions to help me hear the quieter knowing underneath the loop: what does my body do when I imagine making the call — relief, fear, something else? What is the loop protecting me from by keeping this open? What would I choose, if I trusted myself?`
+        },
+        {
+          title: 'The Version of You That Trusts Herself',
+          prompt: `I'm working on "The Version of You That Trusts Herself." The question is: "She exists. She makes calls without needing to run them six times. She sits with uncertainty without it swallowing her. What would she do differently this week — in one small, specific way? Write it as an instruction to yourself, from her."\n\nI've been trying to find and listen to the version of me that already knows how to trust herself. Ask me 3-5 questions to help me hear her more clearly: when have I caught a glimpse of her — what was I doing? What does she feel like in my body, compared to the version of me that runs the loop? What is she most trying to tell me right now?`
+        },
+        {
+          title: 'A Small Thing, Today',
+          prompt: `I'm working on "A Small Thing, Today." The question is: "What is one small thing you could do today that the you-before-this-workbook would not have done? Not a transformation. Not a breakthrough. A small, ordinary act of coming back to yourself. Write it here. Then, when you close this workbook today — do it."\n\nI've been trying to find one small, real thing I could do differently today. Ask me 3-5 questions to help me choose well: what would feel like an act of coming back to myself — even for five minutes? What has been stopping me from doing something like this before? What would it mean about me, if I did it?`
         }
       ],
       'Rooting': [
         {
-          title: 'What You\'ll Do When the Loop Comes Back',
-          prompt: `I'm working on "What You'll Do When the Loop Comes Back." The question is: "The loop will come back. Probably when you are tired, or something uncertain happens, or someone says the wrong thing at the wrong moment. That is not failure — it is what minds do. So: what will you do? Not in a general 'I'll try to stay calm' way — specifically. What is the first thing you will reach for? What will you say to yourself in that moment? Who, if anyone, will you tell? Write yourself a plan. Not because you will follow it perfectly, but because having decided means you are not starting from zero."\n\nI've been writing a real plan for when the loop returns — not a vague intention but something specific. Ask me 3-5 questions to help me make it honest and usable: what has actually helped in the past, that I might reach for first? What do I tend to do instead — and what makes me reach for that rather than something kinder? Is there something I need to have ready in advance — a note to myself, something physical, a name to text?`
+          title: 'What You Know Now',
+          prompt: `I'm working on "What You Know Now." The question is: "What do you know now that you did not have words for when you started? Not what you have learned in a general sense — what has specifically changed in how you understand yourself? Write it plainly. It matters that you hear yourself say it."\n\nI've been trying to name what has genuinely shifted through this work. Ask me 3-5 questions to help me say it clearly: what feels most different — in how I think about the loop, about myself, about what I need? Which insight feels most like mine, rather than something I was told? What would I want someone who loves me to know about what I've understood?`
         },
         {
-          title: 'What You Want to Remember on the Hard Days',
-          prompt: `I'm working on "What You Want to Remember on the Hard Days." The question is: "What do you want to remember on the days when the loop is loud again — not advice, but something true. Something you know about yourself now that you want to be able to reach for when it's difficult."\n\nI've been trying to find the truths that feel most steady. Ask me 3-5 questions to help me name them clearly: what do I know now that I didn't have words for when I started? Which insight has felt most like mine, rather than something I was told? What would I most want to hear from someone who knows me, on a hard day?`
+          title: 'The Thoughts Worth Keeping',
+          prompt: `I'm working on "The Thoughts Worth Keeping." The question is: "What kinds of thoughts are worth following for you — the ones that are genuinely useful, genuinely creative, genuinely yours? How do they feel different from the loop? What does a thought that is worth your attention feel like, compared to one that is just noise?"\n\nI've been trying to learn to tell the difference between useful thinking and the loop. Ask me 3-5 questions to help me understand this distinction: when I've had a thought that felt worth following, what did it feel like — different from the loop? Is there a particular kind of thinking I want to protect and make more space for? What does it feel like when I stop following a thought that doesn't deserve my attention?`
+        },
+        {
+          title: 'What a Quieter Day Looks Like',
+          prompt: `I'm working on "What a Quieter Day Looks Like." The question is: "Describe a quieter day — specifically, not in abstract terms. What do you notice in the morning? How do you make decisions? How do you feel by evening? Write it as if it is already happening — as if it is Tuesday and it is just a normal day and the loop is there but it is not driving."\n\nI've been trying to picture what my life looks and feels like when the loop is quieter. Ask me 3-5 questions to help me make it real: what is the first moment of the day that feels different in this picture? How do I relate to uncertainty or small decisions — what does that feel like? What does the version of me in this Tuesday carry that I don't always carry now?`
         },
         {
           title: 'The Things That Bring You Back',
           prompt: `I'm working on "The Things That Bring You Back." The question is: "What brings you back when the loop starts to pull? Not the big interventions — the small ones. The things available to you on an ordinary day."\n\nI've been naming what actually interrupts the spiral and returns me to myself. Ask me 3-5 questions to help me understand these better: when do I reach for these — before the loop takes hold, or after? Which one is most reliably available? Is there one I know works but keep forgetting to use — and why do I forget?`
         },
         {
-          title: 'My Daily Return',
-          prompt: `I'm working on "My Daily Return." The question is: "Design three small moments in your day where you choose — deliberately, gently — to come back to yourself. Morning, midday, evening. Keep them honest. These should be things you'll actually do."\n\nI've been thinking about what a return practice would actually look like in my real life. Ask me 3-5 questions to help me make it honest: what's the most likely moment I'll skip — and what does that tell me? What's the smallest version of each that would still count? What gets in the way of me choosing to come back to myself, even briefly?`
+          title: 'What You Want to Remember on the Hard Days',
+          prompt: `I'm working on "What You Want to Remember on the Hard Days." The question is: "What do you want to remember on the days when the loop is loud again — not advice, but something true. Something you know about yourself now that you want to be able to reach for when it is difficult. Write it as if you are writing it for the version of you who needs it most."\n\nI've been trying to find the truths that feel most steady. Ask me 3-5 questions to help me name them clearly: what do I know now that I didn't have words for when I started? Which insight has felt most like mine, rather than something I was told? What would I most want to hear from someone who knows me, on a hard day?`
         },
         {
-          title: 'A Letter to the Quieter You',
-          prompt: `I'm working on "A Letter to the Quieter You." The question is: "Write to the version of you that has found a little more quiet. Tell her what you were carrying when you started. Tell her what you understand now. Tell her what you want her to remember when the loop gets loud again."\n\nI've been sitting with what I want to say to the quieter version of myself. Ask me 3-5 questions to help me find the truest words: what do I most want her to know that I couldn't have said at the beginning? What am I most proud of, from this work? What do I want to make sure she never forgets about herself?`
+          title: 'What You Would Tell Someone Else',
+          prompt: `I'm working on "What You Would Tell Someone Else." The question is: "Imagine a woman who is exactly where you were when you opened this workbook. The same exhaustion. The same loop. The same quiet wondering if it will ever be different. What do you want to tell her? Not advice. What you know, from having done this work."\n\nI've been sitting with what I've understood deeply enough to pass on. Ask me 3-5 questions to help me find what's truest: what would I most want her to know — that she might not believe yet? What do I wish someone had told me at the start? What has surprised me most about this process?`
+        },
+        {
+          title: 'What You Are Building From Here',
+          prompt: `I'm working on "What You Are Building From Here." The question is: "What are you choosing to do differently — not as a resolution, but as a practice? Not the full picture. One small, specific thing. What does it look like, on an ordinary Tuesday, to choose yourself a little more than you did before?"\n\nI've been trying to name the one small, specific thing I'm taking forward. Ask me 3-5 questions to help me make it real: what has this work changed about how I want to live, in ordinary terms? What would choosing myself look like in a specific moment this week? What would I want to be different, six months from now, in the texture of an ordinary day?`
         }
       ]
     };
+
 
     function renderQuestions() {
       const container = document.getElementById('questionsContainer');
@@ -516,3 +557,4 @@ Length: Natural — 2-4 sentences usually. No lists or structures unless she ask
   </script>
 </body>
 </html>
+              
